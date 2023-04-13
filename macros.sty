@@ -1,0 +1,289 @@
+%standard macro and environment list - spring 2018
+
+
+%packages
+\usepackage{float, graphicx}
+\usepackage[]{epsfig}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{epsfig}
+\usepackage{verbatim}
+\usepackage{url}
+\usepackage{latexsym}
+\usepackage{mathrsfs}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{enumerate}
+\usepackage[normalem]{ulem}
+\usepackage{bm}
+\usepackage{stmaryrd}
+\usepackage{enumitem}
+\usepackage{mathtools}
+%\usepackage{showlabels}
+\usepackage{showkeys}
+\usepackage{color}
+\usepackage{mdframed}
+\usepackage{cancel}
+
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\var}{Var}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\dist}{dist}
+\DeclareMathOperator{\cotanh}{cotanh}
+\DeclareMathOperator{\vol}{vol}
+\DeclareMathOperator{\area}{area}
+\DeclareMathOperator{\cov}{cov}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\dom}{\mathcal{D}}
+\DeclareMathOperator{\ran}{\mathcal{R}}
+\DeclareMathOperator{\esssup}{ess\,sup}
+\DeclareMathOperator{\ad}{ad}
+\DeclareMathOperator{\Ad}{Ad}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\OO}{\mathcal{O}}
+\DeclareMathOperator{\oo}{o}
+\DeclareMathOperator{\argmax}{argmax}
+\DeclareMathOperator{\argmin}{argmin}
+\DeclareMathOperator{\Res}{Res}
+\DeclareMathOperator{\cu}{cu}
+\DeclareMathOperator{\del}{\partial}
+
+\DeclareMathOperator{\Sign}{Sign}
+\DeclareMathOperator{\Sym}{Sym}
+\DeclareMathOperator{\SeqSign}{SeqSign}
+\DeclareMathOperator{\Real}{Re}		
+\DeclareMathOperator{\Imaginary}{Im}
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\Ai}{Ai}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\End}{End} 
+\DeclareMathOperator{\inv}{inv}
+\DeclareMathOperator{\Adm}{Adm}
+\DeclareMathOperator{\sep}{sep}
+\DeclareMathOperator{\TV}{TV}
+\DeclareMathOperator{\mix}{mix}
+\DeclareMathOperator{\crf}{crf}
+\DeclareMathOperator{\rf}{rf}
+\DeclareMathOperator{\alt}{alt}
+\DeclareMathOperator{\fl}{fl}
+\DeclareMathOperator{\diam}{diam}
+\DeclareMathOperator{\north}{no}
+\DeclareMathOperator{\so}{so}
+\DeclareMathOperator{\ea}{ea}
+\DeclareMathOperator{\we}{we}
+
+\newcommand\cA{{\mathcal A}}
+\newcommand\cB{{\mathcal B}}
+\newcommand{\cC}{{\mathcal C}}
+\newcommand{\cT}{{\mathcal T}}
+\newcommand{\cD}{{\mathcal D}}
+\newcommand{\cE}{{\mathcal E}}
+\newcommand{\cF}{{\mathcal F}}
+\newcommand{\cG}{{\mathcal G}}
+\newcommand\cH{{\mathcal H}}
+\newcommand{\cK}{{\mathcal K}}
+\newcommand{\cL}{{\mathcal L}}
+\newcommand{\cM}{{\mathcal M}}
+\newcommand{\cN}{{\mathcal N}}
+\newcommand\cO{{\mathcal O}}
+\newcommand{\cP}{{\mathcal P}}
+\newcommand{\cQ}{{\mathcal Q}}
+\newcommand{\cR}{{\mathcal R}}
+\newcommand{\cS}{{\mathcal S}}
+\newcommand{\cU}{{\mathcal U}}
+\newcommand{\cV}{{\mathcal V}}
+\newcommand\cW{{\mathcal W}}
+\newcommand{\cX}{{\mathcal X}}
+
+\newcommand{\sA}{\mathscr{A}}
+\newcommand{\sB}{\mathscr{B}}
+\newcommand{\sC}{\mathscr{C}}
+\newcommand{\sD}{\mathscr{D}}
+\newcommand{\sE}{\mathscr{E}}
+\newcommand{\sF}{\mathscr{F}}
+\newcommand{\sG}{\mathscr{G}}
+\newcommand{\sH}{\mathscr{H}}
+\newcommand{\sI}{\mathscr{I}}
+\newcommand{\sJ}{\mathscr{J}}
+\newcommand{\sK}{\mathscr{K}}
+\newcommand{\sL}{\mathscr{L}}
+\newcommand{\sM}{\mathscr{M}}
+\newcommand{\sN}{\mathscr{N}}
+\newcommand{\sO}{\mathscr{O}}
+\newcommand{\sP}{\mathscr{P}}
+\newcommand{\sQ}{\mathscr{Q}}
+\newcommand{\sR}{\mathscr{R}}
+\newcommand{\sS}{\mathscr{S}}
+\newcommand{\sT}{\mathscr{T}}
+\newcommand{\sU}{\mathscr{U}}
+\newcommand{\sV}{\mathscr{V}}
+\newcommand{\sW}{\mathscr{W}}
+\newcommand{\sX}{\mathscr{X}}
+\newcommand{\sY}{\mathscr{Y}}
+\newcommand{\sZ}{\mathscr{Z}}
+
+
+\newcommand{ \sfx }{{\mathsf x}}
+\newcommand{ \sfy }{{\mathsf y}}
+\newcommand{\sfX}{{\mathsf X}}
+\newcommand{ \sft }{{\mathsf t}}
+\newcommand{\sfa}{{\mathsf a}}
+\newcommand{ \sfb }{{\mathsf b}}
+\newcommand{\sfc}{{\mathsf c}}
+\newcommand{\sfd}{{\mathsf d}}
+\newcommand{\sfz}{{\mathsf z}}
+\newcommand{\sfw}{{\mathsf w}}
+\newcommand{\sfW}{{\mathsf W}}
+\newcommand{\sfG}{{\mathsf G}}
+\newcommand{\sfM}{{\mathsf M}}
+\newcommand{\sfK}{{\mathsf K}}
+\newcommand{ \sfh}{{\mathsf h}}
+\newcommand{ \sff}{{\mathsf f}}
+\newcommand{\sfA}{{\mathsf A}}
+\newcommand{\sfB}{{\mathsf B}}
+\newcommand{\sfD}{{\mathsf D}}
+\newcommand{\sfE}{{\mathsf E}}
+\newcommand{\sfF}{{\mathsf F}}
+\newcommand{\sfP}{{\mathsf P}}
+\newcommand{\sfH}{{\mathsf H}}
+\newcommand{\sfS}{{\mathsf S}}
+\newcommand{ \sfs }{{\mathsf s}}
+\newcommand{\sfZ}{{\mathsf Z}}
+\newcommand{\sfT}{{\mathsf T}}
+\newcommand{\sfL}{{\mathsf L}}
+\newcommand{ \sfr}{{\mathsf r}}
+\newcommand{\sfOmega}{{\mathsf \Omega}}
+
+
+\newcommand{\mf}{\mathfrak}
+\newcommand{\fa}{{\mathfrak a}}
+\newcommand{\fm}{{\mathfrak m}}
+\newcommand{\fA}{{\mathfrak A}}
+\newcommand{\fU}{{\mathfrak U}}
+\newcommand{\fb}{{\mathfrak b}}
+\newcommand{\fc}{{\mathfrak c}}
+\newcommand{\fC}{{\mathfrak C}}
+\newcommand{\fL}{{\mathfrak L}}
+\newcommand{\fF}{{\mathfrak F}}
+\newcommand{\fd}{{\mathfrak d}}
+\newcommand{\fw}{{\mathfrak w}}
+\newcommand{\fn}{{\mathfrak n}}
+\newcommand{\fr}{{\mathfrak r}}
+\newcommand{\fe}{{\mathfrak e}}
+\newcommand{\fx}{{\mathfrak x}}
+\newcommand{\ft}{{\mathfrak t}}
+\newcommand{\fk}{{\mathfrak k}}
+\newcommand{\fs}{{\mathfrak s}}
+\newcommand{\fK}{{\mathfrak K}}
+\newcommand{\fS}{{\mathfrak S}}
+\newcommand{\fp}{{\mathfrak p}}
+\newcommand{\fq}{{\mathfrak q}}
+\newcommand{\fM}{{\mathfrak M}}
+\newcommand{\fh}{{\mathfrak h}}
+\newcommand{\fT}{{\mathfrak T}}
+\newcommand{\fD}{{\mathfrak D}}
+\newcommand{\fP}{{\mathfrak P}}
+\newcommand{\fR}{{\mathfrak R}}
+\newcommand{\fB}{{\mathfrak B}}
+
+\newcommand{\bma}{{\bm{a}}}
+\newcommand{\bmb}{{\bm{b}}}
+\newcommand{\bmc}{\bm{c}}
+\newcommand{\bms}{\bm{s}}
+\newcommand{\bme}{{\bm{e}}}
+\newcommand{\bmh}{{\bm{h}}}
+\newcommand{\bmk}{{\bm{k}}}
+\newcommand{\bmn}{{\bm{n}}}
+\newcommand{\bmq}{{\bm q}}
+\newcommand{\bmr}{{\bm{r}}}
+\newcommand{\bmt} {{\bm t }}
+\newcommand{\bmu}{{\bm{u}}}
+\newcommand{\bmv}{{\bm{v}}}
+\newcommand{\bmw}{{\bm{w}}}
+\newcommand{\bmx}{{\bm{x}}}
+\newcommand{\bmy}{{\bm{y}}}
+\newcommand{\bmz} {{\bm {z}}}
+\newcommand{\bmU}{ {\bm  U}}
+\newcommand{\bmS}{\bm S}
+\newcommand{\bmm}{{\bm m}}
+\newcommand{\bmmu}{{\bm \mu}}
+\newcommand{\bmsigma}{{\bm\sigma}}
+
+\newcommand{\mbf}{\mathbf}
+
+
+
+\newcommand{\rL}{{\rm L}}
+\newcommand{\rP}{{\rm P}}
+\newcommand{\rQ}{{\rm Q}}
+\newcommand{\rd}{{\rm d}}
+\newcommand{\rU}{{\rm U}}
+\newcommand{\ri}{\mathrm{i}}
+\newcommand{\re}{\mathrm{e}} 
+
+
+\renewcommand{\b}{\mathbb}
+\newcommand{\bC}{{\mathbb C}}
+\newcommand{\bD}{{\mathbb D}}
+
+\newcommand{\bF}{{\mathbb F}}
+\newcommand{\bB}{{\mathbb B}}
+\newcommand{\bE}{\mathbb{E}}
+\newcommand{\bH}{\mathbb{H}}
+\newcommand{\bN}{\mathbb{N}}
+\newcommand{\bP}{\mathbb{P}}
+\newcommand{\bQ}{\mathbb{Q}}
+\newcommand{\bR}{{\mathbb R}}
+\newcommand{\bS}{\mathbb S}
+\newcommand{\bT}{\mathbb T}
+\newcommand{\bV}{\mathbb V}
+\newcommand{\bZ}{\mathbb{Z}}
+\newcommand{\bW}{\mathbb{W}}
+\newcommand{\IE}{\mathbb{I} \mathbb{E}}
+\newcommand{\indicator}{{\bf 1}}
+
+
+\newcommand{\al}{\alpha}
+\newcommand{\la}{\lambda}
+
+%environments
+
+%proof env
+\newmdenv[
+	topline=false,
+	bottomline=false,
+	rightline=false,
+	skipabove=\topsep,
+	skipbelow=\topsep
+]{leftrule}
+\newenvironment{Proof}[1][\unskip]
+{\noindent\emph{Proof #1:}\begin{adjustwidth}{0.5cm}{}
+\begin{leftrule}
+}
+{ 
+\end{leftrule}
+\flushright $\square$ \flushleft
+\end{adjustwidth}}
+
+%solution env
+
+\newenvironment{Solution}[1][\unskip]
+{\noindent\emph{Solution #1:}\vspace{0.1cm}\begin{adjustwidth}{0.5cm}{}
+\begin{leftrule}
+}
+{ 
+\end{leftrule}
+\flushright $\blacksquare$ \flushleft
+\end{adjustwidth}}
+
+%Special Notations
+\def\ex{\textup{ex}}
+
+\newcommand{\lecture}[1]{
+\vspace{-0.3cm}
+\colorlet{currentcolor}{.}
+\begin{center}
+{\color{blue}
+\fbox{\color{currentcolor}\small \textcolor{blue}{Lecture #1}}}
+\end{center}
+}

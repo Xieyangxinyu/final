@@ -1,0 +1,127 @@
+\documentclass[10pt, oneside]{article}
+\usepackage{geometry}             
+\geometry{letterpaper, left = 21 mm, right = 21 mm, top = 30 mm, bottom = 25 mm}     
+
+%-----------------packages ---------------------
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage{xspace}
+\usepackage{enumitem}
+\usepackage[latin1]{inputenc}
+\usepackage{graphicx,color}
+\usepackage{pifont}
+\usepackage{pdfpages}
+\usepackage{ textcomp }
+\usepackage[normalem]{ulem}
+\usepackage{marvosym}
+\usepackage{tikz-cd}
+\usepackage{hyperref}
+\usepackage{changepage}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{color}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{ marvosym }
+\usepackage{mdframed}
+\usepackage[explicit]{titlesec}
+\usepackage[T1]{fontenc}
+\usepackage{pifont}
+\usepackage{listings}
+\usepackage{epsfig}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\usepackage{tabularx}
+\usepackage{todonotes}
+\usepackage{cite}
+\usepackage[T1]{fontenc}
+
+%-----------------TikZ styles-----------------
+\tikzset{
+  mynode/.style={fill,circle,inner sep=1.3pt,outer sep=0pt}
+}
+
+%-----------------theorem styles-----------------
+
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{quest}[thm]{Question}
+
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{defns}[thm]{Definitions}
+\newtheorem{algo}[thm]{Algorithm}
+\newtheorem{exmp}[thm]{Example}
+\newtheorem{exmps}[thm]{Examples}
+\newtheorem{notn}[thm]{Notation}
+\newtheorem{notns}[thm]{Notations}
+\newtheorem{addm}[thm]{Addendum}
+\newtheorem{exer}[thm]{Exercise}
+\newtheorem{exerh}[thm]{$\text{Exercise}^*$}
+
+\theoremstyle{remark}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{rems}[thm]{Remarks}
+\newtheorem{warn}[thm]{Warning}
+\newtheorem{clm}[thm]{Claim}
+
+\newenvironment{proof*}[1][\proofname]{
+\begin{adjustwidth}{2.5em}{0pt}
+  \renewcommand\qedsymbol{\rule{2mm}{2mm}}
+  \begin{proof}[#1]}{\end{proof}
+  \end{adjustwidth}}
+
+%------------------custom environments--------
+
+\titleformat{\section}[hang]{\Large\bfseries}{}{0pt}{\thesection \ \ #1 \hfill \ding{118}\vspace{0.2cm}}{\Large\bfseries}
+
+\titleformat{\subsection}{\large\bfseries}{}{0pt}{\thesubsection \ \ #1 \hfill  \ding{100}\vspace{0.2cm}}{\Large\bfseries}
+
+%\fancyhead{}
+\renewcommand{\headrulewidth}{1pt}
+
+\numberwithin{figure}{section}
+\numberwithin{equation}{subsection}
+
+%------------------------macros and packages------------------
+
+%%%Please put path to the downloaded macro file here.
+\usepackage{macros} 
+\usepackage{csquotes}
+
+%-------------------------page settings --------------
+
+\pagestyle{fancy}
+\setcounter{tocdepth}{2}
+\setlength{\fboxrule}{0.3pt}
+
+%-------------------------begin doc-------------------
+
+
+\begin{document}
+
+\thispagestyle{empty}
+\title{Combinatorial Hypothesis Testing}
+
+
+%-------------------------------------------------------------------------%
+
+\maketitle
+\tableofcontents
+\let\thefootnote\relax\footnote{Last updated \today}
+\addtocounter{footnote}{-1}\let\thefootnote\svthefootnote
+
+\section{Abstract}
+
+\section{Introduction}
+
+\section{Moment Methods}
+
+\section{Extension}
+
+\end{document}
