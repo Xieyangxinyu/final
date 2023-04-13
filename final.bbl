@@ -1,0 +1,18 @@
+\begin{thebibliography}{1}
+
+\bibitem{addario2010combinatorial}
+Louigi Addario-Berry, Nicolas Broutin, Luc Devroye, and G{\'a}bor Lugosi.
+\newblock On combinatorial testing problems.
+\newblock 2010.
+
+\bibitem{arias2011detection}
+Ery Arias-Castro, Emmanuel~J Candes, and Arnaud Durand.
+\newblock Detection of an anomalous cluster in a network.
+\newblock {\em The Annals of Statistics}, pages 278--304, 2011.
+
+\bibitem{arias2008searching}
+Ery Arias-Castro, Emmanuel~J Candes, Hannes Helgason, and Ofer Zeitouni.
+\newblock Searching for a trail of evidence in a maze.
+\newblock 2008.
+
+\end{thebibliography}

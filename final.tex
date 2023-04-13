@@ -2,104 +2,11 @@
 \usepackage{geometry}             
 \geometry{letterpaper, left = 21 mm, right = 21 mm, top = 30 mm, bottom = 25 mm}     
 
-%-----------------packages ---------------------
-\usepackage{amsmath}
-\usepackage{amsthm}
-\usepackage{amssymb}
-\usepackage{mathrsfs}
-\usepackage{xspace}
-\usepackage{enumitem}
-\usepackage[latin1]{inputenc}
-\usepackage{graphicx,color}
-\usepackage{pifont}
-\usepackage{pdfpages}
-\usepackage{ textcomp }
-\usepackage[normalem]{ulem}
-\usepackage{marvosym}
-\usepackage{tikz-cd}
-\usepackage{hyperref}
-\usepackage{changepage}
-\usepackage{hyperref}
-\usepackage{fancyhdr}
-\usepackage{color}
-\usepackage{amsfonts}
-\usepackage{mathrsfs}
-\usepackage{ marvosym }
-\usepackage{mdframed}
-\usepackage[explicit]{titlesec}
-\usepackage[T1]{fontenc}
-\usepackage{pifont}
-\usepackage{listings}
-\usepackage{epsfig}
-\usepackage{fancyhdr}
-\pagestyle{fancy}
-\usepackage{tabularx}
-\usepackage{todonotes}
-\usepackage{cite}
-\usepackage[T1]{fontenc}
-
-%-----------------TikZ styles-----------------
-\tikzset{
-  mynode/.style={fill,circle,inner sep=1.3pt,outer sep=0pt}
-}
-
-%-----------------theorem styles-----------------
-
-\newtheorem{thm}{Theorem}[section]
-\newtheorem{cor}[thm]{Corollary}
-\newtheorem{prop}[thm]{Proposition}
-\newtheorem{lem}[thm]{Lemma}
-\newtheorem{conj}[thm]{Conjecture}
-\newtheorem{quest}[thm]{Question}
-
-\theoremstyle{definition}
-\newtheorem{defn}[thm]{Definition}
-\newtheorem{defns}[thm]{Definitions}
-\newtheorem{algo}[thm]{Algorithm}
-\newtheorem{exmp}[thm]{Example}
-\newtheorem{exmps}[thm]{Examples}
-\newtheorem{notn}[thm]{Notation}
-\newtheorem{notns}[thm]{Notations}
-\newtheorem{addm}[thm]{Addendum}
-\newtheorem{exer}[thm]{Exercise}
-\newtheorem{exerh}[thm]{$\text{Exercise}^*$}
-
-\theoremstyle{remark}
-\newtheorem{rem}[thm]{Remark}
-\newtheorem{rems}[thm]{Remarks}
-\newtheorem{warn}[thm]{Warning}
-\newtheorem{clm}[thm]{Claim}
-
-\newenvironment{proof*}[1][\proofname]{
-\begin{adjustwidth}{2.5em}{0pt}
-  \renewcommand\qedsymbol{\rule{2mm}{2mm}}
-  \begin{proof}[#1]}{\end{proof}
-  \end{adjustwidth}}
-
-%------------------custom environments--------
-
-\titleformat{\section}[hang]{\Large\bfseries}{}{0pt}{\thesection \ \ #1 \hfill \ding{118}\vspace{0.2cm}}{\Large\bfseries}
-
-\titleformat{\subsection}{\large\bfseries}{}{0pt}{\thesubsection \ \ #1 \hfill  \ding{100}\vspace{0.2cm}}{\Large\bfseries}
-
-%\fancyhead{}
-\renewcommand{\headrulewidth}{1pt}
-
-\numberwithin{figure}{section}
-\numberwithin{equation}{subsection}
 
 %------------------------macros and packages------------------
 
 %%%Please put path to the downloaded macro file here.
 \usepackage{macros} 
-\usepackage{csquotes}
-
-%-------------------------page settings --------------
-
-\pagestyle{fancy}
-\setcounter{tocdepth}{2}
-\setlength{\fboxrule}{0.3pt}
-
 %-------------------------begin doc-------------------
 
 
@@ -116,12 +23,29 @@
 \let\thefootnote\relax\footnote{Last updated \today}
 \addtocounter{footnote}{-1}\let\thefootnote\svthefootnote
 
-\section{Abstract}
-
 \section{Introduction}
+
+Suppose we observe an $n$-dimensional vector $\bX = (X_1,...,X_n)$. The null hypothesis $H_0$ is that the components of $\bX$ are independent and identically distributed (i.i.d.) standard normal random variables. We denote the probability measure and expectation under $H_0$ by $\bP_0$ and $\bE_0$, respectively.
+
+Combinatorics kicks in as we consider the alternative hypotheses: consider a class $\cC=\{S_1,\ldots,S_N\}$ of $N$ sets of indices such that $S_k \subset\{1,\ldots,n\}$ for all $k=1,\ldots,N$. Under $H_1$, there
+exists an $S \in \cC$ such that $X_i$ has a distribution determined by whether $i$ is in $S$:
+\begin{enumerate}
+  \item In its simplest form, as discussed in \cite{arias2008searching, addario2010combinatorial, arias2011detection}, we consider 
+$$
+X_i \mbox{ has distribution }
+\begin{cases}
+  \cN(0,1), \quad & \mbox{ if }i \notin S\\
+  \cN(\mu,1), & \mbox{ if }i \in S
+\end{cases}
+$$
+where $\mu>0$ is a positive parameter and components of $\bX$ are independent. 
+  \item 
+\end{enumerate}
 
 \section{Moment Methods}
 
 \section{Extension}
 
+\bibliographystyle{plain}
+\bibliography{bibfile}
 \end{document}

@@ -1,0 +1,51 @@
+This is BibTeX, Version 0.99d
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: final.aux
+Reallocating 'name_of_file' (item size: 1) to 6 items.
+The style file: plain.bst
+Reallocating 'name_of_file' (item size: 1) to 8 items.
+Database file #1: bibfile.bib
+Warning--empty journal in addario2010combinatorial
+Warning--empty journal in arias2008searching
+You've used 3 entries,
+            2118 wiz_defined-function locations,
+            512 strings with 4441 characters,
+and the built_in function-call counts, 1077 in all, are:
+= -- 101
+> -- 64
+< -- 1
++ -- 25
+- -- 22
+* -- 72
+:= -- 188
+add.period$ -- 9
+call.type$ -- 3
+change.case$ -- 20
+chr.to.int$ -- 0
+cite$ -- 5
+duplicate$ -- 40
+empty$ -- 67
+format.name$ -- 22
+if$ -- 217
+int.to.chr$ -- 0
+int.to.str$ -- 3
+missing$ -- 3
+newline$ -- 18
+num.names$ -- 6
+pop$ -- 24
+preamble$ -- 1
+purify$ -- 17
+quote$ -- 0
+skip$ -- 33
+stack$ -- 0
+substring$ -- 47
+swap$ -- 10
+text.length$ -- 1
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 12
+warning$ -- 2
+while$ -- 9
+width$ -- 4
+write$ -- 31
+(There were 2 warnings)

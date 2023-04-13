@@ -1,28 +1,90 @@
 %standard macro and environment list - spring 2018
 
-
-%packages
-\usepackage{float, graphicx}
-\usepackage[]{epsfig}
-\usepackage{amsmath, amsthm, amssymb}
-\usepackage{epsfig}
-\usepackage{verbatim}
-\usepackage{url}
-\usepackage{latexsym}
+%-----------------packages ---------------------
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
 \usepackage{mathrsfs}
-\usepackage{hyperref}
-\usepackage{graphicx}
-\usepackage{enumerate}
-\usepackage[normalem]{ulem}
-\usepackage{bm}
-\usepackage{stmaryrd}
+\usepackage{xspace}
 \usepackage{enumitem}
-\usepackage{mathtools}
-%\usepackage{showlabels}
-\usepackage{showkeys}
+\usepackage[latin1]{inputenc}
+\usepackage{graphicx,color}
+\usepackage[normalem]{ulem}
+\usepackage{marvosym}
+\usepackage{hyperref}
+\usepackage{changepage}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
 \usepackage{color}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{ marvosym }
 \usepackage{mdframed}
-\usepackage{cancel}
+\usepackage[explicit]{titlesec}
+\usepackage[T1]{fontenc}
+\usepackage{pifont}
+\usepackage{epsfig}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\usepackage{tabularx}
+\usepackage{todonotes}
+\usepackage{cite}
+\usepackage[T1]{fontenc}
+
+%-----------------TikZ styles-----------------
+\tikzset{
+  mynode/.style={fill,circle,inner sep=1.3pt,outer sep=0pt}
+}
+
+%-----------------theorem styles-----------------
+
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{quest}[thm]{Question}
+
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{defns}[thm]{Definitions}
+\newtheorem{algo}[thm]{Algorithm}
+\newtheorem{exmp}[thm]{Example}
+\newtheorem{exmps}[thm]{Examples}
+\newtheorem{notn}[thm]{Notation}
+\newtheorem{notns}[thm]{Notations}
+\newtheorem{addm}[thm]{Addendum}
+\newtheorem{exer}[thm]{Exercise}
+\newtheorem{exerh}[thm]{$\text{Exercise}^*$}
+
+\theoremstyle{remark}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{rems}[thm]{Remarks}
+\newtheorem{warn}[thm]{Warning}
+\newtheorem{clm}[thm]{Claim}
+
+\newenvironment{proof*}[1][\proofname]{
+\begin{adjustwidth}{2.5em}{0pt}
+  \renewcommand\qedsymbol{\rule{2mm}{2mm}}
+  \begin{proof}[#1]}{\end{proof}
+  \end{adjustwidth}}
+
+%------------------custom environments--------
+
+\titleformat{\section}[hang]{\Large\bfseries}{}{0pt}{\thesection \ \ #1 \hfill \ding{118}\vspace{0.2cm}}{\Large\bfseries}
+
+\titleformat{\subsection}{\large\bfseries}{}{0pt}{\thesubsection \ \ #1 \hfill  \ding{100}\vspace{0.2cm}}{\Large\bfseries}
+
+%\fancyhead{}
+\renewcommand{\headrulewidth}{1pt}
+
+\numberwithin{figure}{section}
+\numberwithin{equation}{subsection}
+%-------------------------page settings --------------
+
+\pagestyle{fancy}
+\setcounter{tocdepth}{2}
+\setlength{\fboxrule}{0.3pt}
 
 \DeclareMathOperator{\Tr}{Tr}
 \DeclareMathOperator{\var}{Var}
@@ -241,6 +303,7 @@
 \newcommand{\bW}{\mathbb{W}}
 \newcommand{\IE}{\mathbb{I} \mathbb{E}}
 \newcommand{\indicator}{{\bf 1}}
+\newcommand{\bX}{\mathbf{X}}
 
 
 \newcommand{\al}{\alpha}
