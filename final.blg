@@ -5,47 +5,44 @@ Reallocating 'name_of_file' (item size: 1) to 6 items.
 The style file: plain.bst
 Reallocating 'name_of_file' (item size: 1) to 8 items.
 Database file #1: bibfile.bib
-Warning--empty journal in addario2010combinatorial
-Warning--empty journal in arias2008searching
-You've used 3 entries,
+You've used 4 entries,
             2118 wiz_defined-function locations,
-            512 strings with 4441 characters,
-and the built_in function-call counts, 1077 in all, are:
-= -- 101
-> -- 64
-< -- 1
-+ -- 25
-- -- 22
-* -- 72
-:= -- 188
-add.period$ -- 9
-call.type$ -- 3
-change.case$ -- 20
+            522 strings with 4604 characters,
+and the built_in function-call counts, 1776 in all, are:
+= -- 183
+> -- 82
+< -- 2
++ -- 32
+- -- 28
+* -- 132
+:= -- 282
+add.period$ -- 12
+call.type$ -- 4
+change.case$ -- 26
 chr.to.int$ -- 0
-cite$ -- 5
-duplicate$ -- 40
-empty$ -- 67
-format.name$ -- 22
-if$ -- 217
+cite$ -- 4
+duplicate$ -- 64
+empty$ -- 124
+format.name$ -- 28
+if$ -- 375
 int.to.chr$ -- 0
-int.to.str$ -- 3
-missing$ -- 3
-newline$ -- 18
-num.names$ -- 6
-pop$ -- 24
+int.to.str$ -- 4
+missing$ -- 4
+newline$ -- 23
+num.names$ -- 8
+pop$ -- 22
 preamble$ -- 1
-purify$ -- 17
+purify$ -- 22
 quote$ -- 0
-skip$ -- 33
+skip$ -- 55
 stack$ -- 0
-substring$ -- 47
-swap$ -- 10
-text.length$ -- 1
+substring$ -- 148
+swap$ -- 24
+text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 12
-warning$ -- 2
-while$ -- 9
-width$ -- 4
-write$ -- 31
-(There were 2 warnings)
+type$ -- 16
+warning$ -- 0
+while$ -- 18
+width$ -- 5
+write$ -- 46

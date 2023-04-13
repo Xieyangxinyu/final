@@ -19,15 +19,13 @@
 %-------------------------------------------------------------------------%
 
 \maketitle
-\tableofcontents
-\let\thefootnote\relax\footnote{Last updated \today}
 \addtocounter{footnote}{-1}\let\thefootnote\svthefootnote
 
 \section{Introduction}
 
 Suppose we observe an $n$-dimensional vector $\bX = (X_1,...,X_n)$. The null hypothesis $H_0$ is that the components of $\bX$ are independent and identically distributed (i.i.d.) standard normal random variables. We denote the probability measure and expectation under $H_0$ by $\bP_0$ and $\bE_0$, respectively.
 
-Combinatorics kicks in as we consider the alternative hypotheses: consider a class $\cC=\{S_1,\ldots,S_N\}$ of $N$ sets of indices such that $S_k \subset\{1,\ldots,n\}$ for all $k=1,\ldots,N$. Under $H_1$, there
+Combinatorics kicks in as we consider the alternative hypotheses, by introducing a class $\cC$ with some combinatorial structure: consider a class $\cC=\{S_1,\ldots,S_N\}$ of $N$ sets of indices such that $S_k \subset\{1,\ldots,n\}$ for all $k=1,\ldots,N$. Under $H_1$, there
 exists an $S \in \cC$ such that $X_i$ has a distribution determined by whether $i$ is in $S$:
 \begin{enumerate}
   \item In its simplest form, as discussed in \cite{arias2008searching, addario2010combinatorial, arias2011detection}, we consider 
@@ -39,11 +37,78 @@ X_i \mbox{ has distribution }
 \end{cases}
 $$
 where $\mu>0$ is a positive parameter and components of $\bX$ are independent. 
-  \item 
+  \item In testing correlations \cite{arias2012correlation}, we consider $$
+  \Cov(X_i, X_j) =
+  \begin{cases}
+    1, \quad & \mbox{ if }i = j\\
+    \rho, & \mbox{ if }i \neq j\mbox{ with }i, j \in S\\
+    0, & \mbox{ otherwise}\\
+  \end{cases}
+  $$
 \end{enumerate}
 
-\section{Moment Methods}
+For each $S \in \cC$, we denote the probability measure and expectation by $\bP_S$ and $\bE_S$, respectively. Many interesting examples of $\cC$ arises for this scenario: subsets of size $K$, cliques, perfect matchings, spanning trees, and clusters.
 
+A~\textit{test} is a~binary-valued function $f:\bR^n \to\{
+0,1\}$. If
+$f(X)=0$, then the test accepts the null hypothesis $H_0$;
+otherwise $H_0$ is rejected by $f$.
+We measure the performance of a~test based on the \textit{minimax risk}:
+\[
+R_*^{\max} := \inf_{f} R^{\max}(f).
+\]
+where $R^{\max}(f)$ is the worst-case risk over the class of interest $\cC$, formally defined by
+\[
+R^{\max}(f) = \bP_0\{f(X)=1\}
++ \max_{S\in\cC} \bP_S\{f(X)=0\}.
+\]
+
+In this report, we discuss the techniques introduced in \cite{arias2012correlation, addario2010combinatorial, arias2011detection} to derive the asymptotic upper and lower bounds of $R_*^{\max}$, as well as more recent extensions.
+\section{Lower Bounds}
+\subsection{Moment Methods}
+\label{subsec:Moment Methods}
+A~standard way of obtaining lower bounds for the minimax risk
+is by putting a~prior on the
+class $\cC$ and obtaining a~lower bound on the corresponding \textit
+{Bayesian risk}, which never exceeds the worst-case risk. Because
+this is true for any prior, the idea is to find one that is hardest
+(often called \textit{least favorable}). Consider the
+uniform prior on $\cC$, giving rise to the following \textit{average risk}:
+%
+\[
+R(f) = \bP_0\{f(X)=1\}
++ \bP_1\{f(X)=0\},
+\]
+%
+where
+%
+\[
+\bP_1\{f(X)=0\} := \frac{1}{N}\sum_{S\in\cC} \bP_S\{f(X)=0\},
+\]
+%
+and $N := |\cC|$ is the cardinality of $\cC$.
+The advantage of considering the average risk over the worst-case
+risk is that we know an optimal test for the former, which, by the
+Neyman--Pearson fundamental lemma, is the likelihood ratio test,
+denoted $f^*$. Introducing $L(X)$, the likelihood ratio between $H_0$ and $H_1$, the optimal test becomes
+%
+\[
+f^*(x) = 0  \quad\mbox{if and only if}\quad   L(x) \le 1.
+\]
+The
+%GL
+(average)
+risk $R^*=R(f^*)$ of the optimal test is called the
+\textit{Bayes risk} and it satisfies
+
+\[
+R^* = 1 - \frac{1}{2} \bE_0 |L(X) - 1|
+\]
+
+
+
+\section{Clusters}
+\label{subsec:Clusters}
 \section{Extension}
 
 \bibliographystyle{plain}
