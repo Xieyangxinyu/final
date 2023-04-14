@@ -56,6 +56,8 @@
 \newtheorem{addm}[thm]{Addendum}
 \newtheorem{exer}[thm]{Exercise}
 \newtheorem{exerh}[thm]{$\text{Exercise}^*$}
+\newtheorem{alternative}{Alternative}
+\newenvironment{alt}{\begin{alternative}\hspace{0pt}}{\end{alternative}}
 
 \theoremstyle{remark}
 \newtheorem{rem}[thm]{Remark}
@@ -68,6 +70,7 @@
   \renewcommand\qedsymbol{\rule{2mm}{2mm}}
   \begin{proof}[#1]}{\end{proof}
   \end{adjustwidth}}
+
 
 %------------------custom environments--------
 
@@ -126,7 +129,6 @@
 \DeclareMathOperator{\mix}{mix}
 \DeclareMathOperator{\crf}{crf}
 \DeclareMathOperator{\rf}{rf}
-\DeclareMathOperator{\alt}{alt}
 \DeclareMathOperator{\fl}{fl}
 \DeclareMathOperator{\diam}{diam}
 \DeclareMathOperator{\north}{no}
@@ -304,6 +306,8 @@
 \newcommand{\IE}{\mathbb{I} \mathbb{E}}
 \newcommand{\indicator}{{\bf 1}}
 \newcommand{\bX}{\mathbf{X}}
+\newcommand{\bA}{\mathbf{A}}
+\newcommand{\bI}{\mathbf{I}}
 
 
 \newcommand{\al}{\alpha}
