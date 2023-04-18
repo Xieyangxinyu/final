@@ -23,15 +23,14 @@
 
 \section{Introduction}
 
-Suppose we observe an $n$-dimensional vector $\bX = (X_1,...,X_n)$. The null hypothesis $H_0$ is that the components of $\bX$ are independent and identically distributed (i.i.d.) standard normal random variables. We denote the probability measure and expectation under $H_0$ by $\bP_0$ and $\bE_0$, respectively.
+Suppose we observe an $n$-dimensional vector $\bX = (X_1,...,X_n)$. The null hypothesis $H_0$ is that $\bX \sim \cN(0, \bI)$. We denote the probability measure and expectation under $H_0$ by $\bP_0$ and $\bE_0$, respectively.
 
-Combinatorics kicks in as we consider the alternative hypotheses, by introducing a class $\cC$ with some combinatorial structure: consider a class $\cC=\{S_1,\ldots,S_N\}$ of $N$ sets of indices such that $S_k \subset\{1,\ldots,n\}$ for all $k=1,\ldots,N$. Under $H_1$, there
-exists an $S \in \cC$ such that $X_i$ has a distribution determined by whether $i$ is in $S$:
-\begin{alt}[Detection of Means]
+Combinatorics kicks in as we consider the alternative hypotheses, by introducing a class $\cC$: consider a class $\cC=\{S_1,\ldots,S_N\}$ of $N$ sets of indices such that $S_k \subset\{1,\ldots,n\}$ and $|S_k| = K$ for all $k=1,\ldots,N$. Under $H_1$, there
+exists an $S \in \cC$ such that the distribution of $X_i$ is determined by whether $i$ is in $S$:
+\begin{alt}[Detection of Means\cite{arias2008searching, addario2010combinatorial, arias2011detection}]
   \label{alt:mean}
-In its simplest form, as discussed in \cite{arias2008searching, addario2010combinatorial, arias2011detection}, we consider 
 $$
-X_i \mbox{ has distribution }
+X_i \sim
 \begin{cases}
   \cN(0,1), \quad & \mbox{ if }i \notin S\\
   \cN(\mu,1), & \mbox{ if }i \in S
@@ -39,9 +38,10 @@ X_i \mbox{ has distribution }
 $$
 where $\mu>0$ is a positive parameter and components of $\bX$ are independent. 
 \end{alt}
-\begin{alt}[Detection of Correlations]
+\begin{alt}[Detection of Correlations\cite{arias2012correlation}]
   \label{alt:correlation}
-In testing correlations \cite{arias2012correlation}, we consider $$
+  $X_i \sim \cN(0,1)$ for each $i$ and 
+  $$
   \Cov(X_i, X_j) =
   \begin{cases}
     1, \quad & \mbox{ if }i = j\\
@@ -49,9 +49,10 @@ In testing correlations \cite{arias2012correlation}, we consider $$
     0, & \mbox{ otherwise}\\
   \end{cases}
   $$
+  where $\rho \in (0,1).$
 \end{alt}
 
-For each $S \in \cC$, we denote the probability measure and expectation by $\bP_S$ and $\bE_S$, respectively. Many interesting examples of $\cC$ arises for this scenario: subsets of size $K$, cliques, perfect matchings, spanning trees, and clusters.
+For each $S \in \cC$, we denote the probability measure and expectation by $\bP_S$ and $\bE_S$, respectively. Many interesting combinatorial examples of $\cC$ arises: subsets of size $K$, cliques, perfect matchings, spanning trees, and clusters, etc.
 
 A~\textit{test} is a~binary-valued function $f:\bR^n \to\{
 0,1\}$. If
@@ -67,32 +68,23 @@ R^{\max}(f) = \bP_0\{f(X)=1\}
 + \max_{S\in\cC} \bP_S\{f(X)=0\}.
 \]
 
-In this report, we discuss the techniques introduced in \cite{arias2012correlation, addario2010combinatorial, arias2011detection} to derive the asymptotic upper and lower bounds of $R_*^{\max}$, as well as more recent extensions.
-\section{Lower Bounds}
-A~standard way of obtaining lower bounds for the minimax risk
-is by putting a~prior on the
-class $\cC$ and obtaining a~lower bound on the corresponding \textit
-{Bayesian risk}, which never exceeds the worst-case risk. Because
-this is true for any prior, the idea is to find one that is hardest
-(often called \textit{least favorable}). Consider the
-uniform prior on $\cC$, giving rise to the following \textit{average risk}:
-%
+In this report, we discuss the techniques introduced in \cite{arias2012correlation, addario2010combinatorial, arias2011detection} to derive the lower and upper bounds of $R_*^{\max}$, as well as more recent extensions.
+
+\section{General Framework}
+
+\subsection{Lower Bounds}
+A~standard way to obtain lower bounds for the minimax risk is by putting a~prior on the class $\cC$ and obtaining a~lower bound on the corresponding \textit{Bayesian risk}, which never exceeds the worst-case risk. The
+uniform prior on $\cC$ gives rise to the following \textit{average risk}:
 \[
 R(f) = \bP_0\{f(X)=1\}
 + \bP_1\{f(X)=0\},
 \]
-%
 where
-%
 \[
 \bP_1\{f(X)=0\} := \frac{1}{N}\sum_{S\in\cC} \bP_S\{f(X)=0\},
 \]
-%
 and $N := |\cC|$ is the cardinality of $\cC$.
-The advantage of considering the average risk over the worst-case
-risk is that we know an optimal test for the former, which, by the
-Neyman--Pearson fundamental lemma, is the likelihood ratio test,
-denoted $f^*$. Introducing $L(X)$, the likelihood ratio between $H_0$ and $H_1$, the optimal test becomes
+The advantage of the average risk over the worst-case risk is that the likelihood ratio test, denoted $f^*$, is optimal for the former, according to the Neyman--Pearson lemma. Introducing $L(X)$, the likelihood ratio between $H_0$ and $H_1$, the optimal test becomes
 %
 \[
 f^*(x) = 0  \quad\mbox{if and only if}\quad   L(x) \le 1.
@@ -107,8 +99,60 @@ risk $R^*=R(f^*)$ of the optimal test is called the
 R^* = 1 - \frac{1}{2} \bE_0 |L(X) - 1|
 \]
 
-\subsection{Detection of Means}
-In this section we focus on the first alternative hypothesis \ref{alt:mean}. In this case, if we write 
+\subsection{Upper Bounds}
+The analysss of the upper bounds of the risks of optimal tests are often less systematic. Even though likelihood ratio test is optimal in the
+Bayesian setting, it is difficult to obtain directly upper bounds for the (worst-case) risk
+of the likelihood ratio test. Hence, in analysing combinatorial testing problems, we often focus on obtaining upper bounds for sub-optimal tests for ease of analysis and strive for an upper bound matching the obtained lower bound.
+
+
+\section{Detection of Means}
+In this section we focus on the first alternative hypothesis \ref{alt:mean}. We will first discuss simple tests are considered as we obtain upper bounds: the averaging test and the maximum test. Then, we will provide the key insights driving the results for lower bounds obtained in \cite{addario2010combinatorial} and discuss the applications to examples such as $k$-sets, spanning trees, perfect matchings, etc.
+
+
+\subsection{Upper Bounds}
+The \textit{averaging test} has the form
+\[
+f(\mathbf{x}) = 0  \quad\mbox{if and only if}\quad {\{ \sum_{i=1}^n X_i \le \mu K/2 \}}.
+\]
+Since the sum of the components of $\bX$ is zero-mean normal under $\bP_0$
+and has mean $\mu K$ under the alternative hypothesis, we obtain the following:
+\begin{prop}[\cite{addario2010combinatorial}, Proposition 2.1]
+  \label{average}
+  Let $\delta>0$. The risk of the averaging test $f$ satisfies
+  $R(f) \le\delta$
+  whenever
+  %
+  \[
+  \mu\ge\sqrt{\frac{8n}{K^2} \log\frac{2}{\delta}}.
+  \]
+  %
+\end{prop}
+
+The \textit{maximum test} is based on the \textit{scan statistic} $\max_{S\in\cC} X_S$, and it has the form:
+%
+\[
+f(\mathbf{x}) = 1 \quad\mbox{if and only if}\quad
+\max_{S\in\cC} X_S\ge\frac{\mu K + \mathbb{E}_0 \max_{S\in\cC} X_S}{2}.
+\]
+Observing that under the alternative hypothesis for some $S\in\cC$, $X_S= \sum_{i\in S} X_i$ is normal
+$(\mu K, K)$, we obtain
+\begin{prop}[\cite{addario2010combinatorial}, Proposition 2.2]
+  \label{maxtest}
+  The risk of the maximum test $f$ satisfies
+  $R(f) \le\delta$ whenever
+  %
+  \[
+  \mu\ge\frac{\mathbb{E}_0 \max_{S\in\cC} X_S}{K} + 2\sqrt{\frac{2}{K}
+  \log
+  \frac{2}{\delta}}.
+  \]
+  %
+\end{prop}
+
+{\bf ADD SOMETHING}
+
+\subsection{Lower Bounds}
+Let's take a closer look at the likehood ratio. If we write 
 %
 \[
 \phi_0(\mathbf{x}) = (2\pi)^{-n/2} e^{-\sum_{i=1}^n x_i^2/2}
@@ -131,17 +175,9 @@ _0(\mathbf{x})}
 = \frac{1}{N} \sum_{S\in\cC}
 e^{\mu x_S - K\mu^2/2},
 \]
-where $x_S = \sum_{i\in S} x_i$.
-The Bayes risk can then be written
-as
-\begin{eqnarray*}
-R^* & = & R^*_{\cC}(\mu) = R(f^*) = 1 - \frac{1}{2} \mathbb{E}_0 |L(\bX
-)-1| \\
-& = & 1 - \frac{1}{2}
-\int\biggl| \phi_0(\mathbf{x}) -\frac{1}{N}\sum_{S\in\cC} \phi
-_S(\mathbf{x}) \biggr|\, d\mathbf{x}.
-\end{eqnarray*}
-Via Jensen's inequality, we observe that 
+where $x_S = \sum_{i\in S} x_i$. With the observation \cite{devroye2013probabilistic}
+$$R^* \ge 1 - \sqrt{1 - (\mathbb{E}_0 \sqrt{L(\bX)})^2}$$
+we can apply Jensen's inequality, 
 \[
 \mathbb{E}_0 \sqrt{L(\bX)} = \int\sqrt{\frac{{1/N}\sum_{S\in\cC} \phi_S(\mathbf{x})}{\phi
 _0(\mathbf{x})}} \phi
@@ -149,32 +185,32 @@ _0(\mathbf{x}) \,d\mathbf{x}
 = \int\sqrt{\frac{1}{N} \sum_{S\in\cC} \phi_S(\mathbf{x}) \phi
 _0(\mathbf{x})} \,d\mathbf{x}
 \ge\frac{1}{N} \sum_{S\in\cC}
-\int\sqrt{ \phi_S(\mathbf{x}) \phi_0(\mathbf{x})} \,d\mathbf{x}
+\int\sqrt{ \phi_S(\mathbf{x}) \phi_0(\mathbf{x})} \,d\mathbf{x}.
 \] 
-because for any $S\in\cC$,
+Because for any $S\in\cC$,
 \[
 \int\sqrt{ \phi_S(\mathbf{x}) \phi_0(\mathbf{x})} \,d\mathbf
 {x}=e^{-\mu^2K/8}
 \]
-Combining this inequality with $R^* \ge 1 - \sqrt{1 - (\mathbb{E}_0 \sqrt{L(\bX)})^2}$, we see that for all classes $\cC$, $R^* \ge1/2$ whenever
-$\mu\le\sqrt{(4/K)}\times\sqrt{\log(4/3)}$, i.e. small risk cannot
-be achieved unless $\mu$ is substantially large compared to $K^{-1/2}$.
+for all classes $\cC$, $R^* \ge1/2$ whenever
+\begin{equation}
+  \label{eq: loose lower bound}
+  \mu\le\sqrt{(4/K)}\times\sqrt{\log(4/3)}
+\end{equation}
+i.e. small risk cannot be achieved unless $\mu$ is substantially large compared to $K^{-1/2}$. But this can be substantially improved by the moment method proposed in \cite{addario2010combinatorial}, as we discuss next.
 
 %
 \subsubsection{Moment Methods}
 \label{subsubsec:Moment Methods}
 %
 
-The moment method applies the following insight to move beyond the lower bound we obtained earlier: by the Cauchy--Schwarz inequality,
+The moment method applies the following insight: by the Cauchy--Schwarz inequality,
 %
 \[
 R^* = 1 - \tfrac{1}{2} \mathbb{E}_0 |L(\bX)-1|
 \ge1 - \tfrac{1}{2} \sqrt{\mathbb{E}_0 |L(\bX)-1|^2}.
 \]
-and since $\mathbb{E}_0 L(\bX) = 1$,
-\[
-\mathbb{E}_0 |L(\bX)-1|^2=\Var_0(L(\bX)) = \mathbb{E}_0 [L(\bX)^2] -1.
-\]
+and since $\mathbb{E}_0 L(\bX) = 1, \mathbb{E}_0 |L(\bX)-1|^2=\Var_0(L(\bX)) = \mathbb{E}_0 [L(\bX)^2] -1.$ 
 We are now ready to prove the following lower bound based on overlapping pairs, which reduces the problem to
 studying a purely combinatorial quantity \cite{arias2008searching,addario2010combinatorial}:
 \begin{prop}[\cite{addario2010combinatorial}, Proposition 3.2]
@@ -206,11 +242,16 @@ e^{2\mu\sum_{i\in S\cap S'} X_i} ] \\
 )^{|S\cap S'|}
 \\
 & = &
-e^{\mu^2 (K-|S\cap S'|)+2\mu^2|S\cap S'|},
+e^{\mu^2 (K-|S\cap S'|)+2\mu^2|S\cap S'|}
 \end{eqnarray*}
 \end{proof}
 
+The previous proposition allows us to obtain lower bounds by analysing the quantity $\mathbb{E} e^{\mu^2Z}$. 
+This allows us to exploit the combinatorial structures of the class $\cC$ and gives us far better bounds than \ref{eq: loose lower bound}, as the folloiwng examples show:
+
+
 \begin{exmp}[Disjoint Sets, \cite{addario2010combinatorial}, Section 4.1]
+  \label{exmp: Disjoint Sets}
   Suppose all $S\in\cC$ are disjoint (and therefore $KN\le n$). Fix $\delta\in(0,1)$. Let $Z = K$ with probability $1/N$ and $Z = 0$ otherwise. Thus,
   %
   \[
@@ -223,16 +264,24 @@ e^{\mu^2 (K-|S\cap S'|)+2\mu^2|S\cap S'|},
   \[
   \mu\le\sqrt{\frac{\log(4N(1-\delta)^2)}{K}}.
   \]
+  Notice that with the bound the bound $\mathbb{E}_0 \max_{S\in\cC} X_S \le\sqrt{2K\log N}$, maximum test $f$ gives us $R^* \le R(f) \le\delta$
+  whenever
+  \[
+  \mu\ge\sqrt{\frac{2\log N}{K}} + 2\sqrt{\frac{2\log(2/\delta)}{K}}.
+  \]
+  So in this case the critical transition occurs when $\mu$ is of the order
+of $\hspace*{-0.2pt}\sqrt{(1/K)\hspace*{-0.2pt}\log\hspace*{-0.25pt} N}$.
 \end{exmp}
 
 \begin{exmp}[Spanning Trees, \cite{addario2010combinatorial}, Section 4.5]
   \label{exmp:Spanning Trees}
 Let $1,2,\ldots,n={m\choose2}$ represent the edges of the complete graph $K_m$ and let $\cC$ be the set of all spanning trees of $K_m$.
-Thus, we have $N=m^{m-2}$ spanning trees and $K=m-1$. With the fact$\mathbb{E}[ e^{\mu^2 Z} ] \le \exp(2e^{\mu^2 })$, we obtain that for any $\delta\in(0,1)$,
+Thus, we have $N=m^{m-2}$ spanning trees and $K=m-1$. With the fact $\mathbb{E}[ e^{\mu^2 Z} ] \le \exp(2e^{\mu^2 })$, we obtain that for any $\delta\in(0,1)$,
 $R^* \ge\delta$ whenever
 \[
 \mu\le\sqrt{\log\bigl(1+\tfrac1 2 \log\bigl(1+4(1-\delta)^2\bigr) \bigr)}.
 \]
+Meanwhile, the averaging test has risk $R(f) \le\delta$ whenever $\mu\ge\sqrt{4\log(2/\delta)}$.
 \end{exmp}
 
 \begin{exmp}[Cliques, \cite{addario2010combinatorial}, Section 4.6]
@@ -241,10 +290,15 @@ $R^* \ge\delta$ whenever
 \[
 \mu\le\sqrt{\frac{1}{k} \log\biggl(\frac{m}{2k} \biggr)}.
 \]
-
+Similar to disjoint sets (Example \ref{exmp: Disjoint Sets}), we have with maximum test, $R^* \le\delta$ whenever
+%
+\[
+\mu\ge
+2\sqrt{\frac{1}{k-1} \log\biggl(\frac{me}{k} \biggr)}
++ 4\sqrt{\frac{\log(2/\delta)}{k(k-1)}};
+\]
 \end{exmp}
 
-Thus, by deriving upper bounds for the moment generating function of the overlap $|S\cap S'|$ between two elements of $\cC$ drawn independently and uniformly at random, we can obtain lower bounds for the critical value of $\mu$. This allows us to exploit special combinatorial structures of the class $\cC$; one such combinatorial property is symmetry:
 \begin{defn}
   We say that the class $\cC$ is {\it symmetric} if it satisfies the following conditions.
   Let $S,S'$ be drawn independently and uniformly at random from $\cC$. Then,
@@ -319,8 +373,110 @@ distribution as the number of fixed points in a random permutation. Hence for al
 \]
 \end{exmp}
 
+\subsection{Detection of an Anomalous Cluster}
+As a special case of the detection of means problem, we can consider the following scenario in network analysis:
+The situation where no signal is present, that is, ``business as
+usual,'' is modeled as
+%
+\[
+H_0^m : X_v \sim\cN(0,1)\qquad \forall v \in\bV_m.
+\]
+%
+Let $K$ be a cluster, which we define for now as a subset of nodes,
+that is, \mbox{$K \subset\bV_m$}. In fact, we will be interested in classes of
+clusters that are either derived from a geometric shape, when $\bV_m$ is
+embedded in Euclidean space, or connected components, when $\bV_m$ has a
+graph structure.
+The situation where the nodes in $K$ behave anomalously is modeled as
+%
+\[
+H_{1,K}^m : X_v \sim\cN(\mu_K,1)\qquad \forall v \in K;\qquad X_v \sim
+\cN(0,1)\qquad \forall v \notin K,
+\]
+%
+where $\mu_K > 0$.
+%noisy data.}
+We choose to decompose $\mu_K$ as $\mu_K = |K|^{-1/2} \Lambda_K$, where
+$|K|$ denotes the number of nodes in $K$ and $\Lambda_K$ is the signal
+strength. Indeed, with this normalization, for any cluster $K$,
+%
+%e1.1 ###
+%
+\begin{equation} \label{eq:simple-risk}
+\min_T \bP(T = 1|H_0^m) + \bP(T = 0|H_{1,K}^m) = 2 \bP\bigl(\cN
+(0,1) >
+\Lambda_K/2\bigr),
+\end{equation}
+%
+where the minimum is over all tests for $H_0^m$ versus $H
+_{1,K}^m$ and the lower bound is achieved by the likelihood ratio
+(Neyman--Pearson) test. We define
+%
+\[
+\Lambdamax_m = \max_{K \in\Km} \Lambda_K,\qquad \Lambdamin_m =
+\min_{K
+\in\Km} \Lambda_K.
+\]
+Let $\Km$ be a class of clusters within $\bV_m$ and define
+%
+\[
+H_1^m = \bigcup_{K \in\Km} H_{1,K}^m.
+\]
+%
+We are interested in testing $H_0^m$ versus $H_1^m$. In other
+words, under the alternative, the cluster of anomalous nodes is only
+known to belong to $\Km$.
+We adopt a minimax point of view.
+For a test $T$, we define its worst-case risk as
+%
+\[
+\gamma_{\Km}(T) = \bP(T = 1|H_0^m) + \max_{K \in\Km} \bP(T =
+0|H_{1,K}^m).
+\]
+%
+The minimax risk for $H_0^m$ versus $H_1^m$ is defined as
+%
+\[
+\gamma_{\Km} = \inf_T \gamma_{\Km}(T).
+\]
+%
+We say that $H_0^m$ and $H_1^m$ are asymptotically inseparable
+(in the minimax sense) if
+%
+\[
+\varliminf_{m \to\infty} \gamma_{\Km} = 1,
+\]
+%
+which is equivalent to saying that, as $m$ becomes large, no test can
+perform substantially better than random guessing, without even looking
+at the data.
+A sequence of tests $(T_m)$ is said to asymptotically separate $H
+_0^m$ and $H_1^m$ if
+%
+\[
+\lim_{m \to\infty} \gamma_{\Km}(T_m) = 0,
+\]
+%
+and $H_0^m$ and $H_1^m$ are said to be asymptotically separable
+if there is such a sequence of tests.
 
-\subsection{Detection of Correlations}
+(under specific conditions)
+$H_0^m$ and $H_1^m$ are asymptotically inseparable if there is
+$\eta_m \to0$ slowly enough such that, for all $K \in\Km$,
+%
+\[
+\Lambda_K \leq(1 - \eta_m) \sqrt{2 \log(m/|K|)};
+\]
+%
+and conversely, we show that a version of the scan statistic
+asymptotically separates $H_0^m$ and $H_1^m$ if there is $\eta_m
+\to0$ slowly enough such that, for all $K \in\Km$,
+%
+\[
+\Lambda_K \geq(1 + \eta_m) \sqrt{2 \log(m/|K|)}.
+\]
+
+\section{Detection of Correlations}
 First, we note that we can rewrite the hypotheses as 
 \[
 H_0: \bX \sim\cN(0,\bI)\quad\mbox{vs.}\quad
@@ -548,8 +704,493 @@ in which case $R^* \ge0.3$.
   \]
   which is bounded by 13/4 when $\nu\le1+\ln((\ln(13/4))/2)$, in which case $R^* \ge0.15$.
 \end{exmp}
-\section{Clusters}
-\label{subsec:Clusters}
+
+
+\subsection{Upper Bounds}
+One of the simplest tests is based on the observation that
+the magnitude of the squared-sum $(\sum_{i=1}^n X_i)^2$ may be
+substantially different under the null and alternative hypotheses due
+to the higher correlation under the latter.
+
+Indeed, under $\bP_0$, $(\sum_{i=1}^n X_i)^2$ is distributed as $n
+\chi_1^2$, while for
+any $S\subset\{1,\ldots,n\}$ with $|S|=k$, under
+$\bP_S$, $(\sum_{i=1}^n X_i)^2$ has the same distribution
+as $(n + \rho k(k-1)) \chi_1^2$; in fact, under the more general
+correlation model~(\ref{model-general}), this is a~(stochastic) lower
+bound. This immediately leads to the following result.
+%
+%pr3.1 #&#
+\begin{prop}
+\label{prpsq}
+Let $\cC$ be an arbitrary class of sets of size $k$
+and suppose that $\rho k^2/n \to\infty$ in~(\ref{model-general}).
+If $t_n$ is such that $t_n\to\infty$ but $t_n = o(\rho k^2/n)$,
+then the test which rejects the null hypothesis
+if $(\sum_{i=1}^n X_i)^2 > n t_n$
+has a~%GL
+worst-case
+risk converging to zero.
+However, any test based on $(\sum_{i=1}^n X_i)^2$ is powerless if
+$\rho k^2/n \to0$ in~(\ref{model}).
+\end{prop}
+
+In Corollary~\ref{corksets}, we saw that reliable detection of
+$k$-sets is
+impossible if $k^2/n \to\infty$ and $\rho k^2/n \to0$. Here we see
+that, when $\rho k^2/n \to\infty$, the\vadjust{\goodbreak} squared-sum test is
+asymptotically powerful. Hence, the following statement:
+
+\begin{quote}
+{\normalsize\textit{The squared-sum test is near-optimal for detecting
+$k$-sets in the regime where $k^2/n \to\infty$.}}
+\end{quote}
+%
+On the other hand, in the regime $k^2/n \to0$, the squared-sum test is
+powerless even if $\rho= 1$.
+The test does not require knowledge of $\rho$, though knowing $\rho$ allows
+one to choose the threshold $t_n$ in an optimal fashion; if $\rho$ is
+unknown, we simply choose $t_n \to0$ very slowly.
+
+\subsection{The generalized likelihood ratio test}
+\label{secglrt}
+
+In this section we investigate the performance of the generalized
+likelihood ratio test (GLRT). We show that for parametric classes such
+as $k$-intervals, the test is near-optimal. However, for the
+nonparametric class of $k$-sets,
+the test performs poorly in some regimes.
+
+By definition, the GLRT rejects for large values of $\max_{S \in\cC}
+Z_S/\bE_0 Z_S$, or simply $\max_{S \in\cC} Z_S$ when all the sets in
+the class $\cC$ are of same size, since~$\bE_0 Z_S$ only depends on
+the size of $S$. Hence, the GLRT is of the form
+%
+\[
+f(X)=0  \quad\mbox{if and only if}\quad
+\max_{S \in\cC} X^T (\bI- \bA_S^{-1}) X \leq t
+\]
+%
+for some appropriately chosen $t$. We immediately notice that the GLRT
+requires knowledge of $\rho$
+
+Our analysis of the GLRT is based on Lemma~\ref{lemqf}, which
+provides the
+distribution of the quadratic form $X^T (\bI- \bA_S^{-1}) X$ under
+the null $\bP_0$ and under the alternative $\bP_S$.
+Under the null we need to control the maximum of such quadratic forms
+over $S \in\cC$, which we do using exponential concentration
+inequalities for chi-squared distributions.
+
+%s3.2.1 #&#
+\subsubsection{The GLRT for $k$-intervals and other parametric classes}
+
+Recalling Corollary~\ref{corkint}, when detecting $k$-intervals all
+tests are
+asymptotically powerless when $\rho\ll\min(1, \log(n/k)/k)$. We
+assume for concreteness that
+$k/\log n \to\infty$, for otherwise detecting $k$-intervals for very
+small $k$ has more to do with detecting $k$-sets. We state a~general
+result that applies for classes
+of small cardinality.
+%
+%pr3.2 #&#
+\begin{prop} \label{prpglrt-small} Consider a~class $\cC$ of sets of
+size $k$, with cardinality $N
+\to\infty$ such that $\log(N)/k \to0$. When $\rho k / \log N
+\to\infty$, the generalized likelihood ratio test with threshold
+value $t = - \rho k + \rho\sqrt{5 k \log N} + 2\log N$ has
+%GL Bayes
+worst-case
+risk tending to zero.
+\end{prop}
+%
+\begin{proof}
+We first bound the probability of Type I error. Indeed, under the null,
+by Lemma~\ref{lemqf} and its proof, we can decompose
+%
+\[
+X^T (\bI- \bA_S^{-1}) X
+= -\frac\rho{1-\rho} C_S + \frac{\rho(k-1)}{1 + \rho(k-1)} D_S,
+\]
+%
+where $C_S \sim\chi_{k-1}^2$ and $D_S \sim\chi_1^2$. Hence,
+%
+\[
+\max_{S \in\cC} X^T (\bI- \bA_S^{-1}) X \leq-\rho\min_{S \in
+\cC} C_S + \max_{S \in\cC} D_S.
+\]
+%
+It is well known that the maximum of $N$ standard normals is bounded
+by
+$\sqrt{2 \log N}$
+with probability tending to 1 as $N \to
+\infty$. Hence, the second term on the right-hand side is bounded by
+$2 \log N$ with high probability. For the first term, we combine the
+union bound and Chernoff's bound to obtain, for all $a\le1$,
+%
+%e3.1 #&#
+\begin{eqnarray}\label{glrt-small-eq1}
+\bP_0\Bigl\{\min_{S \in\cC} C_S < a~(k-1)\Bigr\}
+&\leq& N \mathbf{P}\{\chi_{k-1}^2 < a(k-1)\} \nonumber\\[-8pt]\\[-8pt]
+&\leq& N \exp\biggl(-\frac{(k-1)}2 (a~- 1 - \log a)\biggr).
+\nonumber
+\end{eqnarray}
+%
+Using the fact that $a~- 1 - \log a~\sim\frac12 (1-a)^2$ when $a~\to
+1$, the right-hand side tends to zero when $a~= 1 - \sqrt{(5/k)\log
+N}$. We arrive at the conclusion that the GLRT with threshold $t =
+- \rho k + \rho\sqrt{5 k \log N} + 2 \log N$ has probability of Type
+I error tending to zero.
+
+Now consider the alternative under $\P_S$. By Lemma~\ref{lemqf} and
+Chebyshev's inequality,
+%
+\[
+X^T (\bI- \bA_S^{-1}) X \geq- \rho k - \rho s_k \sqrt{k} + \rho k /s_k
+\]
+%
+with high probability when $s_k \to\infty$. We then conclude by the
+fact that the right-hand side is larger than $t$ when $s_k \to\infty$
+sufficiently slowly.
+\end{proof}
+
+Comparing the performance of the GLRT in Proposition~\ref{prpglrt-small} with the
+lower bound for $k$-intervals in Corollary~\ref{corkint}, we see that the
+GLRT is near-optimal for detecting $k$-intervals. This is actually
+the case for all parametric classes we know of.
+
+%s3.2.2 #&#
+\subsubsection{The GRLT for $k$-sets and other nonparametric classes}
+\label{secglrt-nonparametric}
+
+Consider now the example of the class of all $k$-sets.
+Compared to the previous section, the situation here is different in that
+$N$, the size of the class $\cC$, is much larger. For example, for
+$k$-sets, $N = {n \choose k}$, and
+therefore $\log(N)/k \to\infty$ with $n \to\infty$. The
+equivalent\vspace*{1pt} of Proposition~\ref{prpglrt-small} for this regime is the
+following:
+%
+%pr3.3 #&#
+\begin{prop} \label{prpglrt-large}
+Consider a~class $\cC$ of sets of size $k$, with cardinality $N \to
+\infty$ such that $\log(N)/k
+\to\infty$. When $\eta:= (1-\rho) N^{2/k} (\log N)/k \to0$, the
+generalized likelihood
+ratio test with threshold value $t = -(\log N)/\sqrt{\eta}$ has
+%GL Bayes
+worst-case
+risk tending to zero.
+\end{prop}
+%
+\begin{proof}
+We follow the proof of Proposition~\ref{prpglrt-small}. The only
+difference is in~(\ref{glrt-small-eq1}), where we now need $a~\to0$ and that
+right-hand side tends to zero when $\log a~+ 2 (\log N)/k \to-\infty
+$. Choose $a~= N^{-2/k} \sqrt{\eta}$, obtaining that, with\vadjust{\goodbreak} high probability,
+%
+%e3.2 #&#
+\begin{equation} \label{glrt-large-eq1}
+\max_{S \in\cC} X^T (\bI- \bA_S^{-1}) X \leq-\frac\rho{1-\rho}
+N^{-2/k} k \sqrt{\eta} + 2 \log N.
+\end{equation}
+%
+As before, with high probability under $\P_S$,
+%
+%e3.3 #&#
+\begin{equation} \label{glrt-large-eq2}
+X^T (\bI- \bA_S^{-1}) X \geq- \rho k,
+\end{equation}
+%
+so we only need to check that the threshold $t$ is larger than the
+right-hand side in~(\ref{glrt-large-eq1}) and smaller than the
+right-hand side in~(\ref{glrt-large-eq2}), which is the case by the
+assumptions we made.
+\end{proof}
+
+Notice that in Proposition~\ref{prpglrt-large} the condition on $\rho
+$ implies
+that $\rho\to1$, which is much stronger than what the squared-sum
+test requires when $k^2/n \to\infty$.
+For $k$-sets, $N = {n \choose k}$---so that $\log N = k \log(n/k) +
+O(k)$---and the requirement is that $(1-\rho) (n/k)^2 \log(n/k) \to
+0$, which is substantially stronger than what the lower bound obtained
+in Corollary~\ref{corksets} requires. Moreover, if we restrict $\rho
+$ to be bounded away from $1$, then the GLRT may be powerless.
+%
+%
+%th3.1 #&#
+\begin{thm}
+\label{thmglrt-bad}
+Let $\cC$ be the class of all $k$-sets. If $\rho< 0.6$ and $k=
+o(n^{0.7})$, the GLRT has a~%GL
+Bayes
+risk bounded away from zero.
+\end{thm}
+
+In view of Theorem~\ref{thmglrt-bad}, the GLRT is clearly suboptimal
+when in
+the situation stated there, and compares very poorly with the
+squared-sum test, which is asymptotically powerful if $\rho k^2/n \to
+\infty$ as seen in Proposition~\ref{prpsq}. We do not know of any
+other situation
+where the GLRT fails so miserably.
+
+%s3.3 #&#
+\subsection{A~localized squared-sum test}
+
+While the GLRT is near-optimal for detecting objects from a~parametric
+class such as $k$-intervals, it needs knowledge of $\rho$.
+However, a~simple modification solves this drawback. Indeed, consider
+the following ``local'' squared-sum test:
+%
+\[
+f(X)=0  \quad\mbox{if and only if}\quad
+\max_{S \in\cC} \biggl(\sum_{i \in S} X_i\biggr)^2 \leq t
+\]
+%
+for some appropriate threshold $t$.
+%
+%pr3.4 #&#
+\begin{prop} \label{prplocal-sum}
+Consider a~class $\cC$ of sets of size $k$, with cardinality $N
+\to\infty$ such that $\log(N)/k \to0$. When $\rho\gg\log(N)/k$
+in~(\ref{model-general}), the local squared-sum test with threshold $t
+= 2 k \log N$ has
+%GL
+worst-case
+risk tending to zero.
+\end{prop}
+%
+\begin{proof}
+The proof is quite straightforward. Indeed, under the null, for any $S$
+of size $k$ we have $\sum_{i \in S} X_i \sim\cN(0, k)$ so that
+%
+\[
+\max_{S \in\cC} \biggl(\sum_{i \in S} X_i\biggr)^2 \leq t\vadjust{\goodbreak}
+\]
+%
+with probability tending to 1. Under an alternative~(\ref{model-general}), $S$ denoting the anomalous set of variables, we have
+%
+\[
+\P\biggl( \biggl(\sum_{i \in S} X_i\biggr)^2 \ge t\biggr) \ge\P\bigl( \bigl(k + k(k-1) \rho
+\bigr) \chi_1^2 \ge t\bigr) \to1,
+\]
+%
+when $\rho\gg\log(N)/k$.
+\end{proof}
+
+Specializing this result to the case of $k$-intervals leads to the
+following statement (which ignores logarithmic factors):
+
+\begin{quote}
+{\normalsize\textit{The localized squared-sum test is near-optimal for
+detecting $k$-intervals in the regime where $\log(n)/k \to0$.}}
+\end{quote}
+
+\textit{When $k$ is unknown.} We might only know that some interval is
+anomalous, without knowing the size of that interval. In that case,
+multiple testing at each $k$ using the local squared-sum test yields
+adaptivity. Computationally, this may be done effectively by computing
+sums in a~multiscale fashion as advocated in~\cite{MGD}. In fact, here
+it is enough to compute the sums over all \textit{dyadic}
+intervals---since each interval $S$ contains a~dyadic interval of
+length at least $|S|/4$---and this can be done in $3 n$ flops in a~recursive fashion.
+
+%s3.4 #&#
+\subsection{A~goodness-of-fit test}
+
+By now, the parametric case is essentially solved, with the local
+squared-sum test being not only near-optimal but also computable in
+polynomial time
+%GL
+(in $n$ and $k$)
+for the case of $k$-intervals, for example. In the nonparametric case,
+so far, the story is not complete. We focus on the class of all
+$k$-sets. There we know that the squared-sum test is near-optimal if
+$k^2/n \to\infty$. If $k^2/n \to0$, it has no power, and we only
+know that the GLRT works when $(1-\rho) (n/k)^2 \log(n/k)\to0$,
+which does not match the rate obtained in Corollary~\ref{corksets}.
+Worse than that, it is not clear whether computing the GLRT is possible
+in time polynomial in $(n, k)$.
+We now show that a~simple
+goodness-of-fit (GOF)
+test performs (almost) as desired.
+
+%GL sentence added
+The basic idea is the following.
+Let $H_i = \Phi^{-1}(X_i)$, where $\Phi$ is the standard normal distribution
+function. Under the null, the $H_i$'s are i.i.d. uniform in $(0,1)$.
+Under an alternative with anomalous set denoted by $S$, the $X_i, i
+\in S$ are closer together, especially since we place ourselves in the
+regime where $\rho\to1$. More precisely, we have the following.
+%
+%le3.1 #&#
+\begin{lem} \label{lemclose}
+Suppose $X_1,\ldots, X_k$ are
+%GL standardized
+zero-mean, unit-variance
+random variables satisfying $\Cov(X_i, X_j) \geq\rho> 0$, for all $i
+\neq j$. Let $\overline{X}$ denote their average. Then for any $t > 0$,
+%
+\[
+\bP\bigl\{ \# \{i: |X_i - \overline{X}| > t\} \geq k/2\bigr\}
+\leq\frac{2(1-\rho)}{t^2}.
+\]
+%
+\end{lem}
+%
+\begin{proof}
+Let $\Lambda:= \sum_{i \neq j} \Cov(X_i, X_j) \geq k(k-1) \rho$.
+Elementary calculations show that
+%
+\[
+\bE\biggl[\frac1k \sum_i (X_i - \overline{X})^2\biggr]
+= 1 -\frac1k -\frac{\Lambda}{k^2} \leq(1 -1/k)(1 - \rho) \leq
+1-\rho.
+\]
+%
+By Markov's inequality, we then have
+%
+\[
+\bP\biggl\{ \frac1k \sum_i (X_i - \overline{X})^2 > t^2/2
+\biggr\}
+\leq\frac{2(1-\rho)}{t^2}.
+\]
+%
+The statement follows from observing that
+%
+\[
+\# \{i: |X_i - \overline{X}| > t\} \geq k/2  \quad\Rightarrow\quad
+\frac1k \sum_i (X_i - \overline{X})^2 > t^2/2.
+\]
+%
+\end{proof}
+
+The idea, therefore, is detecting unusually high concentrations of
+$H_i$'s, which is a~form of GOF test for the uniform distribution.
+Under a~general correlation model as in~(\ref{model-general}), with
+Lemma~\ref{lemclose} we see that the concentration will happen over an
+interval of length slightly larger than $\sqrt{1-\rho}$. This is
+apparent from Lemma~\ref{lemrepresent} under the simple correlation model
+(\ref{model}).
+
+Choose an integer $m$ such that $m \gg(n/k^2) \log(n/k^2)$ and partition
+the interval $[0,1]$ into $m$ bins of length $1/m$, denoted $I_s,  s =
+1,\ldots, m$. Let $B_s = \# \{i: H_i \in I_s\}$ be the bin
+counts---thus, we are computing a~histogram. Then consider the
+following GOF test:
+%
+\[
+f(X)=0  \quad\mbox{if and only if}\quad
+\max_{s = 1,\ldots, m} B_s \leq t,
+\]
+%
+where $t$ is some threshold.
+%
+%Assume first that $\rho$ is known.
+%
+%pr3.5 #&#
+\begin{prop} \label{prpgof}
+Consider the class $\cC$ of all $k$-sets in the case where $k^2/n \to
+0$ and $k/\log n \to\infty$. In the GOF test above, choose $m$ such
+that $(n/k^2) \log n \ll m \ll n/\log n$. When $(1-\rho)^{1/2} \ll
+1/m$ in~(\ref{model-general}), the resulting test with threshold $t =
+n/m + \sqrt{3 n \log(m)/m}$ has
+%GL
+worst-case
+risk tending to zero.
+\end{prop}
+%
+\begin{proof}
+Bernstein's inequality, applied to the binomial distribution, gives that
+%
+\[
+\bP_0\bigl\{B_s > n/m + b \sqrt{n/m}\bigr\} \leq\exp\bigl[- (b^2/2)/\bigl(1 + (b/3)
+\sqrt{m/n}\bigr)\bigr].
+\]
+%
+This and the union bound imply that, indeed,
+%
+\[
+\bP_0\Bigl\{\max_s B_s > t\Bigr\} \to0.
+\]
+
+Consider now an alternative of the form~(\ref{model-general}), with
+$S$ denoting the anomalous set. Let
+%
+\[
+I := \{i \in S: |X_i - \overline{X}_S| \leq1/m\},\qquad  \overline
+{X}_S := \frac1k \sum_{i \in S} X_i.\vadjust{\goodbreak}
+\]
+%
+Though the set $I$ is random, by Lemma~\ref{lemclose} and the fact that
+$(1-\rho)^{1/2} \ll1/m$, we have that
+%
+\[
+\bP_S\{|I| \geq k/2\} \to1.
+\]
+%
+Define the event $Q := \{-a~\leq\overline{X}_S \leq a\}$ for some $a~> 0$. Note that, since the variance of $\overline{X}_S$ is bounded by
+1, $\bP(Q^c) \leq2 (1 - \Phi(a))$. Define $\tilde{H}_S = \Phi
+^{-1}(\overline{X}_S)$. On~$Q$, using a~simple Taylor expansion, we have
+%
+\[
+|H_i - \tilde{H}_S| \leq\frac{|X_i - \overline{X}_S|}{\phi(a~+
+1/m)} \leq e^{a^2}/m\qquad \forall i \in I,
+\]
+%
+where $\phi$ denotes the standard normal density function and $a$
+is taken sufficiently large. Therefore, when $|I| \geq k/2$ and $Q$
+hold, at least $k/2$ of the anomalous $H_i$'s fall in an interval of
+length at most $2 e^{a^2}/m$. Since such an interval is covered by at
+most $2 e^{a^2}$ bins, by the pigeonhole principle, there is a~bin
+that contains $k e^{-a^2}/4$ anomalous $H_i$'s. By Bernstein's
+inequality, the same bin will also contain at least $(n-k)/m -\sqrt{3
+n \log(m)/m}$ nonanomalous $H_i$'s (with\vspace*{1pt} high probability), so in
+total this bin will contain $n/m -k/m -\sqrt{3 n \log(m)/m} + k
+e^{-a^2}/4$ points. By our choice of $m$, $k \gg\sqrt{n \log(m)/m}$,
+so it suffices to choose $a~\to\infty$ slowly enough that $k e^{-a^2}
+\gg\sqrt{n \log(m)/m}$ still. Then, with high probability, there is
+a~bin with more than $t$ points.
+\end{proof}
+
+Ignoring logarithmic factors, we are now able to state the following:
+
+\begin{quote}
+{\normalsize\textit{The GOF test is near-optimal for detecting $k$-sets in
+the regime where $k^2/n \to0$ and $k/\log n \to\infty$.}}
+\end{quote}
+
+When $k/\log n \to0$, things are somewhat different. There, the GOF
+test requires that $(1-\rho) n^{2 k/(k-1)} \to0$, which is still
+close to optimal when $k \to\infty$, but far from optimal when $k$ is
+bounded (e.g., when $k=2$, the exponent is 4 instead of~2).
+Indeed, when $k/\log n \to0$, $m$ needs to be chosen larger than $n$,
+and Bernstein's inequality is not accurate. Instead, we use the simple bound
+%
+\[
+\P\bigl(\operatorname{Bin}(n,p) \ge\ell\bigr) \le2 \frac{ (n p)^\ell}{\ell!}
+\qquad\mbox{when } n p \le1/2.
+\]
+%
+Note that Bennett's inequality would also do. (The analysis also
+requires some refinement showing that, with probability tending to 1
+under the alternative, one cell contains at least $k$ points.)
+Note that in the remaining case, $k = O(1)$, the GLRT is optimal up to
+a~logarithmic factor, since it only requires that $(1-\rho) n^2 \log n
+\to0$, as seen in Section~\ref{secglrt-nonparametric}. We do not
+know whether
+a~comparable performance can be achieved by a~test that does not have
+access to $\rho$.
+
+\textit{When $k$ is unknown.} In essence, we are trying to detect an
+interval with a~higher mean in a~Poisson count setting.\vadjust{\goodbreak} As before, it
+is enough to look at dyadic intervals of all sizes, which can be done
+efficiently as explained earlier, following the multiscale ideas
+in~\cite{MGD}.
+
 \section{Extension}
 
 \bibliographystyle{plain}

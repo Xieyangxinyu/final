@@ -26,4 +26,9 @@ Simeon~M Berman.
 \newblock {\em Sankhy{\=a}: The Indian Journal of Statistics, Series A}, pages
   155--156, 1962.
 
+\bibitem{devroye2013probabilistic}
+Luc Devroye, L{\'a}szl{\'o} Gy{\"o}rfi, and G{\'a}bor Lugosi.
+\newblock {\em A probabilistic theory of pattern recognition}, volume~31.
+\newblock Springer Science \& Business Media, 2013.
+
 \end{thebibliography}
