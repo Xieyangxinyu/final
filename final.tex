@@ -106,13 +106,13 @@ of the likelihood ratio test. Hence, in analysing combinatorial testing problems
 
 
 \section{Detection of Means}
-In this section we focus on the first alternative hypothesis \ref{alt:mean}. We will first discuss simple tests are considered as we obtain upper bounds: the averaging test and the maximum test. Then, we will provide the key insights driving the results for lower bounds obtained in \cite{addario2010combinatorial} and discuss the applications to examples such as $k$-sets, spanning trees, perfect matchings, etc.
+In this section we focus on the first alternative hypothesis \ref{alt:mean}. We will first discuss simple tests are considered as we obtain upper bounds: the averaging test and the maximum test. Then, we will provide the key insights driving the results for lower bounds obtained in \cite{addario2010combinatorial} and discuss the applications to examples such as {\bf $k$-sets, spanning trees, perfect matchings, etc}.
 
 
 \subsection{Upper Bounds}
 The \textit{averaging test} has the form
 \[
-f(\mathbf{x}) = 0  \quad\mbox{if and only if}\quad {\{ \sum_{i=1}^n X_i \le \mu K/2 \}}.
+f(\mathbf{x}) = 0  \quad\mbox{if and only if}\quad { \sum_{i=1}^n X_i \le \mu K/2 }.
 \]
 Since the sum of the components of $\bX$ is zero-mean normal under $\bP_0$
 and has mean $\mu K$ under the alternative hypothesis, we obtain the following:
@@ -131,8 +131,8 @@ and has mean $\mu K$ under the alternative hypothesis, we obtain the following:
 The \textit{maximum test} is based on the \textit{scan statistic} $\max_{S\in\cC} X_S$, and it has the form:
 %
 \[
-f(\mathbf{x}) = 1 \quad\mbox{if and only if}\quad
-\max_{S\in\cC} X_S\ge\frac{\mu K + \mathbb{E}_0 \max_{S\in\cC} X_S}{2}.
+f(\mathbf{x}) = 0 \quad\mbox{if and only if}\quad
+\max_{S\in\cC} X_S\le\frac{\mu K + \mathbb{E}_0 \max_{S\in\cC} X_S}{2}.
 \]
 Observing that under the alternative hypothesis for some $S\in\cC$, $X_S= \sum_{i\in S} X_i$ is normal
 $(\mu K, K)$, we obtain
@@ -153,17 +153,9 @@ $(\mu K, K)$, we obtain
 
 \subsection{Lower Bounds}
 Let's take a closer look at the likehood ratio. If we write 
-%
 \[
-\phi_0(\mathbf{x}) = (2\pi)^{-n/2} e^{-\sum_{i=1}^n x_i^2/2}
-\]
-%
-and
-%
-\[
-\phi_S(\mathbf{x}) = (2\pi)^{-n/2} e^{-\sum_{i\in S}(x_i-\mu
-)^2/2-\sum
-_{i\notin S} x_i^2/2}
+\phi_0(\mathbf{x}) = (2\pi)^{-n/2} e^{-\sum_{i=1}^n x_i^2/2} \text{ and }
+\phi_S(\mathbf{x}) = (2\pi)^{-n/2} e^{-\sum_{i\in S}(x_i-\mu)^2/2-\sum_{i\notin S} x_i^2/2}
 \]
 for the
 probability densities of $\bP_0$ and $\bP_S$, respectively,
@@ -175,8 +167,7 @@ _0(\mathbf{x})}
 = \frac{1}{N} \sum_{S\in\cC}
 e^{\mu x_S - K\mu^2/2},
 \]
-where $x_S = \sum_{i\in S} x_i$. With the observation \cite{devroye2013probabilistic}
-$$R^* \ge 1 - \sqrt{1 - (\mathbb{E}_0 \sqrt{L(\bX)})^2}$$
+where $x_S = \sum_{i\in S} x_i$. With the observation $R^* \ge 1 - \sqrt{1 - (\mathbb{E}_0 \sqrt{L(\bX)})^2}$ (\cite{devroye2013probabilistic}),
 we can apply Jensen's inequality, 
 \[
 \mathbb{E}_0 \sqrt{L(\bX)} = \int\sqrt{\frac{{1/N}\sum_{S\in\cC} \phi_S(\mathbf{x})}{\phi
@@ -187,12 +178,7 @@ _0(\mathbf{x})} \,d\mathbf{x}
 \ge\frac{1}{N} \sum_{S\in\cC}
 \int\sqrt{ \phi_S(\mathbf{x}) \phi_0(\mathbf{x})} \,d\mathbf{x}.
 \] 
-Because for any $S\in\cC$,
-\[
-\int\sqrt{ \phi_S(\mathbf{x}) \phi_0(\mathbf{x})} \,d\mathbf
-{x}=e^{-\mu^2K/8}
-\]
-for all classes $\cC$, $R^* \ge1/2$ whenever
+Because for any $S\in\cC, \int\sqrt{ \phi_S(\mathbf{x}) \phi_0(\mathbf{x})} \,d\mathbf{x}=e^{-\mu^2K/8}$, for all classes $\cC$, $R^* \ge1/2$ whenever
 \begin{equation}
   \label{eq: loose lower bound}
   \mu\le\sqrt{(4/K)}\times\sqrt{\log(4/3)}
@@ -217,11 +203,9 @@ studying a purely combinatorial quantity \cite{arias2008searching,addario2010com
   \label{prop:pairs}
   Let $S$ and $S'$ be drawn independently, uniformly, at random from $\cC$
   and let $Z=|S\cap S'|$. Then
-  %
   \[
-  R^* \ge1- \tfrac{1}{2} \sqrt{\mathbb{E} e^{\mu^2 Z} -1}.
+  R^* \ge 1- \tfrac{1}{2} \sqrt{\mathbb{E} e^{\mu^2 Z} -1}.
   \]
-  %
 \end{prop}
 \begin{proof}
 Because $L(\bX)= \frac1 N \sum_{S\in\cC} e^{\mu X_S -K\mu^2/2}$, 
@@ -284,22 +268,15 @@ $R^* \ge\delta$ whenever
 Meanwhile, the averaging test has risk $R(f) \le\delta$ whenever $\mu\ge\sqrt{4\log(2/\delta)}$.
 \end{exmp}
 
-\begin{exmp}[Cliques, \cite{addario2010combinatorial}, Section 4.6]
-  Consider the random variables $X_1,\ldots,X_n$ associated with the edges of the complete graph $K_m$ such that ${m\choose2}=n$ and let $\cC$ contain all cliques of size $k$. Thus, $K={k\choose2}$ and $N={m\choose k}$. With some technical work, one can show that $\mathbb{E}[ \exp(\mu^2Z) ] \le2$. This gives us $R^* \ge1/2$ whenever
-%
-\[
-\mu\le\sqrt{\frac{1}{k} \log\biggl(\frac{m}{2k} \biggr)}.
-\]
-Similar to disjoint sets (Example \ref{exmp: Disjoint Sets}), we have with maximum test, $R^* \le\delta$ whenever
-%
-\[
-\mu\ge
-2\sqrt{\frac{1}{k-1} \log\biggl(\frac{me}{k} \biggr)}
-+ 4\sqrt{\frac{\log(2/\delta)}{k(k-1)}};
-\]
-\end{exmp}
+%\begin{exmp}[Cliques, \cite{addario2010combinatorial}, Section 4.6]
+%Consider the random variables $X_1,\ldots,X_n$ associated with the edges of the complete graph $K_m$ such that ${m\choose2}=n$ and let $\cC$ contain all cliques of size $k$. Thus, $K={k\choose2}$ and $N={m\choose k}$. With some technical work, one can show that $\mathbb{E}[ \exp(\mu^2Z) ] \le2$. This gives us $R^* \ge1/2$ whenever
+%  $$\mu\le\sqrt{\frac{1}{k} \log\biggl(\frac{m}{2k} \biggr)}$$
+%Similar to disjoint sets (Example \ref{exmp: Disjoint Sets}), we have with maximum test, $R^* \le\delta$ whenever
+%$$\mu\ge O\biggl(\sqrt{\frac{1}{k} \log\biggl(\frac{m}{k} \biggr)}+ \sqrt{\frac{\log(1/\delta)}{k^2}}\biggr)$$
+%\end{exmp}
 
-\begin{defn}
+We also explore two special combinatorial structures: \textit{symmetry} and \textit{negative association}.
+\begin{defn}[Symmetry]
   We say that the class $\cC$ is {\it symmetric} if it satisfies the following conditions.
   Let $S,S'$ be drawn independently and uniformly at random from $\cC$. Then,
   \begin{enumerate}
@@ -308,30 +285,18 @@ Similar to disjoint sets (Example \ref{exmp: Disjoint Sets}), we have with maxim
     \item for any fixed $S_0\in\cC$ and $i\in S_0$, $\bP\{i\in S\}=K/n$.
   \end{enumerate}
 \end{defn}
-Via H\"older's inequality, we can obtain the folloiwng improvement of the universal lower bound obtained earlier.
+Via H\"older's inequality, we can obtain the following
 \begin{prop}[\cite{addario2010combinatorial}, Proposition 3.3]
   \label{symmetric}
-  Let $\delta\in(0,1)$.
-  Assume that $\cC$ is symmetric. Then $R^*\ge\delta$ for all $\mu$ with
-  \[
-  \mu\le\sqrt{\frac{1}{K}\log\biggl(1+\frac{4n(1-\delta)^2}{K} \biggr)}.
-  \]
-\end{prop}
-\begin{proof}
-  Integrating H\"older's inequality and symmetry, we obtain 
+  Assume that $\cC$ is symmetric. Then 
   $$\mathbb{E}[ e^{\mu^2 Z}]\le (e^{\mu^2K} -1 ) \frac{K}{n} +1.$$
-  Then we can apply Proposition \ref{prop:pairs}. We omit the details here.
-\end{proof}
-The proposition above shows that for any small and sufficiently symmetric
-class, the critical value of $\mu$ is of the order of
-$\sqrt{(\log n)/K}$, at least if $K\le n^\beta$ for some $\beta\in(0,1)$.
-\begin{exmp}[Stars, \cite{addario2010combinatorial}, Section 4.4]
-A star is a subgraph of the complete graph $K_m$ which contains all $K=m-1$ edges incident to a fixed vertex. Consider the set $\cC$ of all stars in $K_m$. In this setting, $n={m\choose2}$ and $N=m$. Hence, 
-for any $\varepsilon>0,$ we have $\lim_{m\to\infty} R^* = 1$ if 
-$$\mu\le(1-\varepsilon)\sqrt{\dfrac{\log m}{m}}$$
-\end{exmp}
-Another interesting property is negative association, which allow us to improve the previous lower bound further.
-\begin{defn}
+\end{prop}
+%The proposition above shows that for any small and sufficiently symmetric class, the critical value of $\mu$ is of the order of $\sqrt{(\log n)/K}$, at least if $K\le n^\beta$ for some $\beta\in(0,1)$.
+%\begin{exmp}[Stars, \cite{addario2010combinatorial}, Section 4.4]
+%A star is a subgraph of the complete graph $K_m$ which contains all $K=m-1$ edges incident to a fixed vertex. Consider the set $\cC$ of all stars in $K_m$. In this setting, $n={m\choose2}$ and $N=m$. Hence, for any $\varepsilon>0,$ we have $\lim_{m\to\infty} R^* = 1$ if 
+%$$\mu\le(1-\varepsilon)\sqrt{\dfrac{\log m}{m}}$$
+%\end{exmp}
+\begin{defn}[Negative Association]
   A collection $Y_1,\ldots,Y_n$ of random variables is \textit{negatively associated} if for any pair of disjoint sets $I,J\subset\{1,\ldots,n\}$ and (coordinate-wise) nondecreasing functions $f$ and $g$,
 \[
 \mathbb{E}[ f(Y_i, i\in I) g(Y_j, j\in J) ]
@@ -341,126 +306,55 @@ Another interesting property is negative association, which allow us to improve 
 
 \begin{prop}[\cite{addario2010combinatorial}, Proposition 3.4]
   \label{negass}
-  Let $\delta\in(0,1)$ and assume that the class $\cC$ is symmetric. Suppose that the labels are such
-  that $S'=\{1,2,\ldots,K\} \in\cC$. Let $S$ be a randomly chosen
-  element of $\cC$.
-  If the random variables
-  ${\bf 1}_{\{ 1 \in S \}},\ldots,{\bf 1}_{\{ K\in S \}}$ are
-  negatively associated,
-  then
-  $R^*\ge\delta$ for all $\mu$ with
+  Let $\delta\in(0,1)$ and assume that the class $\cC$ is symmetric. Suppose that the labels are such that $S'=\{1,2,\ldots,K\} \in\cC$. Let $S$ be a randomly chosen element of $\cC$. If the random variables
+  ${\bf 1}_{\{ 1 \in S \}},\ldots,{\bf 1}_{\{ K\in S \}}$ are negatively associated, then 
+  $$\mathbb{E}[ e^{\mu^2 Z}]\le \biggl( (e^{\mu^2} -1 ) \frac{K}{n} +1 \biggr)^K.$$
+\end{prop}
+\begin{exmp}[K-sets, \cite{addario2010combinatorial}, Section 4.2]
+  Consider the example when $\cC$ contains all sets $S \subset\{1,\ldots ,n\}$ of size $K$. Note $N={n\choose K}$. This class is symmetric and satisfies the condition in the previous proposition. Hence, applying Proposition \ref{prop:pairs}, $R^*\ge\delta$ for all $\mu$ with
   %
   \[
   \mu\le\sqrt{\log\biggl(1+\frac{n\log(1+4(1-\delta)^2)}{K^2} \biggr)}.
   \]
-\end{prop}
-\begin{proof}
-  Negative association gives us
-  $$\mathbb{E}[ e^{\mu^2 Z}]\le \biggl( (e^{\mu^2} -1 ) \frac{K}{n} +1 \biggr)^K.$$
-  Then we can apply Proposition \ref{prop:pairs}. We omit the details here.
-\end{proof}
-\begin{exmp}[K-sets, \cite{addario2010combinatorial}, Section 4.2]
-  Consider the example when $\cC$ contains all sets $S \subset\{1,\ldots ,n\}$ of size $K$. Note $N={n\choose K}$. This class is symmetric and satisfies the condition in the previous proposition.
 \end{exmp}
+{\bf ADD SOMETHING}
 
-\begin{exmp}[Perfect Matchings, \cite{addario2010combinatorial}, Section 4.3]
-  \label{exmp:Perfect Matchings}
-  Let $\cC$ be the set of all perfect matchings of the complete bipartite graph $K_{m,m}$. Thus, we have $n=m^2$ edges and $N=m!$, and $K=m$.
-  The symmetry assumptions hold obviously and the negative association property follows from the fact that $Z=|S\cap S'|$ has the same
-distribution as the number of fixed points in a random permutation. Hence for all $m$, $R^* \ge\delta$ whenever
-\[
-\mu\le\sqrt{\log\bigl(1+\log\bigl(1+4(1-\delta)^2\bigr)\bigr)}.
-\]
-\end{exmp}
+%\begin{exmp}[Perfect Matchings, \cite{addario2010combinatorial}, Section 4.3]
+%  \label{exmp:Perfect Matchings}
+%  Let $\cC$ be the set of all perfect matchings of the complete bipartite graph $K_{m,m}$. Thus, we have $n=m^2$ edges and $N=m!$, and $K=m$. The symmetry assumptions hold obviously and the negative association property follows from the fact that $Z=|S\cap S'|$ has the same distribution as the number of fixed points in a random permutation. Hence for all $m$, $R^* \ge\delta$ whenever
+%$$\mu\le\sqrt{\log\bigl(1+\log\bigl(1+4(1-\delta)^2\bigr)\bigr)}$$
+%\end{exmp}
 
 \subsection{Detection of an Anomalous Cluster}
-As a special case of the detection of means problem, we can consider the following scenario in network analysis:
-The situation where no signal is present, that is, ``business as
-usual,'' is modeled as
+As a special case of the detection of means problem, we can consider the following scenario in network analysis introduced in \cite{arias2011detection}.
+Let $\bV_m$ be either derived from a geometric shape or has a graph structure. For simplicity, we can think of $\bV_m$ as the set of graphs with $m$ nodes embedded in the Euclidean space. Let $\Km$ be a class of clusters within $\bV_m$.
+
+Under $H_0^m, \bX \sim \cN(0, \bI_m)$. Under $H_1^m$, there exists a cluster $K \in \Km$ where 
 %
 \[
-H_0^m : X_v \sim\cN(0,1)\qquad \forall v \in\bV_m.
-\]
-%
-Let $K$ be a cluster, which we define for now as a subset of nodes,
-that is, \mbox{$K \subset\bV_m$}. In fact, we will be interested in classes of
-clusters that are either derived from a geometric shape, when $\bV_m$ is
-embedded in Euclidean space, or connected components, when $\bV_m$ has a
-graph structure.
-The situation where the nodes in $K$ behave anomalously is modeled as
-%
-\[
-H_{1,K}^m : X_v \sim\cN(\mu_K,1)\qquad \forall v \in K;\qquad X_v \sim
+X_v \sim\cN(\mu_K,1)\qquad \forall v \in K;\qquad X_v \sim
 \cN(0,1)\qquad \forall v \notin K,
 \]
 %
 where $\mu_K > 0$.
-%noisy data.}
 We choose to decompose $\mu_K$ as $\mu_K = |K|^{-1/2} \Lambda_K$, where
 $|K|$ denotes the number of nodes in $K$ and $\Lambda_K$ is the signal
-strength. Indeed, with this normalization, for any cluster $K$,
-%
-%e1.1 ###
-%
-\begin{equation} \label{eq:simple-risk}
-\min_T \bP(T = 1|H_0^m) + \bP(T = 0|H_{1,K}^m) = 2 \bP\bigl(\cN
-(0,1) >
-\Lambda_K/2\bigr),
-\end{equation}
-%
-where the minimum is over all tests for $H_0^m$ versus $H
-_{1,K}^m$ and the lower bound is achieved by the likelihood ratio
-(Neyman--Pearson) test. We define
-%
-\[
-\Lambdamax_m = \max_{K \in\Km} \Lambda_K,\qquad \Lambdamin_m =
-\min_{K
-\in\Km} \Lambda_K.
-\]
-Let $\Km$ be a class of clusters within $\bV_m$ and define
-%
-\[
-H_1^m = \bigcup_{K \in\Km} H_{1,K}^m.
-\]
-%
-We are interested in testing $H_0^m$ versus $H_1^m$. In other
-words, under the alternative, the cluster of anomalous nodes is only
-known to belong to $\Km$.
-We adopt a minimax point of view.
-For a test $T$, we define its worst-case risk as
-%
-\[
-\gamma_{\Km}(T) = \bP(T = 1|H_0^m) + \max_{K \in\Km} \bP(T =
-0|H_{1,K}^m).
-\]
-%
-The minimax risk for $H_0^m$ versus $H_1^m$ is defined as
-%
-\[
-\gamma_{\Km} = \inf_T \gamma_{\Km}(T).
-\]
-%
-We say that $H_0^m$ and $H_1^m$ are asymptotically inseparable
+strength. We say that $H_0^m$ and $H_1^m$ are {\it asymptotically inseparable}
 (in the minimax sense) if
 %
 \[
-\varliminf_{m \to\infty} \gamma_{\Km} = 1,
+\liminf_{m \to\infty} R_{*}^{\max} = 1,
 \]
 %
 which is equivalent to saying that, as $m$ becomes large, no test can
-perform substantially better than random guessing, without even looking
-at the data.
-A sequence of tests $(T_m)$ is said to asymptotically separate $H
+perform substantially better than random guessing. A sequence of tests $(T_m)$ is said to {\it asymptotically separate} $H
 _0^m$ and $H_1^m$ if
 %
 \[
-\lim_{m \to\infty} \gamma_{\Km}(T_m) = 0,
+\lim_{m \to\infty} R^{\max}(T_m) = 0,
 \]
-%
-and $H_0^m$ and $H_1^m$ are said to be asymptotically separable
-if there is such a sequence of tests.
 
-(under specific conditions)
+Combining the insight we gained from the moment method earlier and more delicate analysis of the signal $\Lambda_K$, \cite{arias2011detection} shows that if $\Km$ is the set of mild deformations of a unit ball, then under specific conditions,
 $H_0^m$ and $H_1^m$ are asymptotically inseparable if there is
 $\eta_m \to0$ slowly enough such that, for all $K \in\Km$,
 %
@@ -468,42 +362,27 @@ $\eta_m \to0$ slowly enough such that, for all $K \in\Km$,
 \Lambda_K \leq(1 - \eta_m) \sqrt{2 \log(m/|K|)};
 \]
 %
-and conversely, we show that a version of the scan statistic
-asymptotically separates $H_0^m$ and $H_1^m$ if there is $\eta_m
+and conversely, a version of the scan statistic can asymptotically separates $H_0^m$ and $H_1^m$ if there is $\eta_m
 \to0$ slowly enough such that, for all $K \in\Km$,
 %
 \[
 \Lambda_K \geq(1 + \eta_m) \sqrt{2 \log(m/|K|)}.
 \]
+\cite{arias2011detection} also derived bounds for "thin clusters" and paths along a $d$-dimensional lattice. We refer the reader to the orignal paper for details. Notably, the authors also extended their results to exponential families.
 
 \section{Detection of Correlations}
-First, we note that we can rewrite the hypotheses as 
-\[
-H_0: \bX \sim\cN(0,\bI)\quad\mbox{vs.}\quad
-H_1: \bX \sim\cN(0,\bA_S)\qquad\mbox{for some $S \in\cC$,}
-\]
-%
-where
-$\bI$ denotes the $n\times n$ identity matrix and
+\subsection{Lower Bounds}
+First, we note that we can rewrite the alternative hypotheses as $$H_1: \bX \sim\cN(0,\bA_S)\qquad\mbox{for some $S \in\cC$,}$$ where
 $$(\bA_S)_{i,j} = \begin{cases}
-1, &\quad $i = j$, \cr
+1, &\quad i = j, \cr
 \rho, &\quad i \neq j, i, j \in S, \cr
 0, &\quad \text{otherwise}.
 \end{cases}$$
-Introducing
-$$Z_S = \exp\bigl(\tfrac{1}{2} X^T (\bI- \bA_S^{-1}) X \bigr)$$
-for all $S \in\cC$, the likelihood ratio between $H_0$ and $H_1$ may be written as
-$$L(X) = \frac{1}{N} \sum_{S \in\cC} \frac{Z_S}{\bE_0 Z_S}$$
-Thus the Bayes risk satisfies
-%
-\[
-R^* = 1 - \frac{1}{2} \bE_0 |L(X) - 1| = 1 - \frac{1}{2} \bE_0
-\biggl| \frac{1}{N} \sum_{S \in\cC} \frac{Z_S}{\bE_0 Z_S} - 1\biggr|.
-\]
+Introducing $Z_S = \exp\bigl(\tfrac{1}{2} X^T (\bI- \bA_S^{-1}) X \bigr)$ for all $S \in\cC$, the likelihood ratio between $H_0$ and $H_1$ may be written as $$L(X) = \frac{1}{N} \sum_{S \in\cC} \frac{Z_S}{\bE_0 Z_S}$$ Thus the Bayes risk satisfies
+$$R^* = 1 - \frac{1}{2} \bE_0 |L(X) - 1| = 1 - \frac{1}{2} \bE_0\biggl| \frac{1}{N} \sum_{S \in\cC} \frac{Z_S}{\bE_0 Z_S} - 1\biggr|$$
 
-
-
-The next representation theorem of Gaussain random variables plays a key role in analysing this test:
+\subsubsection{Generalised Moment Method}
+A direct application of the momont method discussed earlier does not yield very promising lowerbounds; instead, we leverage the insight from the Representation Lemma:
 \begin{lem}[\cite{berman1962equally};\cite{arias2012correlation}, Lemma 1.1]
   \label{lemrepresent}
   Let $X_1,\ldots, X_k$ be standard normal with $\Cov(X_i, X_j) = \rho
@@ -511,81 +390,9 @@ The next representation theorem of Gaussain random variables plays a key role in
   variables, denoted $U, U_1,\ldots, U_k$, such that $X_i = \sqrt{\rho}
   U + \sqrt{1-\rho}   U_i$ for all $i$.
 \end{lem}
-
-
 Thus, given $U$, the problem becomes that of detecting a~subset of
-variables with nonzero mean (equal to $\sqrt{\rho} U$) and with a~variance equal to $1-\rho$ (instead of 1). This
-simple observation will be very useful to us later on.
+variables with nonzero mean (equal to $\sqrt{\rho} U$) and with a~variance equal to $1-\rho$ (instead of 1). 
 
-When $\cC$ contains just one set $S=\{1,\ldots,k\}$, we can leverage the following lemma and the fact that $\bE_0Z_S = \sqrt{\det(\bA_S)}$ to analyse the Bayes risk directly. 
-\begin{lem}[\cite{arias2012correlation}, Lemma 2.1]
-  \label{lemqf}
-  Under $\bP_0$, $X^T (\bI- \bA_S^{-1}) X$ is distributed as
-  %
-  \[
-  - \frac{\rho}{1-\rho} \chi^2_{k-1} + \frac{\rho(k-1)}{1 + \rho
-  (k-1)} \chi^2_1,
-  \]
-  %
-  and under the alternative $\bP_S$, it has the same distribution as
-  %
-  \[
-  -\rho\chi^2_{k-1} + \rho(k-1) \chi^2_{1},
-  \]
-  %
-  where $\chi_1^2$ and $\chi_{k-1}^2$ denote independent $\chi^2$
-  random variables with degrees of freedom $1$ and $k-1$, respectively.
-\end{lem}
-
-\begin{prop}[\cite{arias2012correlation}, Proposition 2.1]
-  $\lim_{k\to\infty}R^*= 0$ if and only if $\rho k \to\infty$. Similarly, $\lim_{k\to\infty}R^*= 1$ if and only if $\rho k \to0$.
-\end{prop}
-\begin{proof}
-  Suppose $\rho k \to\infty$.
-  It suffices to show that there exists a~threshold $\tau_k$ such that
-  $\bP_0\{X^T (\bI- \bA_S^{-1}) X\ge\tau_k\} \to0$
-  and $\bP_S\{X^T (\bI- \bA_S^{-1}) X< \tau_k\} \to0$.
-  We use Lemma~\ref{lemqf} and the fact that, by Chebyshev's inequality,
-  %
-  \[
-  \mathbf{P}\bigl\{|\chi_{k}^2 - k| > t_k \sqrt{k}\bigr\} \to0, \qquad
-  k \to \infty,
-  \]
-  %
-  for any sequence $t_k \to\infty$, and the fact that
-  %
-  \[
-  \mathbf{P}\{t_k^{-1} < \chi_1^2 < t_k\} \to1  \qquad\mbox{as $k \to
-  \infty$}.
-  \]
-  %
-  We choose $t_k = \log k$ and define $\tau_k := -\rho k + \rho t_k
-  \sqrt{k} + t_k$.
-  Then under the null,
-  %
-  \[
-  \bP_0\{X^T (\bI- \bA_S^{-1}) X \ge\tau_k \} \to0,
-  \]
-  %
-  and under the alternative, setting $\eta_k := -\rho k - \rho t_k \sqrt
-  {k} + \rho k t_k^{-1}$,
-  %
-  \[
-  \bP_S\{X^T (\bI- \bA_S^{-1}) X < \eta_k \} \to0.
-  \]
-  %
-  We then conclude with the fact that, for $k$ large enough, $\tau_k <
-  \eta_k$.
-  
-  If $\rho k$ is bounded, the densities of the test statistic under
-  both hypotheses have a~significant overlap and the risk cannot
-  converge to $0$.
-  
-  The proof of the second statement is similar.
-\end{proof}
-
-\subsubsection{Generalised Moment Method}
-When $\cC > 1$, an direct application of the momont method discussed earlier does not yield very promising lowerbounds; instead, we leverage the insight from the Representation Lemma \ref{lemrepresent}.
 \begin{prop}[\cite{arias2012correlation}, Theorem 2.1]
   \label{thmlower}
 For any class $\cC$ and any $a~> 0$,
@@ -661,20 +468,6 @@ Again, we reduce the problem to studying the purely combinatorial quantity $Z = 
   which is bounded by $1$ if $\nu\le\log(N)/k$, in which case $R^* \ge0.3$.
 \end{exmp}
 
-\begin{exmp}[$k$-intervals, \cite{arias2012correlation}, Section 2.3.2]
-  Suppose $\cC$ is the class of all intervals of size $k$ of the form $\{i,\ldots, i + k -1\}$ modulo $n$. Then $N \le n$. For two $k$-intervals chosen independently and uniformly at random,
-  \[
-  \bP\{|S \cap S'| = \ell\} = \frac2N\qquad\forall\ell= 1,\ldots, k.
-  \]
-  Thus,
-\[
-\bE e^{\nu Z}-1 = \frac2N \Biggl(\sum_{\ell=1}^k e^{\nu\ell}
--k\Biggr) \le\frac{2k}N e^{\nu k},
-\]
-which is bounded by $1$ if $$\nu\le\frac{\log(n/2k)}{k}$$
-in which case $R^* \ge0.3$.
-\end{exmp}
-
 \begin{exmp}[$k$-sets, \cite{arias2012correlation}, Section 2.3.3]
   Suppose $\cC$ is the class of all sets of size $k$. By negative association, (see Proposition \ref{negass})
   \[
@@ -686,16 +479,13 @@ in which case $R^* \ge0.3$.
   in which case $R^* \ge0.3$.
 \end{exmp}
 
-\begin{exmp}[Perfect Matchings, \cite{arias2012correlation}, Section 2.3.4]
-  Suppose $\cC$ is the class of all perfect matchings of size $k = \sqrt{n}$. Using the same $Z$ as in Example \ref{exmp:Perfect Matchings},
-  \[
-  \bE e^{\nu Z} \le\biggl((e^\nu-1) \frac{k}{n}+1\biggr)^k
-  \le\exp\biggl((e^\nu-1) \frac{k^2}{n}\biggr),
-  \]
-  which is bounded by 2 when 
-  $$\frac{k^2}{n} \le\frac{\ln2}{\exp(\nu(\rho)) -1}$$
-  in which case $R^* \ge0.3$.
-\end{exmp}
+%\begin{exmp}[Perfect Matchings, \cite{arias2012correlation}, Section 2.3.4]
+%  Suppose $\cC$ is the class of all perfect matchings of size $k = \sqrt{n}$. Using the same $Z$ as in Example \ref{exmp:Perfect Matchings},
+%  $$\bE e^{\nu Z} \le\biggl((e^\nu-1) \frac{k}{n}+1\biggr)^k\le\exp\biggl((e^\nu-1) \frac{k^2}{n}\biggr),$$
+%  which is bounded by 2 when 
+%  $$\frac{k^2}{n} \le\frac{\ln2}{\exp(\nu(\rho)) -1}$$
+%  in which case $R^* \ge0.3$.
+%\end{exmp}
 
 \begin{exmp}[Spanning Trees, \cite{arias2012correlation}, Section 2.3.5]
   Suppose $\cC$ is the class of all spanning trees of a complete graph with $k+1$ vertices. Similar to Example \ref{exmp:Spanning Trees}, notice
