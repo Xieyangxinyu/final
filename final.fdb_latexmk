@@ -1,12 +1,12 @@
 # Fdb version 3
-["bibtex final"] 1681919628 "final.aux" "final.bbl" "final" 1681919845
+["bibtex final"] 1681919628 "final.aux" "final.bbl" "final" 1681919939
   "C:/Users/xinyux/AppData/Local/Programs/MiKTeX/bibtex/bst/bibtex/plain.bst" 1291868336 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
   "bibfile.bib" 1681850422 1584 3261a2abdc7f1dd19dc1672da4f6b550 ""
-  "final.aux" 1681919845 5014 9aeda65ca5af18da037000ca48a74c99 "pdflatex"
+  "final.aux" 1681919939 5014 9aeda65ca5af18da037000ca48a74c99 "pdflatex"
   (generated)
   "final.bbl"
   "final.blg"
-["pdflatex"] 1681919844 "c:/Users/xinyux/Desktop/STAT 970/final/final.tex" "final.pdf" "final" 1681919845
+["pdflatex"] 1681919937 "c:/Users/xinyux/Desktop/STAT 970/final/final.tex" "final.pdf" "final" 1681919939
   "C:/Users/xinyux/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1681418814 82712 5dde124e2fb39a734e3d3679d8ec178d ""
   "C:/Users/xinyux/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecbx1000.pk" 1676221486 25420 a18ae2305b4faa7bd0b681987f8ff815 ""
   "C:/Users/xinyux/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecbx1200.pk" 1676221480 31952 e8f849c3e2045c23791238cf14a2b7aa ""
@@ -224,11 +224,11 @@
   "C:/Users/xinyux/AppData/Local/Programs/MiKTeX/tex/latex/xkeyval/xkeyval.sty" 1656236919 4937 4ce600ce9bd4ec84d0250eb6892fcf4f ""
   "C:/Users/xinyux/AppData/Local/Programs/MiKTeX/tex/latex/zref/zref-abspage.sty" 1650051284 2245 c8a4088d07cffc2e5207730c738edd76 ""
   "C:/Users/xinyux/AppData/Local/Programs/MiKTeX/tex/latex/zref/zref-base.sty" 1650051284 20785 71a3d72ab517959a6979c27e6176bec1 ""
-  "c:/Users/xinyux/Desktop/STAT 970/final/final.tex" 1681919843 27127 5c2742573c583e97590d2de14bd3b161 ""
-  "final.aux" 1681919845 5014 9aeda65ca5af18da037000ca48a74c99 "pdflatex"
+  "c:/Users/xinyux/Desktop/STAT 970/final/final.tex" 1681919937 27151 5a36b0c508ab96d36cf07c899200abf2 ""
+  "final.aux" 1681919939 5014 9aeda65ca5af18da037000ca48a74c99 "pdflatex"
   "final.bbl" 1681919628 1339 c8318e9ce9e6b15e1eb45dfa03187a80 "bibtex final"
-  "final.out" 1681919845 1592 f97f060369a50427f200a4b0d7f70226 "pdflatex"
-  "final.tex" 1681919843 27127 5c2742573c583e97590d2de14bd3b161 ""
+  "final.out" 1681919939 1592 f97f060369a50427f200a4b0d7f70226 "pdflatex"
+  "final.tex" 1681919937 27151 5a36b0c508ab96d36cf07c899200abf2 ""
   "macros.sty" 1681762676 10103 ddea1da6b9696b97cad53861799da003 ""
   (generated)
   "final.aux"
