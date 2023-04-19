@@ -69,7 +69,7 @@ R^{\max}(f) = \bP_0\{f(X)=1\}
 + \max_{S\in\cC} \bP_S\{f(X)=0\}.
 \]
 
-In this report, we discuss the techniques introduced in \cite{arias2012correlation, addario2010combinatorial, arias2011detection} to derive the lower and upper bounds of $R_*^{\max}$, as well as more recent extensions.
+In this report, we discuss the techniques introduced in \cite{arias2012correlation, addario2010combinatorial, arias2011detection} to derive the lower and upper bounds of $R_*^{\max}$, as well as more recent extensions. For a more detailed, yet self-contained, discussion of the proof techniques, we refer the reader to \cite{lugosi2017lectures}.
 
 \section{General Framework}
 
@@ -583,6 +583,44 @@ worst-case risk tending to zero.
 {\bf WRITE A SUMMARY}
 
 \section{Extension}
+
+Subsequent lines of work have found more settings where the moment methods introduced in earlier sections can be systematically applied to derive minimax lower bounds for testing problems. In this section, we focus on introducing these scenarios. 
+On the other hand, as mentioned earlier, the upper bounds are more often obtained by considering different proposed tests, whose analyses are often much more delicate. Hence, we refer the reader to the respective papers for analyses for the upper bounds.
+
+\subsection{Dectection of positive correlations in a multivariate sample}
+A direct extension of the dectection of correlation problem is considered in \cite{arias2015correlations}. Under the alternatives, we make a slight modification of the alternative hypotheses \ref{alt:correlation}, which is, if $i \ne j, i,j \in S$, we have $\Cov(X_i, X_j) \ge \rho > 0$.  the covariance matrix is still sparse, i.e., $k < n/2$ or $k = o(n)$, meaning that only a few variables are substantially correlated. Examples of this setting includes the block model, cliques and perfect matchings. 
+
+Via a more delicate version of the generalized moment method we saw, we can obtain the following:
+\begin{prop}[\cite{arias2015correlations}, Theorem 1]
+  For any class $\cC$, any $\rho\in(0, 1)$, and any $a \ge\sqrt{3}$,
+  \begin{equation}
+  \label{lower} R^* \geq\bP \bigl(\chi_m^2 \le m
+  a^2 \bigr) \biggl(1 - \frac{1}2 \sqrt{\bE\min \bigl[\exp (m
+  \nu_a Z ), \cosh^m(\xi_a Z) \bigr] - 1}
+  \biggr),
+  \end{equation}
+  %
+  where
+  %
+  \[
+  \nu_a := \frac{\rho a^2}{1+\rho} - \frac{1}2 \log\bigl(1-
+  \rho^2\bigr)\quad  \mbox{and}\quad  \xi_a := \frac{\rho a^2}{1-\rho^2},
+  \]
+  %
+  and where $\chi_m^2$ has chi-squared distribution with $m$ degrees of
+  freedom, and $Z=|S \cap S'|$ with $S, S'$ i.i.d. uniform from $\cC$.
+\end{prop}
+The upper bounds are obtained via squared-sum test and "localized" squared-sum test. 
+
+\subsection{Dectection of sparse principal components of a high-dimensional covariance matrix}
+Introduced in \cite{berthet2013optimal}, we can consider the alternative hypothesis $\bX \sim \cN(0, \bI + \theta v v^T)$ where $\theta >0$ and $v$ is $k$-sparse. The techniques for proving the minimax lower bound is much more technical and involves studying the $\chi^2$ distance between probability measures. Yet, the moment methods still palys a key role in showing the following result:
+\begin{prop}[\cite{berthet2013optimal}, Theorem 5.1]
+  Fix $\nu > 0$. There exists a constant $C_{\nu}$ such that if 
+  $$\theta < \min(\sqrt{\frac{k \log(C_{\nu}p/k^2 + 1)}{n}}, \frac{1}{\sqrt{2}})$$
+  Then
+  $R^* \ge 0.5 - \nu$.
+\end{prop}
+
 
 \bibliographystyle{plain}
 \bibliography{bibfile}
