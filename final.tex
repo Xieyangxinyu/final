@@ -235,28 +235,16 @@ The previous proposition allows us to obtain lower bounds by analysing the quant
 This allows us to exploit the combinatorial structures of the class $\cC$ and gives us far better bounds than \ref{eq: loose lower bound}, as the folloiwng examples show:
 
 
-\begin{exmp}[Disjoint Sets, \cite{addario2010combinatorial}, Section 4.1]
-  \label{exmp: Disjoint Sets}
-  Suppose all $S\in\cC$ are disjoint (and therefore $KN\le n$). Fix $\delta\in(0,1)$. Let $Z = K$ with probability $1/N$ and $Z = 0$ otherwise. Thus,
-  %
-  \[
-  \mathbb{E} e^{\mu^2Z} -1 = \frac{1}{N} (e^{\mu^2 K} -1 )
-  \le\frac{1}{N} e^{\mu^2 K}
-  \]
-  %
-  and therefore $R^* \ge\delta$ whenever
-  %
-  \[
-  \mu\le\sqrt{\frac{\log(4N(1-\delta)^2)}{K}}.
-  \]
-  Notice that with the bound the bound $\mathbb{E}_0 \max_{S\in\cC} X_S \le\sqrt{2K\log N}$, maximum test $f$ gives us $R^* \le R(f) \le\delta$
-  whenever
-  \[
-  \mu\ge\sqrt{\frac{2\log N}{K}} + 2\sqrt{\frac{2\log(2/\delta)}{K}}.
-  \]
-  So in this case the critical transition occurs when $\mu$ is of the order
-of $\hspace*{-0.2pt}\sqrt{(1/K)\hspace*{-0.2pt}\log\hspace*{-0.25pt} N}$.
-\end{exmp}
+%\begin{exmp}[Disjoint Sets, \cite{addario2010combinatorial}, Section 4.1]
+%  \label{exmp: Disjoint Sets}
+%  Suppose all $S\in\cC$ are disjoint (and therefore $KN\le n$). Fix $\delta\in(0,1)$. Let $Z = K$ with probability $1/N$ and $Z = 0$ otherwise. Thus,
+%  $$\mathbb{E} e^{\mu^2Z} -1 = \frac{1}{N} (e^{\mu^2 K} -1 )\le\frac{1}{N} e^{\mu^2 K}$$
+%  and therefore $R^* \ge\delta$ whenever
+%  $$\mu\le\sqrt{\frac{\log(4N(1-\delta)^2)}{K}}.$$
+%  Notice that with the bound the bound $\mathbb{E}_0 \max_{S\in\cC} X_S \le\sqrt{2K\log N}$, maximum test $f$ gives us $R^* \le R(f) \le\delta$ whenever
+%  $$\mu\ge\sqrt{\frac{2\log N}{K}} + 2\sqrt{\frac{2\log(2/\delta)}{K}}.$$
+%  So in this case the critical transition occurs when $\mu$ is of the order of $\hspace*{-0.2pt}\sqrt{(1/K)\hspace*{-0.2pt}\log\hspace*{-0.25pt} N}$.
+%\end{exmp}
 
 \begin{exmp}[Spanning Trees, \cite{addario2010combinatorial}, Section 4.5]
   \label{exmp:Spanning Trees}
