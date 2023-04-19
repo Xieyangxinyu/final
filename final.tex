@@ -382,7 +382,7 @@ Introducing $Z_S = \exp\bigl(\tfrac{1}{2} X^T (\bI- \bA_S^{-1}) X \bigr)$ for al
 $$R^* = 1 - \frac{1}{2} \bE_0 |L(X) - 1| = 1 - \frac{1}{2} \bE_0\biggl| \frac{1}{N} \sum_{S \in\cC} \frac{Z_S}{\bE_0 Z_S} - 1\biggr|$$
 
 \subsubsection{Generalised Moment Method}
-A direct application of the momont method discussed earlier does not yield very promising lowerbounds; instead, we leverage the insight from the Representation Lemma:
+A direct application of the momont method discussed earlier does not yield very promising lowerbounds; instead, we leverage the insight from the folloiwng representation lemma:
 \begin{lem}[\cite{berman1962equally};\cite{arias2012correlation}, Lemma 1.1]
   \label{lemrepresent}
   Let $X_1,\ldots, X_k$ be standard normal with $\Cov(X_i, X_j) = \rho
@@ -391,23 +391,19 @@ A direct application of the momont method discussed earlier does not yield very 
   U + \sqrt{1-\rho}   U_i$ for all $i$.
 \end{lem}
 Thus, given $U$, the problem becomes that of detecting a~subset of
-variables with nonzero mean (equal to $\sqrt{\rho} U$) and with a~variance equal to $1-\rho$ (instead of 1). 
+variables with nonzero mean (equal to $\sqrt{\rho} U$) and with a~variance equal to $1-\rho$ (instead of 1). We are now ready to reduce analysing testing problem into a combinatorial problem.
 
 \begin{prop}[\cite{arias2012correlation}, Theorem 2.1]
   \label{thmlower}
 For any class $\cC$ and any $a~> 0$,
 \[
-R^* \geq\mathbf{P}\{|\cN(0,1)| \le a\} \bigl(1 - \tfrac12 \sqrt{\bE
+R^* \geq\bP\{|\cN(0,1)| \le a\} \bigl(1 - \tfrac12 \sqrt{\bE
 \exp
 (\nu_a~Z ) - 1}\bigr),
 \]
 where $\nu_a~:= \rho a^2/(1+\rho)- \frac12 \log(1-\rho^2)$ and
 $Z=|S \cap S'|$, with $S, S'$ drawn independently, uniformly at random
-from $\cC$. In particular, taking $a~= 1$,
-\[
-R^* \geq0.6 - 0.3 \sqrt{\bE\exp(\nu_1 Z ) - 1},
-\]
-where $\nu_1 = \nu(\rho) := \rho/(1+\rho)- \frac12 \log(1-\rho^2)$.
+from $\cC$.
 \end{prop}
 
 \begin{proof}
@@ -457,26 +453,20 @@ $$\bE_0 L_u^2(X) \le \frac{1}{N^2} \sum_{S, S' \in\cC}
 \end{proof}
 
 Again, we reduce the problem to studying the purely combinatorial quantity $Z = |S \cap S'|$. We demonstrate the implications of this proposition via a few examples.
-\begin{exmp}[Disjoint Sets, \cite{arias2012correlation}, Section 2.3.1]
-  Suppose all $S\in\cC$ are disjoint (and therefore $KN\le n$). Let $Z = K$ with probability $1/N$ and $Z = 0$ otherwise. Thus,
-  %
-  \[
-  \mathbb{E} e^{\nu Z} -1 = \frac{1}{N} (e^{\nu K} -1)
-  \le\frac{1}{N} e^{\nu K}
-  \]
-  %
-  which is bounded by $1$ if $\nu\le\log(N)/k$, in which case $R^* \ge0.3$.
-\end{exmp}
+%\begin{exmp}[Disjoint Sets, \cite{arias2012correlation}, Section 2.3.1]
+%  Suppose all $S\in\cC$ are disjoint (and therefore $KN\le n$). Let $Z = K$ with probability $1/N$ and $Z = 0$ otherwise. Thus,
+%  $$\mathbb{E} e^{\nu Z} -1 = \frac{1}{N} (e^{\nu K} -1)\le\frac{1}{N} e^{\nu K}$$
+%  which is bounded by $1$ if $\nu\le\log(N)/k$, in which case $R^* \ge0.3$.
+%\end{exmp}
 
 \begin{exmp}[$k$-sets, \cite{arias2012correlation}, Section 2.3.3]
+  \label{exmp: k-sets, cor}
   Suppose $\cC$ is the class of all sets of size $k$. By negative association, (see Proposition \ref{negass})
   \[
   \bE e^{\nu Z} \le\biggl((e^\nu-1) \frac{k}{n}+1\biggr)^k
   \le\exp\biggl((e^\nu-1) \frac{k^2}{n}\biggr),
   \]
-  which is bounded by 2 when 
-  $$\frac{k^2}{n} \le\frac{\ln2}{\exp(\nu(\rho)) -1}$$
-  in which case $R^* \ge0.3$.
+  which implies that $R^* \to1$ if either $k^2/n \to\infty$ and $\rho k^2/n \to0$, or $(1-\rho)n^2/k^4 \to\infty$.
 \end{exmp}
 
 %\begin{exmp}[Perfect Matchings, \cite{arias2012correlation}, Section 2.3.4]
@@ -492,212 +482,60 @@ Again, we reduce the problem to studying the purely combinatorial quantity $Z = 
   \[
   \bE e^{\nu Z} \le \exp{2(e^\nu-1)},
   \]
-  which is bounded by 13/4 when $\nu\le1+\ln((\ln(13/4))/2)$, in which case $R^* \ge0.15$.
+  which implies that $R^* \to1$ if $\rho\to0$.
 \end{exmp}
 
 
 \subsection{Upper Bounds}
-One of the simplest tests is based on the observation that
-the magnitude of the squared-sum $(\sum_{i=1}^n X_i)^2$ may be
-substantially different under the null and alternative hypotheses due
-to the higher correlation under the latter.
 
-Indeed, under $\bP_0$, $(\sum_{i=1}^n X_i)^2$ is distributed as $n
+The \textit{squared-sum test} is based on the observation that under $\bP_0$, $(\sum_{i=1}^n X_i)^2$ is distributed as $n
 \chi_1^2$, while for
 any $S\subset\{1,\ldots,n\}$ with $|S|=k$, under
 $\bP_S$, $(\sum_{i=1}^n X_i)^2$ has the same distribution
-as $(n + \rho k(k-1)) \chi_1^2$; in fact, under the more general
-correlation model~(\ref{model-general}), this is a~(stochastic) lower
-bound. This immediately leads to the following result.
+as $(n + \rho k(k-1)) \chi_1^2$. This implies that the squared-sum test is near-optimal for detecting
+$k$-sets in the regime where $k^2/n \to\infty$, as stated in the following proposition.
 %
 %pr3.1 #&#
-\begin{prop}
+\begin{prop}[\cite{arias2012correlation}, Proposition 3.1]
 \label{prpsq}
-Let $\cC$ be an arbitrary class of sets of size $k$
-and suppose that $\rho k^2/n \to\infty$ in~(\ref{model-general}).
-If $t_n$ is such that $t_n\to\infty$ but $t_n = o(\rho k^2/n)$,
-then the test which rejects the null hypothesis
-if $(\sum_{i=1}^n X_i)^2 > n t_n$
-has a~%GL
-worst-case
-risk converging to zero.
-However, any test based on $(\sum_{i=1}^n X_i)^2$ is powerless if
-$\rho k^2/n \to0$ in~(\ref{model}).
+Let $\cC$ be an arbitrary class of sets of size $k$ and suppose that $\rho k^2/n \to\infty$.
+If $t_n$ is such that $t_n\to\infty$ but $t_n = o(\rho k^2/n)$, then the test which rejects the null hypothesis
+if $(\sum_{i=1}^n X_i)^2 > n t_n$ has a~worst-case risk converging to zero.
 \end{prop}
+Notice that in this case, i.e. $k^2/n \to\infty$, Example \ref{exmp: k-sets, cor} implies that any test based on $(\sum_{i=1}^n X_i)^2$ is powerless if $\rho k^2/n \to0$.
 
-In Corollary~\ref{corksets}, we saw that reliable detection of
-$k$-sets is
-impossible if $k^2/n \to\infty$ and $\rho k^2/n \to0$. Here we see
-that, when $\rho k^2/n \to\infty$, the\vadjust{\goodbreak} squared-sum test is
-asymptotically powerful. Hence, the following statement:
-
-\begin{quote}
-{\normalsize\textit{The squared-sum test is near-optimal for detecting
-$k$-sets in the regime where $k^2/n \to\infty$.}}
-\end{quote}
-%
-On the other hand, in the regime $k^2/n \to0$, the squared-sum test is
-powerless even if $\rho= 1$.
-The test does not require knowledge of $\rho$, though knowing $\rho$ allows
-one to choose the threshold $t_n$ in an optimal fashion; if $\rho$ is
-unknown, we simply choose $t_n \to0$ very slowly.
-
-\subsection{The generalized likelihood ratio test}
-\label{secglrt}
-
-In this section we investigate the performance of the generalized
-likelihood ratio test (GLRT). We show that for parametric classes such
-as $k$-intervals, the test is near-optimal. However, for the
-nonparametric class of $k$-sets,
-the test performs poorly in some regimes.
-
-By definition, the GLRT rejects for large values of $\max_{S \in\cC}
-Z_S/\bE_0 Z_S$, or simply $\max_{S \in\cC} Z_S$ when all the sets in
-the class $\cC$ are of same size, since~$\bE_0 Z_S$ only depends on
-the size of $S$. Hence, the GLRT is of the form
+The \textit{generalized likelihood ratio test} (GLRT) has the form
 %
 \[
 f(X)=0  \quad\mbox{if and only if}\quad
 \max_{S \in\cC} X^T (\bI- \bA_S^{-1}) X \leq t
 \]
 %
-for some appropriately chosen $t$. We immediately notice that the GLRT
-requires knowledge of $\rho$
-
-Our analysis of the GLRT is based on Lemma~\ref{lemqf}, which
-provides the
-distribution of the quadratic form $X^T (\bI- \bA_S^{-1}) X$ under
-the null $\bP_0$ and under the alternative $\bP_S$.
-Under the null we need to control the maximum of such quadratic forms
-over $S \in\cC$, which we do using exponential concentration
-inequalities for chi-squared distributions.
-
-%s3.2.1 #&#
-\subsubsection{The GLRT for $k$-intervals and other parametric classes}
-
-Recalling Corollary~\ref{corkint}, when detecting $k$-intervals all
-tests are
-asymptotically powerless when $\rho\ll\min(1, \log(n/k)/k)$. We
-assume for concreteness that
-$k/\log n \to\infty$, for otherwise detecting $k$-intervals for very
-small $k$ has more to do with detecting $k$-sets. We state a~general
-result that applies for classes
-of small cardinality.
-%
-%pr3.2 #&#
-\begin{prop} \label{prpglrt-small} Consider a~class $\cC$ of sets of
-size $k$, with cardinality $N
-\to\infty$ such that $\log(N)/k \to0$. When $\rho k / \log N
-\to\infty$, the generalized likelihood ratio test with threshold
-value $t = - \rho k + \rho\sqrt{5 k \log N} + 2\log N$ has
-%GL Bayes
-worst-case
-risk tending to zero.
-\end{prop}
-%
-\begin{proof}
-We first bound the probability of Type I error. Indeed, under the null,
-by Lemma~\ref{lemqf} and its proof, we can decompose
+for some appropriately chosen $t$. This is based on the folloiwng observation:
+under $\bP_0$, $X^T (\bI- \bA_S^{-1}) X$ is distributed as
 %
 \[
-X^T (\bI- \bA_S^{-1}) X
-= -\frac\rho{1-\rho} C_S + \frac{\rho(k-1)}{1 + \rho(k-1)} D_S,
+- \frac{\rho}{1-\rho} \chi^2_{k-1} + \frac{\rho(k-1)}{1 + \rho(k-1)} \chi^2_1,
 \]
 %
-where $C_S \sim\chi_{k-1}^2$ and $D_S \sim\chi_1^2$. Hence,
+and under the alternative $\bP_S$, it has the same distribution as
 %
 \[
-\max_{S \in\cC} X^T (\bI- \bA_S^{-1}) X \leq-\rho\min_{S \in
-\cC} C_S + \max_{S \in\cC} D_S.
+-\rho\chi^2_{k-1} + \rho(k-1) \chi^2_{1},
 \]
 %
-It is well known that the maximum of $N$ standard normals is bounded
-by
-$\sqrt{2 \log N}$
-with probability tending to 1 as $N \to
-\infty$. Hence, the second term on the right-hand side is bounded by
-$2 \log N$ with high probability. For the first term, we combine the
-union bound and Chernoff's bound to obtain, for all $a\le1$,
-%
-%e3.1 #&#
-\begin{eqnarray}\label{glrt-small-eq1}
-\bP_0\Bigl\{\min_{S \in\cC} C_S < a~(k-1)\Bigr\}
-&\leq& N \mathbf{P}\{\chi_{k-1}^2 < a(k-1)\} \nonumber\\[-8pt]\\[-8pt]
-&\leq& N \exp\biggl(-\frac{(k-1)}2 (a~- 1 - \log a)\biggr).
-\nonumber
-\end{eqnarray}
-%
-Using the fact that $a~- 1 - \log a~\sim\frac12 (1-a)^2$ when $a~\to
-1$, the right-hand side tends to zero when $a~= 1 - \sqrt{(5/k)\log
-N}$. We arrive at the conclusion that the GLRT with threshold $t =
-- \rho k + \rho\sqrt{5 k \log N} + 2 \log N$ has probability of Type
-I error tending to zero.
+where $\chi_1^2$ and $\chi_{k-1}^2$ denote independent $\chi^2$
+random variables with degrees of freedom $1$ and $k-1$, respectively. Careful analysis based on this observation gives us the folloiwng result:
 
-Now consider the alternative under $\P_S$. By Lemma~\ref{lemqf} and
-Chebyshev's inequality,
-%
-\[
-X^T (\bI- \bA_S^{-1}) X \geq- \rho k - \rho s_k \sqrt{k} + \rho k /s_k
-\]
-%
-with high probability when $s_k \to\infty$. We then conclude by the
-fact that the right-hand side is larger than $t$ when $s_k \to\infty$
-sufficiently slowly.
-\end{proof}
-
-Comparing the performance of the GLRT in Proposition~\ref{prpglrt-small} with the
-lower bound for $k$-intervals in Corollary~\ref{corkint}, we see that the
-GLRT is near-optimal for detecting $k$-intervals. This is actually
-the case for all parametric classes we know of.
-
-%s3.2.2 #&#
-\subsubsection{The GRLT for $k$-sets and other nonparametric classes}
-\label{secglrt-nonparametric}
-
-Consider now the example of the class of all $k$-sets.
-Compared to the previous section, the situation here is different in that
-$N$, the size of the class $\cC$, is much larger. For example, for
-$k$-sets, $N = {n \choose k}$, and
-therefore $\log(N)/k \to\infty$ with $n \to\infty$. The
-equivalent\vspace*{1pt} of Proposition~\ref{prpglrt-small} for this regime is the
-following:
-%
-%pr3.3 #&#
-\begin{prop} \label{prpglrt-large}
+\begin{prop}[\cite{arias2012correlation}, Proposition 3.3] \label{prpglrt-large}
 Consider a~class $\cC$ of sets of size $k$, with cardinality $N \to
 \infty$ such that $\log(N)/k
 \to\infty$. When $\eta:= (1-\rho) N^{2/k} (\log N)/k \to0$, the
 generalized likelihood
 ratio test with threshold value $t = -(\log N)/\sqrt{\eta}$ has
-%GL Bayes
 worst-case
 risk tending to zero.
 \end{prop}
-%
-\begin{proof}
-We follow the proof of Proposition~\ref{prpglrt-small}. The only
-difference is in~(\ref{glrt-small-eq1}), where we now need $a~\to0$ and that
-right-hand side tends to zero when $\log a~+ 2 (\log N)/k \to-\infty
-$. Choose $a~= N^{-2/k} \sqrt{\eta}$, obtaining that, with\vadjust{\goodbreak} high probability,
-%
-%e3.2 #&#
-\begin{equation} \label{glrt-large-eq1}
-\max_{S \in\cC} X^T (\bI- \bA_S^{-1}) X \leq-\frac\rho{1-\rho}
-N^{-2/k} k \sqrt{\eta} + 2 \log N.
-\end{equation}
-%
-As before, with high probability under $\P_S$,
-%
-%e3.3 #&#
-\begin{equation} \label{glrt-large-eq2}
-X^T (\bI- \bA_S^{-1}) X \geq- \rho k,
-\end{equation}
-%
-so we only need to check that the threshold $t$ is larger than the
-right-hand side in~(\ref{glrt-large-eq1}) and smaller than the
-right-hand side in~(\ref{glrt-large-eq2}), which is the case by the
-assumptions we made.
-\end{proof}
 
 Notice that in Proposition~\ref{prpglrt-large} the condition on $\rho
 $ implies
@@ -706,110 +544,10 @@ test requires when $k^2/n \to\infty$.
 For $k$-sets, $N = {n \choose k}$---so that $\log N = k \log(n/k) +
 O(k)$---and the requirement is that $(1-\rho) (n/k)^2 \log(n/k) \to
 0$, which is substantially stronger than what the lower bound obtained
-in Corollary~\ref{corksets} requires. Moreover, if we restrict $\rho
-$ to be bounded away from $1$, then the GLRT may be powerless.
-%
-%
-%th3.1 #&#
-\begin{thm}
-\label{thmglrt-bad}
-Let $\cC$ be the class of all $k$-sets. If $\rho< 0.6$ and $k=
-o(n^{0.7})$, the GLRT has a~%GL
-Bayes
-risk bounded away from zero.
-\end{thm}
+in Example \ref{exmp: k-sets, cor} requires. In fact, if $\rho$ is bounded away from 1, then the GLRT may be powerless (\cite{arias2012correlation}, Theorem 3.1).
 
-In view of Theorem~\ref{thmglrt-bad}, the GLRT is clearly suboptimal
-when in
-the situation stated there, and compares very poorly with the
-squared-sum test, which is asymptotically powerful if $\rho k^2/n \to
-\infty$ as seen in Proposition~\ref{prpsq}. We do not know of any
-other situation
-where the GLRT fails so miserably.
 
-%s3.3 #&#
-\subsection{A~localized squared-sum test}
-
-While the GLRT is near-optimal for detecting objects from a~parametric
-class such as $k$-intervals, it needs knowledge of $\rho$.
-However, a~simple modification solves this drawback. Indeed, consider
-the following ``local'' squared-sum test:
-%
-\[
-f(X)=0  \quad\mbox{if and only if}\quad
-\max_{S \in\cC} \biggl(\sum_{i \in S} X_i\biggr)^2 \leq t
-\]
-%
-for some appropriate threshold $t$.
-%
-%pr3.4 #&#
-\begin{prop} \label{prplocal-sum}
-Consider a~class $\cC$ of sets of size $k$, with cardinality $N
-\to\infty$ such that $\log(N)/k \to0$. When $\rho\gg\log(N)/k$
-in~(\ref{model-general}), the local squared-sum test with threshold $t
-= 2 k \log N$ has
-%GL
-worst-case
-risk tending to zero.
-\end{prop}
-%
-\begin{proof}
-The proof is quite straightforward. Indeed, under the null, for any $S$
-of size $k$ we have $\sum_{i \in S} X_i \sim\cN(0, k)$ so that
-%
-\[
-\max_{S \in\cC} \biggl(\sum_{i \in S} X_i\biggr)^2 \leq t\vadjust{\goodbreak}
-\]
-%
-with probability tending to 1. Under an alternative~(\ref{model-general}), $S$ denoting the anomalous set of variables, we have
-%
-\[
-\P\biggl( \biggl(\sum_{i \in S} X_i\biggr)^2 \ge t\biggr) \ge\P\bigl( \bigl(k + k(k-1) \rho
-\bigr) \chi_1^2 \ge t\bigr) \to1,
-\]
-%
-when $\rho\gg\log(N)/k$.
-\end{proof}
-
-Specializing this result to the case of $k$-intervals leads to the
-following statement (which ignores logarithmic factors):
-
-\begin{quote}
-{\normalsize\textit{The localized squared-sum test is near-optimal for
-detecting $k$-intervals in the regime where $\log(n)/k \to0$.}}
-\end{quote}
-
-\textit{When $k$ is unknown.} We might only know that some interval is
-anomalous, without knowing the size of that interval. In that case,
-multiple testing at each $k$ using the local squared-sum test yields
-adaptivity. Computationally, this may be done effectively by computing
-sums in a~multiscale fashion as advocated in~\cite{MGD}. In fact, here
-it is enough to compute the sums over all \textit{dyadic}
-intervals---since each interval $S$ contains a~dyadic interval of
-length at least $|S|/4$---and this can be done in $3 n$ flops in a~recursive fashion.
-
-%s3.4 #&#
-\subsection{A~goodness-of-fit test}
-
-By now, the parametric case is essentially solved, with the local
-squared-sum test being not only near-optimal but also computable in
-polynomial time
-%GL
-(in $n$ and $k$)
-for the case of $k$-intervals, for example. In the nonparametric case,
-so far, the story is not complete. We focus on the class of all
-$k$-sets. There we know that the squared-sum test is near-optimal if
-$k^2/n \to\infty$. If $k^2/n \to0$, it has no power, and we only
-know that the GLRT works when $(1-\rho) (n/k)^2 \log(n/k)\to0$,
-which does not match the rate obtained in Corollary~\ref{corksets}.
-Worse than that, it is not clear whether computing the GLRT is possible
-in time polynomial in $(n, k)$.
-We now show that a~simple
-goodness-of-fit (GOF)
-test performs (almost) as desired.
-
-%GL sentence added
-The basic idea is the following.
+The \textit{goodness of fit test} (GOF test) is based on the folloiwng insight.
 Let $H_i = \Phi^{-1}(X_i)$, where $\Phi$ is the standard normal distribution
 function. Under the null, the $H_i$'s are i.i.d. uniform in $(0,1)$.
 Under an alternative with anomalous set denoted by $S$, the $X_i, i
@@ -830,41 +568,6 @@ random variables satisfying $\Cov(X_i, X_j) \geq\rho> 0$, for all $i
 \]
 %
 \end{lem}
-%
-\begin{proof}
-Let $\Lambda:= \sum_{i \neq j} \Cov(X_i, X_j) \geq k(k-1) \rho$.
-Elementary calculations show that
-%
-\[
-\bE\biggl[\frac1k \sum_i (X_i - \overline{X})^2\biggr]
-= 1 -\frac1k -\frac{\Lambda}{k^2} \leq(1 -1/k)(1 - \rho) \leq
-1-\rho.
-\]
-%
-By Markov's inequality, we then have
-%
-\[
-\bP\biggl\{ \frac1k \sum_i (X_i - \overline{X})^2 > t^2/2
-\biggr\}
-\leq\frac{2(1-\rho)}{t^2}.
-\]
-%
-The statement follows from observing that
-%
-\[
-\# \{i: |X_i - \overline{X}| > t\} \geq k/2  \quad\Rightarrow\quad
-\frac1k \sum_i (X_i - \overline{X})^2 > t^2/2.
-\]
-%
-\end{proof}
-
-The idea, therefore, is detecting unusually high concentrations of
-$H_i$'s, which is a~form of GOF test for the uniform distribution.
-Under a~general correlation model as in~(\ref{model-general}), with
-Lemma~\ref{lemclose} we see that the concentration will happen over an
-interval of length slightly larger than $\sqrt{1-\rho}$. This is
-apparent from Lemma~\ref{lemrepresent} under the simple correlation model
-(\ref{model}).
 
 Choose an integer $m$ such that $m \gg(n/k^2) \log(n/k^2)$ and partition
 the interval $[0,1]$ into $m$ bins of length $1/m$, denoted $I_s,  s =
@@ -877,109 +580,16 @@ f(X)=0  \quad\mbox{if and only if}\quad
 \max_{s = 1,\ldots, m} B_s \leq t,
 \]
 %
-where $t$ is some threshold.
-%
-%Assume first that $\rho$ is known.
-%
-%pr3.5 #&#
+where $t$ is some threshold. The folloiwng result suggests that, ignoring logarithmic factors, the GOF test is near-optimal for detecting $k$-sets in
+the regime where $k^2/n \to0$ and $k/\log n \to\infty$.
+
 \begin{prop} \label{prpgof}
 Consider the class $\cC$ of all $k$-sets in the case where $k^2/n \to
 0$ and $k/\log n \to\infty$. In the GOF test above, choose $m$ such
 that $(n/k^2) \log n \ll m \ll n/\log n$. When $(1-\rho)^{1/2} \ll
-1/m$ in~(\ref{model-general}), the resulting test with threshold $t =
-n/m + \sqrt{3 n \log(m)/m}$ has
-%GL
-worst-case
-risk tending to zero.
+1/m$, the resulting test with threshold $t = n/m + \sqrt{3 n \log(m)/m}$ has
+worst-case risk tending to zero.
 \end{prop}
-%
-\begin{proof}
-Bernstein's inequality, applied to the binomial distribution, gives that
-%
-\[
-\bP_0\bigl\{B_s > n/m + b \sqrt{n/m}\bigr\} \leq\exp\bigl[- (b^2/2)/\bigl(1 + (b/3)
-\sqrt{m/n}\bigr)\bigr].
-\]
-%
-This and the union bound imply that, indeed,
-%
-\[
-\bP_0\Bigl\{\max_s B_s > t\Bigr\} \to0.
-\]
-
-Consider now an alternative of the form~(\ref{model-general}), with
-$S$ denoting the anomalous set. Let
-%
-\[
-I := \{i \in S: |X_i - \overline{X}_S| \leq1/m\},\qquad  \overline
-{X}_S := \frac1k \sum_{i \in S} X_i.\vadjust{\goodbreak}
-\]
-%
-Though the set $I$ is random, by Lemma~\ref{lemclose} and the fact that
-$(1-\rho)^{1/2} \ll1/m$, we have that
-%
-\[
-\bP_S\{|I| \geq k/2\} \to1.
-\]
-%
-Define the event $Q := \{-a~\leq\overline{X}_S \leq a\}$ for some $a~> 0$. Note that, since the variance of $\overline{X}_S$ is bounded by
-1, $\bP(Q^c) \leq2 (1 - \Phi(a))$. Define $\tilde{H}_S = \Phi
-^{-1}(\overline{X}_S)$. On~$Q$, using a~simple Taylor expansion, we have
-%
-\[
-|H_i - \tilde{H}_S| \leq\frac{|X_i - \overline{X}_S|}{\phi(a~+
-1/m)} \leq e^{a^2}/m\qquad \forall i \in I,
-\]
-%
-where $\phi$ denotes the standard normal density function and $a$
-is taken sufficiently large. Therefore, when $|I| \geq k/2$ and $Q$
-hold, at least $k/2$ of the anomalous $H_i$'s fall in an interval of
-length at most $2 e^{a^2}/m$. Since such an interval is covered by at
-most $2 e^{a^2}$ bins, by the pigeonhole principle, there is a~bin
-that contains $k e^{-a^2}/4$ anomalous $H_i$'s. By Bernstein's
-inequality, the same bin will also contain at least $(n-k)/m -\sqrt{3
-n \log(m)/m}$ nonanomalous $H_i$'s (with\vspace*{1pt} high probability), so in
-total this bin will contain $n/m -k/m -\sqrt{3 n \log(m)/m} + k
-e^{-a^2}/4$ points. By our choice of $m$, $k \gg\sqrt{n \log(m)/m}$,
-so it suffices to choose $a~\to\infty$ slowly enough that $k e^{-a^2}
-\gg\sqrt{n \log(m)/m}$ still. Then, with high probability, there is
-a~bin with more than $t$ points.
-\end{proof}
-
-Ignoring logarithmic factors, we are now able to state the following:
-
-\begin{quote}
-{\normalsize\textit{The GOF test is near-optimal for detecting $k$-sets in
-the regime where $k^2/n \to0$ and $k/\log n \to\infty$.}}
-\end{quote}
-
-When $k/\log n \to0$, things are somewhat different. There, the GOF
-test requires that $(1-\rho) n^{2 k/(k-1)} \to0$, which is still
-close to optimal when $k \to\infty$, but far from optimal when $k$ is
-bounded (e.g., when $k=2$, the exponent is 4 instead of~2).
-Indeed, when $k/\log n \to0$, $m$ needs to be chosen larger than $n$,
-and Bernstein's inequality is not accurate. Instead, we use the simple bound
-%
-\[
-\P\bigl(\operatorname{Bin}(n,p) \ge\ell\bigr) \le2 \frac{ (n p)^\ell}{\ell!}
-\qquad\mbox{when } n p \le1/2.
-\]
-%
-Note that Bennett's inequality would also do. (The analysis also
-requires some refinement showing that, with probability tending to 1
-under the alternative, one cell contains at least $k$ points.)
-Note that in the remaining case, $k = O(1)$, the GLRT is optimal up to
-a~logarithmic factor, since it only requires that $(1-\rho) n^2 \log n
-\to0$, as seen in Section~\ref{secglrt-nonparametric}. We do not
-know whether
-a~comparable performance can be achieved by a~test that does not have
-access to $\rho$.
-
-\textit{When $k$ is unknown.} In essence, we are trying to detect an
-interval with a~higher mean in a~Poisson count setting.\vadjust{\goodbreak} As before, it
-is enough to look at dyadic intervals of all sizes, which can be done
-efficiently as explained earlier, following the multiscale ideas
-in~\cite{MGD}.
 
 \section{Extension}
 
