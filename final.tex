@@ -266,6 +266,7 @@ Meanwhile, the averaging test has risk $R(f) \le\delta$ whenever $\mu\ge\sqrt{4\
 
 We also explore two special combinatorial structures: \textit{symmetry} and \textit{negative association}.
 \begin{defn}[Symmetry]
+  \label{defn:symmetry}
   We say that the class $\cC$ is {\it symmetric} if it satisfies the following conditions.
   Let $S,S'$ be drawn independently and uniformly at random from $\cC$. Then,
   \begin{enumerate}
@@ -276,7 +277,7 @@ We also explore two special combinatorial structures: \textit{symmetry} and \tex
 \end{defn}
 Via H\"older's inequality, we can obtain the following
 \begin{prop}[\cite{addario2010combinatorial}, Proposition 3.3]
-  \label{symmetric}
+  \label{prop:symmetric}
   Assume that $\cC$ is symmetric. Then 
   $$\mathbb{E}[ e^{\mu^2 Z}]\le (e^{\mu^2K} -1 ) \frac{K}{n} +1.$$
 \end{prop}
@@ -625,7 +626,36 @@ Introduced in \cite{berthet2013optimal}, we can consider the alternative hypothe
 
 More recently, \cite{neykov2019combinatorial} introduced a new family of combinatorial inference problems for graphical models. Unlike classical statistical inference where the main interest is point estimation or parameter testing, combinatorial inference aims at testing the global structure of the underlying graph. Examples include testing the graph connectivity, the presence of a cycle of certain size, or the maximum degree of the graph.
 
+\section{More Examples}
 
+In this section we introduce two examples that do necessarily satisfy symmetry or negative association. Although it is not immediate what applications these examples can lead to, they may inspire other novel tools to study combinatorial testing problems.
+
+\subsection{Paths on a tree}
+Consider a full binary tree whose depth is equal to $m$. Then there are $n = 2m-2$ edges on this tree. Let $\cC$ be the class of all possible paths from the root node to a leaf. Then $N = |\cC| = 2^m$ and for each $S \in \cC, K = m$. 
+
+Notice that this class does not satisfy the second conditon of symmetry in Definition \ref{defn:symmetry}. Because for a fixed path $S_0 \in \cC$, the probability that an edge on $S_0$ at depth $i$ is in another uniformly random path $S$ is $\bP(i \in S) = 2^{-i}.$ Neither are this random variables ${\bf 1}(i \in S)$ negatively associated: for example, the second edge on $S_0$ is in $S$ only if the first edge is in $S$ already, i.e.
+$$\bP(1 \in S, 2 \in S) = \bP(2 \in S) >\bP(1 \in S)\bP(2 \in S) $$
+
+The first condition of symmetry still holds, which makes it possible to modify Proposition \ref{prop:symmetric} to obtain a bound. However, in this case, we can compute the moment generating function exactly since $Z$ is geometrically distributed with $p = 1/2.$
+$$\bE[e^{\nu Z}] = \frac{p e^{\nu Z}}{1 - (1-p)e^{\nu Z}} = \frac{2}{2 - e^{\nu Z}} - 1$$
+By Proposition \ref{prop:pairs}, with $\nu = \mu^2$, we obtain that for any $\delta\in(0,1)$, $R^* \ge\delta$ whenever
+$$\mu\le\sqrt{\log\bigl(2-\frac{1}{2(1-\delta)^2 + 1}\bigr)}.$$
+By Proposition \ref{thmlower}, with $\nu = \nu_a$, we obtain as $\rho \to 0$, $\nu_a \to 0$, thus $\bE[e^{\nu Z}] \to 1$ and $R^* \to 1$.
+
+\subsection{Triangulations on a k-gon and Catalan Numbers}
+Consider a convex $m$-gon, $m \ge 5$. We describe the class $\cC$ as follows. Let $G$ be a complete graph whose $m$ vertices are embedded on a convex $m$-gon. Let $1,...,n$ index the edges in $E(G)\setminus E(\partial G)$; that is, $1,..., n = m(m-1) - m = (m-1)^2$ are the edges in the interior of this $m$-gon. Let $S$ be the set of interior edges of a non-intersecting triangulation of this $m$-gon and let $\cC$ contain all sets of this form. Then,
+$K = |S| = m - 3$ and $N = c(m-2)$, where $$c(n) = \frac{1}{n+1}\binom{2n}{n}$$
+is the Catalan number. This class does not satisfy the first condition of symmetry. To see this, consider the case of hexagon shown below:\\
+\includegraphics{hexagon.png}\\
+Let $S'$ be the triangulation on the upper left corner. Then we have 
+$$\bP(Z = 0|S') = 5/14, \bP(Z = 1|S') = 5/14, \bP(Z = 2|S') = 3/14, \bP(Z = 3|S') = 1/14$$
+Meanwhile, let $S''$ be the triangulation on the second to last one on lower right corner, whose three interior edges forms a triangle. In this case,
+$$\bP(Z = 0|S'') = 4/14, \bP(Z = 1|S'') = 6/14, \bP(Z = 2|S'') = 3/14, \bP(Z = 3|S'') = 1/14$$
+Neither does this class satisfy negative association. Intuitively, if one edge comes us in a uniform triangulation, then the edges not interesting with this one will more likely show up in this random triangulation. For example, let $S'$ be the first triangulation in the upper left corder and let $1$ denote the vertical edge and $2$ the diagonal edge. Then
+$$\bP(1 \in S, 2 \in S) = \frac{2}{14} > \frac{5}{14} \times \frac{4}{14} = \bP(1 \in S)\bP(2 \in S) $$
+It is less clear how to can bound the moment generating function of $Z$ in this case. Hence, deeper understanding of the combinatorial structure of this set will be helpful.
+
+Catalan numbers is a recurrent theme in combinatorics. It counts the number of binary trees, plane trees, ballot sequences, parenthesizations, and Dyck paths, to just name a few examples \cite{stanley2015catalan}. The omnipresence of Catalan numbers allows us to understand many combinatorial classes simultaneously. Hence, it is an interesting future direction to understand the moment generating function of the Catalan-type class and study the testing problem for some of the combinatorial classes of this family. 
 \bibliographystyle{plain}
 \bibliography{bibfile}
 \end{document}
