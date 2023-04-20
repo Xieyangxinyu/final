@@ -295,7 +295,7 @@ Via H\"older's inequality, we can obtain the following
 
 \begin{prop}[\cite{addario2010combinatorial}, Proposition 3.4]
   \label{negass}
-  Let $\delta\in(0,1)$ and assume that the class $\cC$ is symmetric. Suppose that the labels are such that $S'=\{1,2,\ldots,K\} \in\cC$. Let $S$ be a randomly chosen element of $\cC$. If the random variables
+  Assume that the class $\cC$ is symmetric. Suppose that the labels are such that $S'=\{1,2,\ldots,K\} \in\cC$. Let $S$ be a randomly chosen element of $\cC$. If the random variables
   ${\bf 1}_{\{ 1 \in S \}},\ldots,{\bf 1}_{\{ K\in S \}}$ are negatively associated, then 
   $$\mathbb{E}[ e^{\mu^2 Z}]\le \biggl( (e^{\mu^2} -1 ) \frac{K}{n} +1 \biggr)^K.$$
 \end{prop}
@@ -620,6 +620,10 @@ Introduced in \cite{berthet2013optimal}, we can consider the alternative hypothe
   Then
   $R^* \ge 0.5 - \nu$.
 \end{prop}
+
+\subsection{Combinatorial inference for graphical models}
+
+More recently, \cite{neykov2019combinatorial} introduced a new family of combinatorial inference problems for graphical models. Unlike classical statistical inference where the main interest is point estimation or parameter testing, combinatorial inference aims at testing the global structure of the underlying graph. Examples include testing the graph connectivity, the presence of a cycle of certain size, or the maximum degree of the graph.
 
 
 \bibliographystyle{plain}
