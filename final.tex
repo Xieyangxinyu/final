@@ -69,8 +69,8 @@ R^{\max}(f) = \bP_0\{f(X)=1\}
 + \max_{S\in\cC} \bP_S\{f(X)=0\}.
 \]
 
-In this report, we discuss the techniques introduced in \cite{arias2012correlation, addario2010combinatorial, arias2011detection} to derive the lower and upper bounds of $R_*^{\max}$, as well as more recent extensions. For a more detailed, yet self-contained, discussion of the proof techniques, we refer the reader to \cite{lugosi2017lectures}.
-
+In this report, we discuss the main techniques introduced in \cite{arias2012correlation, addario2010combinatorial, arias2011detection} to derive the lower and upper bounds of $R_*^{\max}$, as well as more recent extensions. In particular, we focus on the moment method used to prove lower bounds. As for the combinatorial example, we focus on bounds for $K$-sets. For a more detailed, yet self-contained, discussion of the proof techniques, we refer the reader to \cite{lugosi2017lectures}.
+Lastly, we give two more combinatorial examples of $\cC$, paths on a tree and triangulations on a $k$-gon, and suggest that the testing problems for the combinatorial classes arising from the Catalan numbers might be a direction of interest.
 \section{General Framework}
 
 \subsection{Lower Bounds}
@@ -99,15 +99,13 @@ risk $R^*=R(f^*)$ of the optimal test is called the
 \[
 R^* = 1 - \frac{1}{2} \bE_0 |L(X) - 1|
 \]
-
+Later, we will reduce the analysis of $R^*$ into understanding the properties of overlapping pairs, which reduces the problem into understanding the combinatorial property of the class $\cC.$ More details will follow in the next two sections.
 \subsection{Upper Bounds}
-The analysss of the upper bounds of the risks of optimal tests are often less systematic. Even though likelihood ratio test is optimal in the
-Bayesian setting, it is difficult to obtain directly upper bounds for the (worst-case) risk
-of the likelihood ratio test. Hence, in analysing combinatorial testing problems, we often focus on obtaining upper bounds for sub-optimal tests for ease of analysis and strive for an upper bound matching the obtained lower bound.
-
+The analyses of the upper bounds of the risks are often less systematic. Even though likelihood ratio test is optimal in the
+Bayesian setting, it is difficult to obtain directly upper bounds for the (worst-case) risk. Hence, in analysing combinatorial testing problems, we often focus on obtaining upper bounds for sub-optimal tests for ease of analysis and strive for an upper bound matching the obtained lower bound.
 
 \section{Detection of Means}
-In this section we focus on the first alternative hypothesis \ref{alt:mean}. We will first discuss simple tests are considered as we obtain upper bounds: the averaging test and the maximum test. Then, we will provide the key insights driving the results for lower bounds obtained in \cite{addario2010combinatorial} and discuss the applications to examples such as {\bf $k$-sets, spanning trees, perfect matchings, etc}.
+In this section we focus on the first alternative hypothesis \ref{alt:mean}. We will first discuss two simple tests for obtaining upper bounds: the averaging test and the maximum test. Then, we will provide the key insights driving the results for lower bounds obtained in \cite{addario2010combinatorial}, i.e., the moment method, and discuss the applications to examples such as $K$-sets and spanning trees. In \cite{addario2010combinatorial}, other examples such as disjoint sets, perfect matchings, stars and cliques are discussed. Since the techniques are similar, we refer the reader to \cite{addario2010combinatorial} for details. Lastly, we briefly discuss the detection of anomalous clusters as a special case of the detection of means problem.
 
 
 \subsection{Upper Bounds}
@@ -150,53 +148,30 @@ $(\mu K, K)$, we obtain
   %
 \end{prop}
 
-{\bf ADD SOMETHING}
-
 \subsection{Lower Bounds}
 Let's take a closer look at the likehood ratio. If we write 
-\[
-\phi_0(\mathbf{x}) = (2\pi)^{-n/2} e^{-\sum_{i=1}^n x_i^2/2} \text{ and }
-\phi_S(\mathbf{x}) = (2\pi)^{-n/2} e^{-\sum_{i\in S}(x_i-\mu)^2/2-\sum_{i\notin S} x_i^2/2}
-\]
-for the
-probability densities of $\bP_0$ and $\bP_S$, respectively,
-the likelihood ratio at $\mathbf{x}$ is
-\[
-L(\mathbf{x})
-= \frac{{1/N}\sum_{S\in\cC} \phi_S(\mathbf{x})}{\phi
-_0(\mathbf{x})}
-= \frac{1}{N} \sum_{S\in\cC}
-e^{\mu x_S - K\mu^2/2},
-\]
+$$\phi_0(\mathbf{x}) = (2\pi)^{-n/2} e^{-\sum_{i=1}^n x_i^2/2} \text{ and }
+\phi_S(\mathbf{x}) = (2\pi)^{-n/2} e^{-\sum_{i\in S}(x_i-\mu)^2/2-\sum_{i\notin S} x_i^2/2}$$
+for the probability densities of $\bP_0$ and $\bP_S$, respectively, the likelihood ratio at $\mathbf{x}$ is
+\begin{equation}
+  \label{eq: likelihood ratio}
+  L(\mathbf{x}) = \frac{{1/N}\sum_{S\in\cC} \phi_S(\mathbf{x})}{\phi_0(\mathbf{x})} = \frac{1}{N} \sum_{S\in\cC} e^{\mu x_S - K\mu^2/2},
+\end{equation}
 where $x_S = \sum_{i\in S} x_i$. With the observation $R^* \ge 1 - \sqrt{1 - (\mathbb{E}_0 \sqrt{L(\bX)})^2}$ (\cite{devroye2013probabilistic}),
-we can apply Jensen's inequality, 
-\[
-\mathbb{E}_0 \sqrt{L(\bX)} = \int\sqrt{\frac{{1/N}\sum_{S\in\cC} \phi_S(\mathbf{x})}{\phi
-_0(\mathbf{x})}} \phi
-_0(\mathbf{x}) \,d\mathbf{x}
-= \int\sqrt{\frac{1}{N} \sum_{S\in\cC} \phi_S(\mathbf{x}) \phi
-_0(\mathbf{x})} \,d\mathbf{x}
-\ge\frac{1}{N} \sum_{S\in\cC}
-\int\sqrt{ \phi_S(\mathbf{x}) \phi_0(\mathbf{x})} \,d\mathbf{x}.
-\] 
-Because for any $S\in\cC, \int\sqrt{ \phi_S(\mathbf{x}) \phi_0(\mathbf{x})} \,d\mathbf{x}=e^{-\mu^2K/8}$, for all classes $\cC$, $R^* \ge1/2$ whenever
+we can apply Jensen's inequality and obtain 
+$$\mathbb{E}_0 \sqrt{L(\bX)} = \int\sqrt{\frac{{1/N}\sum_{S\in\cC} \phi_S(\mathbf{x})}{\phi_0(\mathbf{x})}} \phi_0(\mathbf{x}) \,d\mathbf{x} = \int\sqrt{\frac{1}{N} \sum_{S\in\cC} \phi_S(\mathbf{x}) \phi_0(\mathbf{x})} \,d\mathbf{x}\ge\frac{1}{N} \sum_{S\in\cC}
+\int\sqrt{ \phi_S(\mathbf{x}) \phi_0(\mathbf{x})} \,d\mathbf{x}.$$ 
+Because for any $S\in\cC, \int\sqrt{ \phi_S(\mathbf{x}) \phi_0(\mathbf{x})} \,d\mathbf{x}=e^{-\mu^2K/8}$, we obtain that for all classes $\cC$, $R^* \ge1/2$ whenever
 \begin{equation}
   \label{eq: loose lower bound}
   \mu\le\sqrt{(4/K)}\times\sqrt{\log(4/3)}
 \end{equation}
 i.e. small risk cannot be achieved unless $\mu$ is substantially large compared to $K^{-1/2}$. But this can be substantially improved by the moment method proposed in \cite{addario2010combinatorial}, as we discuss next.
 
-%
 \subsubsection{Moment Methods}
 \label{subsubsec:Moment Methods}
-%
-
 The moment method applies the following insight: by the Cauchy--Schwarz inequality,
-%
-\[
-R^* = 1 - \tfrac{1}{2} \mathbb{E}_0 |L(\bX)-1|
-\ge1 - \tfrac{1}{2} \sqrt{\mathbb{E}_0 |L(\bX)-1|^2}.
-\]
+$$R^* = 1 - \tfrac{1}{2} \mathbb{E}_0 |L(\bX)-1| \ge 1 - \tfrac{1}{2} \sqrt{\mathbb{E}_0 |L(\bX)-1|^2}.$$
 and since $\mathbb{E}_0 L(\bX) = 1, \mathbb{E}_0 |L(\bX)-1|^2=\Var_0(L(\bX)) = \mathbb{E}_0 [L(\bX)^2] -1.$ 
 We are now ready to prove the following lower bound based on overlapping pairs, which reduces the problem to
 studying a purely combinatorial quantity \cite{arias2008searching,addario2010combinatorial}:
@@ -209,11 +184,9 @@ studying a purely combinatorial quantity \cite{arias2008searching,addario2010com
   \]
 \end{prop}
 \begin{proof}
-Because $L(\bX)= \frac1 N \sum_{S\in\cC} e^{\mu X_S -K\mu^2/2}$, 
+Because $L(\bX)= \frac1 N \sum_{S\in\cC} e^{\mu X_S -K\mu^2/2}$ \ref{eq: likelihood ratio}, 
 \[
-\mathbb{E}_0 [L(\bX)^2]
-=
-\frac{1}{N^2} \sum_{S,S'\in\cC} e^{-K \mu^2} \mathbb{E}_0 e^{\mu(X_S+X_{S'})}.
+\mathbb{E}_0 [L(\bX)^2]=\frac{1}{N^2} \sum_{S,S'\in\cC} e^{-K \mu^2} \mathbb{E}_0 e^{\mu(X_S+X_{S'})}.
 \]
 Meanwhile,
 \begin{eqnarray*}
@@ -231,8 +204,8 @@ e^{\mu^2 (K-|S\cap S'|)+2\mu^2|S\cap S'|}
 \end{eqnarray*}
 \end{proof}
 
-The previous proposition allows us to obtain lower bounds by analysing the quantity $\mathbb{E} e^{\mu^2Z}$. 
-This allows us to exploit the combinatorial structures of the class $\cC$ and gives us far better bounds than \ref{eq: loose lower bound}, as the folloiwng examples show:
+This proposition allows us to obtain lower bounds by analysing the moment generating quantity $\mathbb{E} e^{\mu^2Z}$. 
+This allows us to exploit the combinatorial structures of the class $\cC$ and gives us far better bounds than \ref{eq: loose lower bound}, as the folloiwng example show:
 
 
 %\begin{exmp}[Disjoint Sets, \cite{addario2010combinatorial}, Section 4.1]
@@ -254,7 +227,7 @@ $R^* \ge\delta$ whenever
 \[
 \mu\le\sqrt{\log\bigl(1+\tfrac1 2 \log\bigl(1+4(1-\delta)^2\bigr) \bigr)}.
 \]
-Meanwhile, the averaging test has risk $R(f) \le\delta$ whenever $\mu\ge\sqrt{4\log(2/\delta)}$.
+which is substantially smaller than \ref{eq: loose lower bound}. Meanwhile, the averaging test has risk $R(f) \le\delta$ whenever $\mu\ge\sqrt{4\log(2/\delta)}$, which is optimal up to constant.
 \end{exmp}
 
 %\begin{exmp}[Cliques, \cite{addario2010combinatorial}, Section 4.6]
@@ -264,7 +237,7 @@ Meanwhile, the averaging test has risk $R(f) \le\delta$ whenever $\mu\ge\sqrt{4\
 %$$\mu\ge O\biggl(\sqrt{\frac{1}{k} \log\biggl(\frac{m}{k} \biggr)}+ \sqrt{\frac{\log(1/\delta)}{k^2}}\biggr)$$
 %\end{exmp}
 
-We also explore two special combinatorial structures: \textit{symmetry} and \textit{negative association}.
+Next, we explore two special combinatorial structures: \textit{symmetry} and \textit{negative association} to apply Proposition \ref{prop:symmetric} to $K$-sets.
 \begin{defn}[Symmetry]
   \label{defn:symmetry}
   We say that the class $\cC$ is {\it symmetric} if it satisfies the following conditions.
@@ -275,13 +248,13 @@ We also explore two special combinatorial structures: \textit{symmetry} and \tex
     \item for any fixed $S_0\in\cC$ and $i\in S_0$, $\bP\{i\in S\}=K/n$.
   \end{enumerate}
 \end{defn}
-Via H\"older's inequality, we can obtain the following
+Via H\"older's inequality, we can obtain the following:
 \begin{prop}[\cite{addario2010combinatorial}, Proposition 3.3]
   \label{prop:symmetric}
   Assume that $\cC$ is symmetric. Then 
   $$\mathbb{E}[ e^{\mu^2 Z}]\le (e^{\mu^2K} -1 ) \frac{K}{n} +1.$$
 \end{prop}
-%The proposition above shows that for any small and sufficiently symmetric class, the critical value of $\mu$ is of the order of $\sqrt{(\log n)/K}$, at least if $K\le n^\beta$ for some $\beta\in(0,1)$.
+The proposition above shows that for any small and sufficiently symmetric class, the critical value of $\mu$ is of the order of $\sqrt{(\log n)/K}$, at least if $K\le n^\beta$ for some $\beta\in(0,1)$.
 %\begin{exmp}[Stars, \cite{addario2010combinatorial}, Section 4.4]
 %A star is a subgraph of the complete graph $K_m$ which contains all $K=m-1$ edges incident to a fixed vertex. Consider the set $\cC$ of all stars in $K_m$. In this setting, $n={m\choose2}$ and $N=m$. Hence, for any $\varepsilon>0,$ we have $\lim_{m\to\infty} R^* = 1$ if 
 %$$\mu\le(1-\varepsilon)\sqrt{\dfrac{\log m}{m}}$$
@@ -293,7 +266,7 @@ Via H\"older's inequality, we can obtain the following
 \le\mathbb{E}[ f(Y_i, i\in I) ] \mathbb{E}[g(Y_j, j\in J) ].
 \]
 \end{defn}
-
+The following proposition further improves the upper bound of $\mathbb{E}[ e^{\mu^2 Z}].$
 \begin{prop}[\cite{addario2010combinatorial}, Proposition 3.4]
   \label{negass}
   Assume that the class $\cC$ is symmetric. Suppose that the labels are such that $S'=\{1,2,\ldots,K\} \in\cC$. Let $S$ be a randomly chosen element of $\cC$. If the random variables
@@ -301,13 +274,13 @@ Via H\"older's inequality, we can obtain the following
   $$\mathbb{E}[ e^{\mu^2 Z}]\le \biggl( (e^{\mu^2} -1 ) \frac{K}{n} +1 \biggr)^K.$$
 \end{prop}
 \begin{exmp}[K-sets, \cite{addario2010combinatorial}, Section 4.2]
-  Consider the example when $\cC$ contains all sets $S \subset\{1,\ldots ,n\}$ of size $K$. Note $N={n\choose K}$. This class is symmetric and satisfies the condition in the previous proposition. Hence, applying Proposition \ref{prop:pairs}, $R^*\ge\delta$ for all $\mu$ with
+  Suppose $\cC$ contains all sets $S \subset\{1,\ldots ,n\}$ of size $K$. Note $N={n\choose K}$. This class is symmetric and satisfies the condition in the previous proposition. Hence, applying Proposition \ref{prop:pairs}, $R^*\ge\delta$ for all $\mu$ with
   %
   \[
   \mu\le\sqrt{\log\biggl(1+\frac{n\log(1+4(1-\delta)^2)}{K^2} \biggr)}.
   \]
+  This simple bound turns out to have the correct order of magnitude both when $n \gg K^2$, which is achieved by the maximum test, and when $n \ll K^2$, which is achieved by the averaging test.
 \end{exmp}
-{\bf ADD SOMETHING}
 
 %\begin{exmp}[Perfect Matchings, \cite{addario2010combinatorial}, Section 4.3]
 %  \label{exmp:Perfect Matchings}
@@ -317,52 +290,38 @@ Via H\"older's inequality, we can obtain the following
 
 \subsection{Detection of an Anomalous Cluster}
 As a special case of the detection of means problem, we can consider the following scenario in network analysis introduced in \cite{arias2011detection}.
-Let $\bV_m$ be either derived from a geometric shape or has a graph structure. For simplicity, we can think of $\bV_m$ as the set of graphs with $m$ nodes embedded in the Euclidean space. Let $\Km$ be a class of clusters within $\bV_m$.
-
-Under $H_0^m, \bX \sim \cN(0, \bI_m)$. Under $H_1^m$, there exists a cluster $K \in \Km$ where 
-%
+Let $\bV_m$ be either derived from a geometric shape or has a graph structure. For simplicity, we can think of $\bV_m$ as the set of graphs with $m$ nodes embedded in the Euclidean space. Let $\Km$ be a class of clusters within $\bV_m$. Under $H_0^m, \bX \sim \cN(0, \bI_m)$. Under $H_1^m$, there exists a cluster $S \in \Km$ where 
 \[
-X_v \sim\cN(\mu_K,1)\qquad \forall v \in K;\qquad X_v \sim
-\cN(0,1)\qquad \forall v \notin K,
+X_v \sim\cN(\mu_S,1)\qquad \forall v \in S;\qquad X_v \sim \cN(0,1)\qquad \forall v \notin S,
 \]
-%
-where $\mu_K > 0$.
-We choose to decompose $\mu_K$ as $\mu_K = |K|^{-1/2} \Lambda_K$, where
-$|K|$ denotes the number of nodes in $K$ and $\Lambda_K$ is the signal
-strength. We say that $H_0^m$ and $H_1^m$ are {\it asymptotically inseparable}
-(in the minimax sense) if
-%
+where $\mu_S > 0$. We choose to decompose $\mu_S$ as $\mu_S = K^{-1/2} \Lambda_S$, where
+$K$ denotes the number of nodes in $S$ and $\Lambda_K$ is the signal strength. We say that $H_0^m$ and $H_1^m$ are {\it asymptotically inseparable} (in the minimax sense) if
 \[
 \liminf_{m \to\infty} R_{*}^{\max} = 1,
 \]
-%
-which is equivalent to saying that, as $m$ becomes large, no test can
-perform substantially better than random guessing. A sequence of tests $(T_m)$ is said to {\it asymptotically separate} $H
+which is equivalent to saying that, as $m$ becomes large, no test can perform substantially better than random guessing. A sequence of tests $(T_m)$ is said to {\it asymptotically separate} $H
 _0^m$ and $H_1^m$ if
-%
 \[
 \lim_{m \to\infty} R^{\max}(T_m) = 0,
 \]
 
-Combining the insight we gained from the moment method earlier and more delicate analysis of the signal $\Lambda_K$, \cite{arias2011detection} shows that if $\Km$ is the set of mild deformations of a unit ball, then under specific conditions,
+Combining the insight we gained from the moment method earlier and more delicate analysis of the signal $\Lambda_S$, \cite{arias2011detection} shows that if $\Km$ is the set of "mild deformations" of a unit ball, then under specific conditions,
 $H_0^m$ and $H_1^m$ are asymptotically inseparable if there is
-$\eta_m \to0$ slowly enough such that, for all $K \in\Km$,
-%
+$\eta_m \to0$ slowly enough such that, for all $S \in\Km$,
 \[
-\Lambda_K \leq(1 - \eta_m) \sqrt{2 \log(m/|K|)};
+\Lambda_S \leq(1 - \eta_m) \sqrt{2 \log(m/K)};
 \]
-%
-and conversely, a version of the scan statistic can asymptotically separates $H_0^m$ and $H_1^m$ if there is $\eta_m
-\to0$ slowly enough such that, for all $K \in\Km$,
-%
+and conversely, a version of the scan statistic can asymptotically separates $H_0^m$ and $H_1^m$ if there is $\eta_m \to0$ slowly enough such that, for all $S \in\Km$,
 \[
-\Lambda_K \geq(1 + \eta_m) \sqrt{2 \log(m/|K|)}.
+\Lambda_K \geq(1 + \eta_m) \sqrt{2 \log(m/K)}.
 \]
-\cite{arias2011detection} also derived bounds for "thin clusters" and paths along a $d$-dimensional lattice. We refer the reader to the orignal paper for details. Notably, the authors also extended their results to exponential families.
+Besides, \cite{arias2011detection} derived bounds for "thin clusters" and paths along a $d$-dimensional lattice. We refer the reader to the orignal paper for details. Notably, the authors also extended their results to exponential families. The detection of correlation version of this application has also been studied, see \cite{arias2017detecting}.
 
 \section{Detection of Correlations}
+
+In this section we discuss a generalisation of the moment method that adapts to the detection of correlations problem. Then we discuss some upper bounds achieved by the squared-sum test, the generalized likelihood ratio test and the goodness of fit test. In discussing these tests, we use $K$-sets as the example as it reveals the strength and weakness of these tests.
 \subsection{Lower Bounds}
-First, we note that we can rewrite the alternative hypotheses as $$H_1: \bX \sim\cN(0,\bA_S)\qquad\mbox{for some $S \in\cC$,}$$ where
+First, we can rewrite the alternative hypotheses as $$H_1: \bX \sim\cN(0,\bA_S)\qquad\mbox{for some $S \in\cC$,}$$ where
 $$(\bA_S)_{i,j} = \begin{cases}
 1, &\quad i = j, \cr
 \rho, &\quad i \neq j, i, j \in S, \cr
@@ -372,7 +331,7 @@ Introducing $Z_S = \exp\bigl(\tfrac{1}{2} X^T (\bI- \bA_S^{-1}) X \bigr)$ for al
 $$R^* = 1 - \frac{1}{2} \bE_0 |L(X) - 1| = 1 - \frac{1}{2} \bE_0\biggl| \frac{1}{N} \sum_{S \in\cC} \frac{Z_S}{\bE_0 Z_S} - 1\biggr|$$
 
 \subsubsection{Generalised Moment Method}
-A direct application of the momont method discussed earlier does not yield very promising lowerbounds; instead, we leverage the insight from the folloiwng representation lemma:
+A direct application of the momont method discussed earlier does not yield very promising lower bounds; instead, we leverage the insight from the folloiwng representation lemma:
 \begin{lem}[\cite{berman1962equally};\cite{arias2012correlation}, Lemma 1.1]
   \label{lemrepresent}
   Let $X_1,\ldots, X_k$ be standard normal with $\Cov(X_i, X_j) = \rho
@@ -381,7 +340,7 @@ A direct application of the momont method discussed earlier does not yield very 
   U + \sqrt{1-\rho}   U_i$ for all $i$.
 \end{lem}
 Thus, given $U$, the problem becomes that of detecting a~subset of
-variables with nonzero mean (equal to $\sqrt{\rho} U$) and with a~variance equal to $1-\rho$ (instead of 1). We are now ready to reduce analysing testing problem into a combinatorial problem.
+variables with mean equal to $\sqrt{\rho} U$ and with a~variance equal to $1-\rho$. We are now ready to reduce our analysis into a combinatorial problem.
 
 \begin{prop}[\cite{arias2012correlation}, Theorem 2.1]
   \label{thmlower}
@@ -449,14 +408,14 @@ Again, we reduce the problem to studying the purely combinatorial quantity $Z = 
 %  which is bounded by $1$ if $\nu\le\log(N)/k$, in which case $R^* \ge0.3$.
 %\end{exmp}
 
-\begin{exmp}[$k$-sets, \cite{arias2012correlation}, Section 2.3.3]
+\begin{exmp}[$K$-sets, \cite{arias2012correlation}, Section 2.3.3]
   \label{exmp: k-sets, cor}
-  Suppose $\cC$ is the class of all sets of size $k$. By negative association, (see Proposition \ref{negass})
+  Suppose $\cC$ is the class of all sets of size $K$. By negative association, (see Proposition \ref{negass})
   \[
-  \bE e^{\nu Z} \le\biggl((e^\nu-1) \frac{k}{n}+1\biggr)^k
-  \le\exp\biggl((e^\nu-1) \frac{k^2}{n}\biggr),
+  \bE e^{\nu Z} \le\biggl((e^\nu-1) \frac{K}{n}+1\biggr)^K
+  \le\exp\biggl((e^\nu-1) \frac{K^2}{n}\biggr),
   \]
-  which implies that $R^* \to1$ if either $k^2/n \to\infty$ and $\rho k^2/n \to0$, or $(1-\rho)n^2/k^4 \to\infty$.
+  which implies that $R^* \to1$ if either $K^2/n \to\infty$ and $\rho K^2/n \to0$, or $(1-\rho)n^2/K^4 \to\infty$.
 \end{exmp}
 
 %\begin{exmp}[Perfect Matchings, \cite{arias2012correlation}, Section 2.3.4]
@@ -468,9 +427,9 @@ Again, we reduce the problem to studying the purely combinatorial quantity $Z = 
 %\end{exmp}
 
 \begin{exmp}[Spanning Trees, \cite{arias2012correlation}, Section 2.3.5]
-  Suppose $\cC$ is the class of all spanning trees of a complete graph with $k+1$ vertices. Similar to Example \ref{exmp:Spanning Trees}, notice
+  Suppose $\cC$ is the class of all spanning trees of a complete graph with $m$ vertices. Similar to Example \ref{exmp:Spanning Trees}, notice
   \[
-  \bE e^{\nu Z} \le \exp{2(e^\nu-1)},
+  \bE e^{\nu Z} \le \exp(2(e^\nu-1)),
   \]
   which implies that $R^* \to1$ if $\rho\to0$.
 \end{exmp}
@@ -479,60 +438,44 @@ Again, we reduce the problem to studying the purely combinatorial quantity $Z = 
 \subsection{Upper Bounds}
 
 The \textit{squared-sum test} is based on the observation that under $\bP_0$, $(\sum_{i=1}^n X_i)^2$ is distributed as $n
-\chi_1^2$, while for
-any $S\subset\{1,\ldots,n\}$ with $|S|=k$, under
-$\bP_S$, $(\sum_{i=1}^n X_i)^2$ has the same distribution
-as $(n + \rho k(k-1)) \chi_1^2$. This implies that the squared-sum test is near-optimal for detecting
-$k$-sets in the regime where $k^2/n \to\infty$, as stated in the following proposition.
-%
-%pr3.1 #&#
+\chi_1^2$, while under $\bP_S$, $(\sum_{i=1}^n X_i)^2$ has the same distribution
+as $(n + \rho K(K-1)) \chi_1^2$. This implies that the squared-sum test is near-optimal for detecting
+$K$-sets in the regime where $K^2/n \to\infty$, as stated in the following proposition.
+
 \begin{prop}[\cite{arias2012correlation}, Proposition 3.1]
 \label{prpsq}
-Let $\cC$ be an arbitrary class of sets of size $k$ and suppose that $\rho k^2/n \to\infty$.
-If $t_n$ is such that $t_n\to\infty$ but $t_n = o(\rho k^2/n)$, then the test which rejects the null hypothesis
+Let $\cC$ be an arbitrary class of sets of size $K$ and suppose that $\rho K^2/n \to\infty$.
+If $t_n$ is such that $t_n\to\infty$ but $t_n = o(\rho K^2/n)$, then the test which rejects the null hypothesis
 if $(\sum_{i=1}^n X_i)^2 > n t_n$ has a~worst-case risk converging to zero.
 \end{prop}
-Notice that in this case, i.e. $k^2/n \to\infty$, Example \ref{exmp: k-sets, cor} implies that any test based on $(\sum_{i=1}^n X_i)^2$ is powerless if $\rho k^2/n \to0$.
+Notice that in this case, i.e. $K^2/n \to\infty$, Example \ref{exmp: k-sets, cor} implies that any test based on $(\sum_{i=1}^n X_i)^2$ is powerless if $\rho K^2/n \to0$.
 
 The \textit{generalized likelihood ratio test} (GLRT) has the form
-%
 \[
 f(X)=0  \quad\mbox{if and only if}\quad
 \max_{S \in\cC} X^T (\bI- \bA_S^{-1}) X \leq t
 \]
-%
 for some appropriately chosen $t$. This is based on the folloiwng observation:
 under $\bP_0$, $X^T (\bI- \bA_S^{-1}) X$ is distributed as
-%
 \[
-- \frac{\rho}{1-\rho} \chi^2_{k-1} + \frac{\rho(k-1)}{1 + \rho(k-1)} \chi^2_1,
+- \frac{\rho}{1-\rho} \chi^2_{K-1} + \frac{\rho(K-1)}{1 + \rho(K-1)} \chi^2_1,
 \]
-%
 and under the alternative $\bP_S$, it has the same distribution as
-%
 \[
--\rho\chi^2_{k-1} + \rho(k-1) \chi^2_{1},
+-\rho\chi^2_{K-1} + \rho(K-1) \chi^2_{1},
 \]
-%
-where $\chi_1^2$ and $\chi_{k-1}^2$ denote independent $\chi^2$
-random variables with degrees of freedom $1$ and $k-1$, respectively. Careful analysis based on this observation gives us the folloiwng result:
+where $\chi_1^2$ and $\chi_{K-1}^2$ denote independent $\chi^2$ random variables with degrees of freedom $1$ and $K-1$, respectively. Careful analysis based on this observation gives us the folloiwng result:
 
 \begin{prop}[\cite{arias2012correlation}, Proposition 3.3] \label{prpglrt-large}
-Consider a~class $\cC$ of sets of size $k$, with cardinality $N \to
-\infty$ such that $\log(N)/k
-\to\infty$. When $\eta:= (1-\rho) N^{2/k} (\log N)/k \to0$, the
-generalized likelihood
-ratio test with threshold value $t = -(\log N)/\sqrt{\eta}$ has
-worst-case
-risk tending to zero.
+Consider a~class $\cC$ of sets of size $K$, with cardinality $N \to
+\infty$ such that $\log(N)/K \to\infty$. When $\eta:= (1-\rho) N^{2/K} (\log N)/K \to0$, the
+generalized likelihood ratio test with threshold value $t = -(\log N)/\sqrt{\eta}$ has
+worst-case risk tending to zero.
 \end{prop}
 
-Notice that in Proposition~\ref{prpglrt-large} the condition on $\rho
-$ implies
-that $\rho\to1$, which is much stronger than what the squared-sum
-test requires when $k^2/n \to\infty$.
-For $k$-sets, $N = {n \choose k}$---so that $\log N = k \log(n/k) +
-O(k)$---and the requirement is that $(1-\rho) (n/k)^2 \log(n/k) \to
+The GLRT is unsatisfactory for testing $K$-sets. Notice that in Proposition~\ref{prpglrt-large} the condition on $\rho$ implies
+that $\rho \to 1$, which is much stronger than what the squared-sum test requires when $K^2/n \to\infty$.
+For $K$-sets, the requirement of the last proposition is that $(1-\rho) (n/K)^2 \log(n/K) \to
 0$, which is substantially stronger than what the lower bound obtained
 in Example \ref{exmp: k-sets, cor} requires. In fact, if $\rho$ is bounded away from 1, then the GLRT may be powerless (\cite{arias2012correlation}, Theorem 3.1).
 
@@ -540,56 +483,32 @@ in Example \ref{exmp: k-sets, cor} requires. In fact, if $\rho$ is bounded away 
 The \textit{goodness of fit test} (GOF test) is based on the folloiwng insight.
 Let $H_i = \Phi^{-1}(X_i)$, where $\Phi$ is the standard normal distribution
 function. Under the null, the $H_i$'s are i.i.d. uniform in $(0,1)$.
-Under an alternative with anomalous set denoted by $S$, the $X_i, i
-\in S$ are closer together, especially since we place ourselves in the
-regime where $\rho\to1$. More precisely, we have the following.
-%
-%le3.1 #&#
-\begin{lem} \label{lemclose}
-Suppose $X_1,\ldots, X_k$ are
-%GL standardized
-zero-mean, unit-variance
-random variables satisfying $\Cov(X_i, X_j) \geq\rho> 0$, for all $i
-\neq j$. Let $\overline{X}$ denote their average. Then for any $t > 0$,
-%
-\[
-\bP\bigl\{ \# \{i: |X_i - \overline{X}| > t\} \geq k/2\bigr\}
-\leq\frac{2(1-\rho)}{t^2}.
-\]
-%
-\end{lem}
-
-Choose an integer $m$ such that $m \gg(n/k^2) \log(n/k^2)$ and partition
-the interval $[0,1]$ into $m$ bins of length $1/m$, denoted $I_s,  s =
-1,\ldots, m$. Let $B_s = \# \{i: H_i \in I_s\}$ be the bin
-counts---thus, we are computing a~histogram. Then consider the
-following GOF test:
-%
+Under $H_S$, the $X_i, i \in S$ are closer together(\cite{arias2012correlation}, Lemma 3.1). Choose an integer $m$ such that $m \gg(n/K^2) \log(n/K^2)$ and partition the interval $[0,1]$ into $m$ bins of length $1/m$, denoted $I_s,  s =
+1,\ldots, m$. Let $B_s = \# \{i: H_i \in I_s\}$ be the bin counts. The GOF test has the form:
 \[
 f(X)=0  \quad\mbox{if and only if}\quad
 \max_{s = 1,\ldots, m} B_s \leq t,
 \]
-%
-where $t$ is some threshold. The folloiwng result suggests that, ignoring logarithmic factors, the GOF test is near-optimal for detecting $k$-sets in
-the regime where $k^2/n \to0$ and $k/\log n \to\infty$.
+where $t$ is some threshold. The folloiwng result suggests that, ignoring logarithmic factors, the GOF test is near-optimal for detecting $K$-sets in
+the regime where $K^2/n \to0$ and $K/\log n \to\infty$.
 
 \begin{prop} \label{prpgof}
-Consider the class $\cC$ of all $k$-sets in the case where $k^2/n \to
-0$ and $k/\log n \to\infty$. In the GOF test above, choose $m$ such
-that $(n/k^2) \log n \ll m \ll n/\log n$. When $(1-\rho)^{1/2} \ll
+Consider the class $\cC$ of all $K$-sets in the case where $K^2/n \to
+0$ and $K/\log n \to\infty$. In the GOF test above, choose $m$ such
+that $(n/K^2) \log n \ll m \ll n/\log n$. When $(1-\rho)^{1/2} \ll
 1/m$, the resulting test with threshold $t = n/m + \sqrt{3 n \log(m)/m}$ has
 worst-case risk tending to zero.
 \end{prop}
 
-{\bf WRITE A SUMMARY}
+In summary, we see that a good upper bound for $K$-sets is tricky to obtain as each test discussed above can only to almost optimal in special settings.
 
 \section{Extension}
 
-Subsequent lines of work have found more settings where the moment methods introduced in earlier sections can be systematically applied to derive minimax lower bounds for testing problems. In this section, we focus on introducing these scenarios. 
-On the other hand, as mentioned earlier, the upper bounds are more often obtained by considering different proposed tests, whose analyses are often much more delicate. Hence, we refer the reader to the respective papers for analyses for the upper bounds.
+Subsequent lines of work have found more settings where the moment methods introduced in earlier sections can be systematically applied to derive minimax lower bounds for testing problems\cite{berthet2013optimal, arias2015correlations, arias2017detecting, neykov2019combinatorial}. In this section, we introduce some of these scenarios. 
+On the other hand, as mentioned earlier, the upper bounds are more often obtained by considering different proposed tests, whose analyses are often much more delicate. Hence, we refer the reader to the respective papers for analyses of the upper bounds.
 
 \subsection{Dectection of positive correlations in a multivariate sample}
-A direct extension of the dectection of correlation problem is considered in \cite{arias2015correlations}. Under the alternatives, we make a slight modification of the alternative hypotheses \ref{alt:correlation}, which is, if $i \ne j, i,j \in S$, we have $\Cov(X_i, X_j) \ge \rho > 0$.  the covariance matrix is still sparse, i.e., $k < n/2$ or $k = o(n)$, meaning that only a few variables are substantially correlated. Examples of this setting includes the block model, cliques and perfect matchings. 
+A direct extension of the dectection of correlation problem is considered in \cite{arias2015correlations}. We make a slight modification of the alternative hypotheses \ref{alt:correlation}, which is, if $i \ne j, i,j \in S$, we have $\Cov(X_i, X_j) \ge \rho > 0$. In our discussion, the covariance matrix is still sparse, i.e., $K < n/2$ or $K = o(n)$, meaning that only a few variables are substantially correlated. Examples of this setting includes the block model, cliques and perfect matchings. 
 
 Via a more delicate version of the generalized moment method we saw, we can obtain the following:
 \begin{prop}[\cite{arias2015correlations}, Theorem 1]
@@ -614,33 +533,34 @@ Via a more delicate version of the generalized moment method we saw, we can obta
 The upper bounds are obtained via squared-sum test and "localized" squared-sum test. 
 
 \subsection{Dectection of sparse principal components of a high-dimensional covariance matrix}
-Introduced in \cite{berthet2013optimal}, we can consider the alternative hypothesis $\bX \sim \cN(0, \bI + \theta v v^T)$ where $\theta >0$ and $v$ is $k$-sparse. The techniques for proving the minimax lower bound is much more technical and involves studying the $\chi^2$ distance between probability measures. Yet, the moment methods still palys a key role in showing the following result:
+Introduced in \cite{berthet2013optimal}, we consider the alternative hypothesis $\bX \sim \cN(0, \bI + \theta v v^T)$ where $\theta >0$ and $v$ is $K$-sparse. The techniques for proving the minimax lower bound is much more technical and involves studying the $\chi^2$ distance between probability measures. Yet, the moment methods still palys a key role in showing the following result:
 \begin{prop}[\cite{berthet2013optimal}, Theorem 5.1]
   Fix $\nu > 0$. There exists a constant $C_{\nu}$ such that if 
-  $$\theta < \min(\sqrt{\frac{k \log(C_{\nu}p/k^2 + 1)}{n}}, \frac{1}{\sqrt{2}})$$
+  $$\theta < \min(\sqrt{\frac{K \log(C_{\nu}p/K^2 + 1)}{n}}, \frac{1}{\sqrt{2}})$$
   Then
   $R^* \ge 0.5 - \nu$.
 \end{prop}
 
 \subsection{Combinatorial inference for graphical models}
 
-More recently, \cite{neykov2019combinatorial} introduced a new family of combinatorial inference problems for graphical models. Unlike classical statistical inference where the main interest is point estimation or parameter testing, combinatorial inference aims at testing the global structure of the underlying graph. Examples include testing the graph connectivity, the presence of a cycle of certain size, or the maximum degree of the graph.
+More recently, \cite{neykov2019combinatorial} introduced a new family of combinatorial inference problems for graphical models. Unlike classical statistical inference where the main interest is point estimation or parameter testing, combinatorial inference aims at testing the global structure of the underlying graph. Examples include testing the graph connectivity, the presence of a cycle of certain size, or the maximum degree of the graph. Although the moment method still plays a part, many more novel and technical tools are needed to study this family of testing problems.
 
 \section{More Examples}
 
-In this section we introduce two examples that do necessarily satisfy symmetry or negative association. Although it is not immediate what applications these examples can lead to, they may inspire other novel tools to study combinatorial testing problems.
+In this section we introduce two examples that do not necessarily satisfy symmetry or negative association. Although it is not immediate what applications these examples can lead to, they may inspire other novel tools to study combinatorial testing problems.
 
 \subsection{Paths on a tree}
-Consider a full binary tree whose depth is equal to $m$. Then there are $n = 2m-2$ edges on this tree. Let $\cC$ be the class of all possible paths from the root node to a leaf. Then $N = |\cC| = 2^m$ and for each $S \in \cC, K = m$. 
+Consider a full binary tree whose depth is equal to $m$. Then there are $n = 2^{m+1} - 2$ edges on this tree. Let $\cC$ be the class of all possible paths from the root node to a leaf. Then $N = |\cC| = 2^m$ and for each $S \in \cC, K = |S| = m$. 
 
-Notice that this class does not satisfy the second conditon of symmetry in Definition \ref{defn:symmetry}. Because for a fixed path $S_0 \in \cC$, the probability that an edge on $S_0$ at depth $i$ is in another uniformly random path $S$ is $\bP(i \in S) = 2^{-i}.$ Neither are this random variables ${\bf 1}(i \in S)$ negatively associated: for example, the second edge on $S_0$ is in $S$ only if the first edge is in $S$ already, i.e.
+Notice that this class does not satisfy the second conditon of symmetry in Definition \ref{defn:symmetry}. Because for a fixed path $S_0 \in \cC$, the probability that an edge on $S_0$ at depth $i$ is in another uniformly random path $S$ is $\bP(i \in S) = 2^{-i}.$ Neither are this random variables ${\bf 1}(i \in S)$ negatively associated: for example, as the second edge on $S_0$ is in $S$ only if the first edge is in $S$ already, i.e.
 $$\bP(1 \in S, 2 \in S) = \bP(2 \in S) >\bP(1 \in S)\bP(2 \in S) $$
 
-The first condition of symmetry still holds, which makes it possible to modify Proposition \ref{prop:symmetric} to obtain a bound. However, in this case, we can compute the moment generating function exactly since $Z$ is geometrically distributed with $p = 1/2.$
+The first condition of symmetry still holds, which makes it possible to modify Proposition \ref{prop:symmetric} to obtain a bound. However, in this case, we can compute the moment generating function exactly since $Z$ is geometrically distributed with $p = 1/2:$
 $$\bE[e^{\nu Z}] = \frac{p e^{\nu Z}}{1 - (1-p)e^{\nu Z}} = \frac{2}{2 - e^{\nu Z}} - 1$$
-By Proposition \ref{prop:pairs}, with $\nu = \mu^2$, we obtain that for any $\delta\in(0,1)$, $R^* \ge\delta$ whenever
+For the detection of means problem, by Proposition \ref{prop:pairs}, with $\nu = \mu^2$, we obtain that for any $\delta\in(0,1)$, $R^* \ge\delta$ whenever
 $$\mu\le\sqrt{\log\bigl(2-\frac{1}{2(1-\delta)^2 + 1}\bigr)}.$$
-By Proposition \ref{thmlower}, with $\nu = \nu_a$, we obtain as $\rho \to 0$, $\nu_a \to 0$, thus $\bE[e^{\nu Z}] \to 1$ and $R^* \to 1$.
+Since $n = 2^K$, neither the maximum test nor the averaging test achieve a matching upper bound.\\
+For the detection of correlations problem, by Proposition \ref{thmlower}, with $\nu = \nu_a$, we obtain as $\rho \to 0$, $\nu_a \to 0$, $\bE[e^{\nu Z}] \to 1$ and thus  $R^* \to 1$.
 
 \subsection{Triangulations on a k-gon and Catalan Numbers}
 Consider a convex $m$-gon, $m \ge 5$. We describe the class $\cC$ as follows. Let $G$ be a complete graph whose $m$ vertices are embedded on a convex $m$-gon. Let $1,...,n$ index the edges in $E(G)\setminus E(\partial G)$; that is, $1,..., n = m(m-1) - m = (m-1)^2$ are the edges in the interior of this $m$-gon. Let $S$ be the set of interior edges of a non-intersecting triangulation of this $m$-gon and let $\cC$ contain all sets of this form. Then,
@@ -649,13 +569,13 @@ is the Catalan number. This class does not satisfy the first condition of symmet
 \includegraphics{hexagon.png}\\
 Let $S'$ be the triangulation on the upper left corner. Then we have 
 $$\bP(Z = 0|S') = 5/14, \bP(Z = 1|S') = 5/14, \bP(Z = 2|S') = 3/14, \bP(Z = 3|S') = 1/14$$
-Meanwhile, let $S''$ be the triangulation on the second to last one on lower right corner, whose three interior edges forms a triangle. In this case,
+Meanwhile, let $S''$ be the triangulation on the second to last one on lower right corner, whose three interior edges form a triangle. In this case,
 $$\bP(Z = 0|S'') = 4/14, \bP(Z = 1|S'') = 6/14, \bP(Z = 2|S'') = 3/14, \bP(Z = 3|S'') = 1/14$$
-Neither does this class satisfy negative association. Intuitively, if one edge comes us in a uniform triangulation, then the edges not interesting with this one will more likely show up in this random triangulation. For example, let $S'$ be the first triangulation in the upper left corder and let $1$ denote the vertical edge and $2$ the diagonal edge. Then
+Neither does this class satisfy negative association. Intuitively, if one edge comes up in a uniform triangulation, then the edges not interesting with this one will more likely show up in this random triangulation. For example, let $S'$ be the first triangulation in the upper left corder and let $1$ denote the vertical edge and $2$ the diagonal edge. Then
 $$\bP(1 \in S, 2 \in S) = \frac{2}{14} > \frac{5}{14} \times \frac{4}{14} = \bP(1 \in S)\bP(2 \in S) $$
-It is less clear how to can bound the moment generating function of $Z$ in this case. Hence, deeper understanding of the combinatorial structure of this set will be helpful.
+It is less clear how to bound the moment generating function of $Z$ in this case. Hence, deeper understanding of the combinatorial structure of this set will be helpful.
 
-Catalan numbers is a recurrent theme in combinatorics. It counts the number of binary trees, plane trees, ballot sequences, parenthesizations, and Dyck paths, to just name a few examples \cite{stanley2015catalan}. The omnipresence of Catalan numbers allows us to understand many combinatorial classes simultaneously. Hence, it is an interesting future direction to understand the moment generating function of the Catalan-type class and study the testing problem for some of the combinatorial classes of this family. 
+Catalan numbers is a recurrent theme in combinatorics. It counts the number of binary trees, plane trees, ballot sequences, parenthesizations, and Dyck paths, to just name a few examples \cite{stanley2015catalan}. The omnipresence of Catalan numbers allows us to understand many combinatorial classes simultaneously. Hence, it is an interesting future direction to understand the moment generating function of the Catalan-type classes and study the testing problem for some of the combinatorial classes of this family. 
 \bibliographystyle{plain}
 \bibliography{bibfile}
 \end{document}

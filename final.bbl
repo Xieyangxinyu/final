@@ -5,6 +5,12 @@ Louigi Addario-Berry, Nicolas Broutin, Luc Devroye, and G{\'a}bor Lugosi.
 \newblock On combinatorial testing problems.
 \newblock {\em The Annals of Statistics}, pages 3063--3092, 2010.
 
+\bibitem{arias2017detecting}
+E~Arias-Castro, G~Lugosi, and Nicolas Verzelen.
+\newblock Detecting a path of correlations in a network.
+\newblock {\em ALEA: Latin American Journal of Probability and Mathematical
+  Statistics}, 14(1):33--44, 2017.
+
 \bibitem{arias2012correlation}
 ERY ARIAS-CASTRO, S{\'E}BASTIEN BUBECK, and G{\'A}BOR LUGOSI.
 \newblock Detection of correlations.
